@@ -12,7 +12,7 @@
 <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
 
-<!-- Firebase (only for Storage + Firestore, NOT Auth) -->
+<!-- Firebase (Storage + Firestore only) -->
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-storage-compat.js"></script>
@@ -36,89 +36,6 @@
 body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
   background:var(--bg-color);color:var(--text-color);min-height:100vh;
   transition:background .3s,color .3s;}
-
-/* ============ LOGIN SCREEN ============ */
-.login-screen{
-  position:fixed;inset:0;background:linear-gradient(135deg,#123c9b,#1976d2);
-  display:flex;align-items:center;justify-content:center;z-index:99999;padding:20px;
-}
-.login-screen.hidden{display:none;}
-.login-box{
-  background:#fff;padding:44px 34px;border-radius:18px;
-  width:100%;max-width:420px;box-shadow:0 30px 80px rgba(0,0,0,.4);
-  animation:loginIn .4s ease;
-}
-@keyframes loginIn{
-  from{opacity:0;transform:translateY(20px) scale(.97);}
-  to{opacity:1;transform:translateY(0) scale(1);}
-}
-.login-logo{
-  text-align:center;font-size:52px;margin-bottom:6px;
-  animation:bounce 2s infinite;
-}
-@keyframes bounce{
-  0%,100%{transform:translateY(0);}
-  50%{transform:translateY(-8px);}
-}
-.login-box h1{font-size:28px;text-align:center;color:#123c9b;margin-bottom:4px;font-weight:800;}
-.login-box h1 span{color:#ffd700;}
-.login-box .subtitle{text-align:center;color:#6c757d;font-size:13px;margin-bottom:26px;font-weight:500;}
-.login-field{margin-bottom:16px;}
-.login-field label{
-  display:block;font-size:12px;font-weight:700;color:#475569;
-  margin-bottom:6px;text-transform:uppercase;letter-spacing:.5px;
-}
-.login-input-wrap{position:relative;}
-.login-input-wrap i{
-  position:absolute;left:14px;top:50%;transform:translateY(-50%);
-  color:#94a3b8;font-size:15px;pointer-events:none;
-}
-.login-box input{
-  width:100%;padding:13px 14px 13px 42px;border:2px solid #e2e8f0;
-  border-radius:10px;font-size:14px;transition:.3s;font-family:inherit;
-  background:#f8fafc;color:#0f172a;
-}
-.login-box input:focus{
-  outline:none;border-color:#123c9b;background:#fff;
-  box-shadow:0 0 0 4px rgba(18,60,155,.1);
-}
-.toggle-password{
-  position:absolute;right:12px;top:50%;transform:translateY(-50%);
-  background:none;border:none;color:#94a3b8;cursor:pointer;
-  font-size:15px;padding:6px;
-}
-.toggle-password:hover{color:#123c9b;}
-.login-box button.login-btn{
-  width:100%;padding:14px;background:linear-gradient(135deg,#16a34a,#15803d);
-  color:#fff;border:none;border-radius:10px;font-size:15px;
-  font-weight:700;cursor:pointer;transition:.3s;margin-top:4px;
-  display:flex;align-items:center;justify-content:center;gap:8px;
-  letter-spacing:.3px;
-}
-.login-box button.login-btn:hover:not(:disabled){
-  background:linear-gradient(135deg,#15803d,#166534);
-  transform:translateY(-1px);box-shadow:0 8px 20px rgba(22,163,74,.3);
-}
-.login-box button.login-btn:disabled{opacity:.7;cursor:not-allowed;}
-.login-error{
-  background:#fef2f2;color:#b91c1c;padding:11px 14px;border-radius:8px;
-  font-size:13px;margin-bottom:14px;display:none;
-  border-left:4px solid #dc2626;font-weight:500;
-}
-.login-error.show{display:block;animation:shake .4s ease;}
-@keyframes shake{
-  0%,100%{transform:translateX(0);}
-  25%{transform:translateX(-6px);}
-  75%{transform:translateX(6px);}
-}
-.login-footer{
-  text-align:center;margin-top:24px;padding-top:16px;
-  border-top:1px solid #e2e8f0;font-size:12.5px;
-  color:#64748b;display:flex;align-items:center;
-  justify-content:center;gap:6px;font-weight:500;
-}
-.login-footer i{color:#16a34a;font-size:14px;}
-.login-footer strong{color:#123c9b;font-weight:700;}
 
 /* ============ ADMIN LAYOUT ============ */
 .admin-wrapper{display:flex;min-height:100vh;}
@@ -198,9 +115,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-s
 .btn-close-admin:hover{background:#5a6268;}
 .btn-dark-admin{background:var(--secondary);color:#fff;}
 .btn-dark-admin:hover{opacity:.8;}
-.btn-dark-admin.active{background:var(--gold);color:#0a0e1a;}
-.btn-logout{background:#dc3545;color:#fff;}
-.btn-logout:hover{background:#a71d2a;}
 
 .admin-stats{
   display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
@@ -474,8 +388,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-s
 .btn-setting.danger:hover{background:#a71d2a;}
 .setting-group input[type="text"],
 .setting-group input[type="url"],
-.setting-group input[type="number"],
-.setting-group input[type="password"]{
+.setting-group input[type="number"]{
   padding:8px 12px;border:2px solid var(--border-color);border-radius:6px;
   font-size:13px;background:var(--bg-color);color:var(--text-color);
   margin-right:6px;width:220px;max-width:100%;
@@ -484,56 +397,17 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-s
 </head>
 <body>
 
-<!-- ============ LOGIN SCREEN ============ -->
-<div class="login-screen" id="loginScreen">
-  <div class="login-box">
-    <div class="login-logo">🚀</div>
-    <h1><span>Dream</span> Josh</h1>
-    <div class="subtitle">Admin Panel — Secure Login</div>
-
-    <div class="login-error" id="loginError"></div>
-
-    <div class="login-field">
-      <label><i class="fas fa-user"></i> Username</label>
-      <div class="login-input-wrap">
-        <i class="fas fa-user"></i>
-        <input type="text" id="loginUsername" placeholder="Enter username" autocomplete="off">
-      </div>
-    </div>
-
-    <div class="login-field">
-      <label><i class="fas fa-lock"></i> Password</label>
-      <div class="login-input-wrap">
-        <i class="fas fa-lock"></i>
-        <input type="password" id="loginPassword" placeholder="Enter password" autocomplete="new-password">
-        <button type="button" class="toggle-password" onclick="togglePasswordVisibility()">
-          <i class="fas fa-eye" id="togglePwdIcon"></i>
-        </button>
-      </div>
-    </div>
-
-    <button class="login-btn" id="loginBtn" onclick="handleLogin()">
-      <i class="fas fa-sign-in-alt"></i> Login
-    </button>
-
-    <div class="login-footer">
-      <i class="fas fa-shield-alt"></i> Secured by <strong>Dream Josh</strong>
-    </div>
-  </div>
-</div>
-
-<!-- ============ MAIN ADMIN ============ -->
-<div class="admin-wrapper" id="adminWrapper" style="display:none;">
+<div class="admin-wrapper" id="adminWrapper">
   <div class="admin-sidebar" id="adminSidebar">
     <div class="admin-logo">
       <h1>🚀 <span>Dream</span>Josh</h1>
       <span class="badge">Admin</span>
     </div>
     <div class="admin-user">
-      <div class="avatar" id="userAvatar">A</div>
+      <div class="avatar">A</div>
       <div>
-        <div class="name" id="userName">Admin</div>
-        <div class="role" id="userRole">Super Admin</div>
+        <div class="name">Administrator</div>
+        <div class="role">Super Admin</div>
       </div>
     </div>
     <ul class="admin-menu">
@@ -569,7 +443,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-s
       <li><a data-page="settings" onclick="showAdminPage('settings')"><i class="fas fa-cog"></i> Settings</a></li>
     </ul>
     <div class="admin-footer-menu">
-      <a onclick="handleLogout()"><i class="fas fa-sign-out-alt"></i> Logout</a>
+      <a onclick="window.close()"><i class="fas fa-times-circle"></i> Close Panel</a>
     </div>
   </div>
 
@@ -583,7 +457,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-s
         <button class="btn-dark-admin" id="darkModeBtn" onclick="toggleDarkMode()">
           <i class="fas fa-moon"></i> Dark
         </button>
-        <button class="btn-logout" onclick="handleLogout()"><i class="fas fa-sign-out-alt"></i> Logout</button>
+        <button class="btn-close-admin" onclick="window.close()"><i class="fas fa-times"></i> Close</button>
       </div>
     </div>
 
@@ -825,7 +699,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-s
         <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:16px;border-bottom:2px solid var(--border-color);padding-bottom:10px;">
           <button class="settings-tab-btn active" data-tab="general" onclick="switchSettingsTab('general')">⚙️ General</button>
           <button class="settings-tab-btn" data-tab="home" onclick="switchSettingsTab('home')">🏠 Home Files</button>
-          <button class="settings-tab-btn" data-tab="security" onclick="switchSettingsTab('security')">🔐 Security</button>
         </div>
 
         <div class="settings-tab-content active" id="settings-general">
@@ -863,42 +736,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-s
               <i class="fas fa-save"></i> Save
             </button>
           </div>
-        </div>
-
-        <!-- 🔐 SECURITY TAB — Username & Password Set -->
-        <div class="settings-tab-content" id="settings-security">
-          <div class="setting-group">
-            <h5>🔐 Set Login Credentials</h5>
-            <p style="font-size:12px;color:var(--text-light);margin-bottom:10px;">
-              यहाँ से अपना Username और Password set करें।
-            </p>
-
-            <div style="display:flex;flex-direction:column;gap:10px;max-width:400px;">
-              <div>
-                <label style="font-size:12px;font-weight:600;color:var(--text-light);display:block;margin-bottom:4px;">👤 Username</label>
-                <input type="text" id="settingAdminUsername" placeholder="Admin" style="width:100%;margin:0;">
-              </div>
-              <div>
-                <label style="font-size:12px;font-weight:600;color:var(--text-light);display:block;margin-bottom:4px;">🔒 New Password</label>
-                <input type="password" id="settingAdminPassword" placeholder="Enter password (min 4 chars)" style="width:100%;margin:0;">
-              </div>
-              <div>
-                <label style="font-size:12px;font-weight:600;color:var(--text-light);display:block;margin-bottom:4px;">🔒 Confirm Password</label>
-                <input type="password" id="settingAdminPassword2" placeholder="Re-enter password" style="width:100%;margin:0;">
-              </div>
-              <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px;">
-                <button class="btn-setting success" onclick="saveAdminCredentials()">
-                  <i class="fas fa-save"></i> Save Credentials
-                </button>
-                <button class="btn-setting danger" onclick="removeAdminPassword()">
-                  <i class="fas fa-unlock"></i> Remove Password
-                </button>
-              </div>
-            </div>
-
-            <div id="credsStatus" style="margin-top:14px;font-size:12.5px;padding:12px;border-radius:8px;background:var(--bg-color);border-left:4px solid var(--secondary-blue);"></div>
-          </div>
-
           <div class="setting-group">
             <h5>🚨 Danger Zone</h5>
             <button class="btn-setting danger" onclick="clearAllLocalData()">
@@ -925,7 +762,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-s
 
 <script>
 // ============================================================
-// FIREBASE CONFIG (Storage + Firestore only)
+// FIREBASE CONFIG
 // ============================================================
 const firebaseConfig = {
   apiKey: "AIzaSyBlI0IgzkgvoPaTntxfnU8q5CYRwc4sIHM",
@@ -942,47 +779,9 @@ try {
   firebaseApp = firebase.initializeApp(firebaseConfig);
   firebaseDB = firebase.firestore();
   firebaseStorage = firebase.storage();
-  console.log("✅ Firebase initialized (Storage + Firestore)");
+  console.log("✅ Firebase initialized");
 } catch (err) {
   console.error("❌ Firebase error:", err);
-}
-
-// ============================================================
-// 🔐 ADMIN CREDENTIALS SYSTEM (LocalStorage + Firestore)
-// ============================================================
-const ADMIN_CREDS_KEY = 'dreamjosh_admin_creds';
-const SESSION_KEY = 'dreamjosh_admin_session';
-
-function getAdminCreds() {
-  try {
-    const saved = localStorage.getItem(ADMIN_CREDS_KEY);
-    if (saved) {
-      const parsed = JSON.parse(saved);
-      if (parsed && parsed.username) return parsed;
-    }
-  } catch (e) {}
-  return { username: 'Admin', password: 'Admin@123' };
-}
-
-function saveAdminCreds(username, password) {
-  const creds = { username, password };
-  localStorage.setItem(ADMIN_CREDS_KEY, JSON.stringify(creds));
-  if (firebaseDB) {
-    firebaseDB.collection('dreamjosh').doc('adminCreds').set(creds).catch(()=>{});
-  }
-}
-
-async function loadAdminCredsFromCloud() {
-  if (!firebaseDB) return;
-  try {
-    const doc = await firebaseDB.collection('dreamjosh').doc('adminCreds').get();
-    if (doc.exists) {
-      const data = doc.data();
-      if (data.username) {
-        localStorage.setItem(ADMIN_CREDS_KEY, JSON.stringify(data));
-      }
-    }
-  } catch (e) { console.warn('Creds load failed:', e); }
 }
 
 // ============================================================
@@ -1017,143 +816,6 @@ const DEFAULT_DATA = {
     homeLimit: 6
   }
 };
-
-// ============================================================
-// PASSWORD TOGGLE
-// ============================================================
-function togglePasswordVisibility() {
-  const input = document.getElementById('loginPassword');
-  const icon = document.getElementById('togglePwdIcon');
-  if (input.type === 'password') {
-    input.type = 'text';
-    icon.classList.remove('fa-eye');
-    icon.classList.add('fa-eye-slash');
-  } else {
-    input.type = 'password';
-    icon.classList.remove('fa-eye-slash');
-    icon.classList.add('fa-eye');
-  }
-}
-
-// ============================================================
-// LOGIN / LOGOUT
-// ============================================================
-async function checkAuth() {
-  const loginScreen = document.getElementById('loginScreen');
-  const adminWrapper = document.getElementById('adminWrapper');
-
-  // Firebase se latest credentials load karein
-  await loadAdminCredsFromCloud();
-
-  // Session check
-  const sessionActive = sessionStorage.getItem(SESSION_KEY) === 'true';
-  if (sessionActive) {
-    const creds = getAdminCreds();
-    loginScreen.classList.add('hidden');
-    adminWrapper.style.display = 'flex';
-    document.getElementById('userName').textContent = creds.username || 'Admin';
-    document.getElementById('userAvatar').textContent = (creds.username || 'A').charAt(0).toUpperCase();
-    document.getElementById('userRole').textContent = 'Super Admin';
-    initAdmin();
-    return;
-  }
-
-  loginScreen.classList.remove('hidden');
-  adminWrapper.style.display = 'none';
-}
-
-function handleLogin() {
-  const usernameInput = document.getElementById('loginUsername');
-  const passwordInput = document.getElementById('loginPassword');
-  const errEl = document.getElementById('loginError');
-  const btn = document.getElementById('loginBtn');
-
-  const username = usernameInput.value.trim();
-  const password = passwordInput.value;
-
-  errEl.classList.remove('show');
-  errEl.textContent = '';
-
-  if (!username) {
-    errEl.textContent = '⚠️ Username भरें!';
-    errEl.classList.add('show');
-    return;
-  }
-
-  if (!password) {
-    errEl.textContent = '⚠️ Password भरें!';
-    errEl.classList.add('show');
-    return;
-  }
-
-  const creds = getAdminCreds();
-  const expectedUser = (creds.username || 'Admin').toLowerCase();
-  const expectedPass = creds.password || '';
-
-  if (username.toLowerCase() !== expectedUser) {
-    errEl.textContent = '❌ गलत Username!';
-    errEl.classList.add('show');
-    return;
-  }
-
-  if (password !== expectedPass) {
-    errEl.textContent = '❌ गलत Password!';
-    errEl.classList.add('show');
-    return;
-  }
-
-  // ✅ LOGIN SUCCESS
-  btn.disabled = true;
-  btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Logging in...';
-
-  sessionStorage.setItem(SESSION_KEY, 'true');
-  passwordInput.value = '';
-
-  setTimeout(() => {
-    btn.disabled = false;
-    btn.innerHTML = '<i class="fas fa-sign-in-alt"></i> Login';
-
-    document.getElementById('loginScreen').classList.add('hidden');
-    document.getElementById('adminWrapper').style.display = 'flex';
-
-    document.getElementById('userName').textContent = creds.username || 'Admin';
-    document.getElementById('userAvatar').textContent = (creds.username || 'A').charAt(0).toUpperCase();
-    document.getElementById('userRole').textContent = 'Super Admin';
-
-    showToast('✅ Welcome ' + (creds.username || 'Admin') + '!', 'success');
-    initAdmin();
-  }, 400);
-}
-
-function handleLogout() {
-  if (!confirm('Logout करना है?')) return;
-  sessionStorage.removeItem(SESSION_KEY);
-  showToast('👋 Logout successful', 'info');
-  setTimeout(() => location.reload(), 800);
-}
-
-document.addEventListener('keydown', e => {
-  const loginScreen = document.getElementById('loginScreen');
-  if (e.key === 'Enter' && loginScreen && !loginScreen.classList.contains('hidden')) {
-    handleLogin();
-  }
-});
-
-// ============================================================
-// INIT ADMIN
-// ============================================================
-let adminInitialized = false;
-function initAdmin() {
-  if (adminInitialized) return;
-  adminInitialized = true;
-
-  loadData();
-  loadFilesMeta();
-  updateSidebarCounts();
-  showAdminPage('dashboard');
-  loadFilesFromCloud();
-  console.log('✅ Admin Panel Ready');
-}
 
 // ============================================================
 // DATA LOAD/SAVE
@@ -2029,31 +1691,6 @@ function loadSettingsForm() {
   set('settingTagline', s.tagline);
   set('settingSiteURL', s.siteURL);
   set('settingHomeLimit', s.homeLimit || 6);
-
-  // Load credentials form
-  loadCredentialsForm();
-}
-
-function loadCredentialsForm() {
-  const creds = getAdminCreds();
-  const userEl = document.getElementById('settingAdminUsername');
-  const statusEl = document.getElementById('credsStatus');
-
-  if (userEl) userEl.value = creds.username || 'Admin';
-
-  if (statusEl) {
-    if (creds.password && creds.password.length > 0) {
-      statusEl.innerHTML = '🔒 <strong>Password SET है</strong> — Login के लिए password ज़रूरी है।';
-      statusEl.style.color = '#16a34a';
-      statusEl.style.background = 'rgba(22,163,74,.1)';
-      statusEl.style.borderLeftColor = '#16a34a';
-    } else {
-      statusEl.innerHTML = '⚠️ <strong>Password SET नहीं है</strong> — अभी बिना password के login हो रहा है। कृपया password set करें।';
-      statusEl.style.color = '#dc3545';
-      statusEl.style.background = 'rgba(220,53,69,.1)';
-      statusEl.style.borderLeftColor = '#dc3545';
-    }
-  }
 }
 
 function switchSettingsTab(tab) {
@@ -2072,71 +1709,6 @@ function saveAllSettings() {
   appData.settings.homeLimit = parseInt(get('settingHomeLimit')) || 6;
   saveData();
   showToast('✅ Settings saved!', 'success');
-}
-
-// ============================================================
-// 🔐 ADMIN CREDENTIALS MANAGEMENT
-// ============================================================
-function saveAdminCredentials() {
-  const username = document.getElementById('settingAdminUsername').value.trim();
-  const pwd1 = document.getElementById('settingAdminPassword').value;
-  const pwd2 = document.getElementById('settingAdminPassword2').value;
-
-  if (!username) {
-    showToast('⚠️ Username ज़रूरी है!', 'error');
-    return;
-  }
-
-  // Agar password fields khali hain to sirf username update
-  if (!pwd1 && !pwd2) {
-    const creds = getAdminCreds();
-    saveAdminCreds(username, creds.password || '');
-    showToast('✅ Username updated! (Password वैसा ही रहेगा)', 'success');
-    document.getElementById('userName').textContent = username;
-    document.getElementById('userAvatar').textContent = username.charAt(0).toUpperCase();
-    loadCredentialsForm();
-    return;
-  }
-
-  if (!pwd1 || !pwd2) {
-    showToast('⚠️ दोनों password fields भरें!', 'error');
-    return;
-  }
-
-  if (pwd1 !== pwd2) {
-    showToast('❌ Passwords match नहीं कर रहे!', 'error');
-    return;
-  }
-
-  if (pwd1.length < 4) {
-    showToast('⚠️ Password कम से कम 4 characters का होना चाहिए!', 'error');
-    return;
-  }
-
-  saveAdminCreds(username, pwd1);
-
-  document.getElementById('settingAdminPassword').value = '';
-  document.getElementById('settingAdminPassword2').value = '';
-
-  document.getElementById('userName').textContent = username;
-  document.getElementById('userAvatar').textContent = username.charAt(0).toUpperCase();
-
-  showToast('✅ Username और Password set हो गया! अगली बार password मांगा जाएगा।', 'success');
-  loadCredentialsForm();
-}
-
-function removeAdminPassword() {
-  const creds = getAdminCreds();
-  if (!creds.password || creds.password.length === 0) {
-    showToast('ℹ️ Password पहले से ही set नहीं है।', 'info');
-    return;
-  }
-
-  if (!confirm('Password हटाना है? इसके बाद बिना password के login होगा।')) return;
-
-  saveAdminCreds(creds.username || 'Admin', '');
-  showToast('🔓 Password हटा दिया गया!', 'success');
-  loadCredentialsForm();
 }
 
 function clearAllLocalData() {
@@ -2227,7 +1799,7 @@ function showToast(msg, type = 'info') {
 }
 
 function exportAllData() {
-  const blob = new Blob([JSON.stringify({ appData, jobsData, filesMeta, creds: getAdminCreds() }, null, 2)], { type:'application/json' });
+  const blob = new Blob([JSON.stringify({ appData, jobsData, filesMeta }, null, 2)], { type:'application/json' });
   const a = document.createElement('a');
   a.href = URL.createObjectURL(blob);
   a.download = 'dreamjosh_backup_' + new Date().toISOString().slice(0,10) + '.json';
@@ -2239,16 +1811,18 @@ function exportAllData() {
 // INIT
 // ============================================================
 document.addEventListener('DOMContentLoaded', () => {
-  checkAuth();
+  loadData();
+  loadFilesMeta();
+  updateSidebarCounts();
+  showAdminPage('dashboard');
+  loadFilesFromCloud();
   if (typeof pdfjsLib !== 'undefined') {
     pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js';
   }
+  console.log('✅ Admin Panel Ready');
 });
 
 // Expose globally
-window.handleLogin = handleLogin;
-window.handleLogout = handleLogout;
-window.togglePasswordVisibility = togglePasswordVisibility;
 window.showAdminPage = showAdminPage;
 window.toggleSidebar = toggleSidebar;
 window.openFileUploadModal = openFileUploadModal;
@@ -2277,9 +1851,6 @@ window.deleteEmployee = deleteEmployee;
 window.saveSocial = saveSocial;
 window.saveAllSettings = saveAllSettings;
 window.switchSettingsTab = switchSettingsTab;
-window.saveAdminCredentials = saveAdminCredentials;
-window.removeAdminPassword = removeAdminPassword;
-window.loadCredentialsForm = loadCredentialsForm;
 window.clearAllLocalData = clearAllLocalData;
 window.toggleDarkMode = toggleDarkMode;
 window.closeAdminModal = closeAdminModal;

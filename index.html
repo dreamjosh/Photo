@@ -403,7 +403,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-s
       <li><a data-page="settings" onclick="showAdminPage('settings')"><i class="fas fa-cog"></i> Settings</a></li>
     </ul>
     <div class="admin-footer-menu">
-      <a onclick="window.close()"><i class="fas fa-times-circle"></i> Close Panel</a>
+      <a href="index.html"><i class="fas fa-home"></i> Back to Home</a>
+      <a href="index.html"><i class="fas fa-times-circle"></i> Close Panel</a>
     </div>
   </div>
 
@@ -416,7 +417,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-s
       <div class="admin-actions">
         <button class="admin-menu-toggle" onclick="toggleSidebar()"><i class="fas fa-bars"></i></button>
         <button class="btn-dark-admin" onclick="toggleDarkMode()"><i class="fas fa-moon"></i> Dark</button>
-        <button class="btn-close-admin" onclick="window.close()"><i class="fas fa-times"></i> Close</button>
+        <a href="index.html" class="btn-close-admin" style="text-decoration:none;"><i class="fas fa-times"></i> Close</a>
       </div>
     </div>
 
@@ -435,6 +436,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-s
           <button onclick="showAdminPage('files');openFileUploadModal()"><i class="fas fa-upload"></i> Upload File</button>
           <button onclick="showAdminPage('jobs');openJobModal()"><i class="fas fa-plus"></i> Add Job</button>
           <button onclick="showAdminPage('settings')"><i class="fas fa-cog"></i> Settings</button>
+          <button onclick="window.location.href='index.html'"><i class="fas fa-home"></i> Home</button>
         </div>
       </div>
     </div>
@@ -831,6 +833,11 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-s
 
 <script>
 // ============================================================
+// 🔗 HOME URL — Yahan index.html ka path set karein
+// ============================================================
+const HOME_URL = 'index.html';
+
+// ============================================================
 // FIREBASE
 // ============================================================
 const firebaseConfig = {
@@ -1002,7 +1009,7 @@ function updateSidebarCounts() {
 }
 
 // ============================================================
-// WORD EDITOR
+// WORD EDITOR (same as original)
 // ============================================================
 let currentWatermark = '';
 
@@ -2522,7 +2529,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   updateSidebarCounts();
   showAdminPage('dashboard');
   loadFilesFromCloud();
-  console.log('✅ Admin Panel v4.0 Ready');
+  console.log('✅ Admin Panel v4.0 Ready — Close Panel ab index.html par le jaata hai');
 });
 
 // Expose

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Damor Tractore Service · Dashboard</title>
+    <title>Damor Tractore Service · Tractor Book</title>
     <!-- Font Awesome & Google Fonts -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
@@ -628,6 +628,33 @@
         .passbook-entry:last-child { border-bottom: none; }
         .passbook-entry .amount-credit { color: #1e7a3a; font-weight: 700; }
         .passbook-entry .amount-debit { color: #b13b3b; font-weight: 700; }
+        /* ---------- HOURLY RATE PANEL ---------- */
+        .rate-panel {
+            background: #fff8e7;
+            border: 1.5px solid #f5b042;
+            border-radius: 20px;
+            padding: 1rem 1.2rem;
+            margin-bottom: 1rem;
+        }
+        .rate-panel .rate-value {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #2a5c36;
+        }
+        .rate-panel .rate-label {
+            font-size: 0.75rem;
+            color: #7d917f;
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
+        }
+        .hours-badge {
+            background: #eef3ea;
+            color: #2a5c36;
+            padding: 0.2rem 0.6rem;
+            border-radius: 100px;
+            font-size: 0.7rem;
+            font-weight: 700;
+        }
         /* ---------- FOOTER ---------- */
         .site-footer {
             text-align: center;
@@ -711,9 +738,9 @@
                     <p>Attach photos of work spots and conditions.</p>
                 </div>
                 <div class="feature-card">
-                    <i class="fas fa-bell"></i>
-                    <h3>Payment Reminders</h3>
-                    <p>Track dues and get reminders for pending payments.</p>
+                    <i class="fas fa-clock"></i>
+                    <h3>Hourly Work</h3>
+                    <p>Set hourly rate and auto-calculate bill by hours worked.</p>
                 </div>
                 <div class="feature-card">
                     <i class="fas fa-chart-line"></i>
@@ -847,7 +874,6 @@
                             <button class="btn btn-small" id="addFarmerBtn"><i class="fas fa-user-plus"></i> Add Farmer</button>
                         </div>
 
-                        <!-- Summary stats -->
                         <div class="summary-grid mt-2">
                             <div class="summary-item">
                                 <i class="fas fa-users"></i>
@@ -872,7 +898,6 @@
                             </div>
                         </div>
 
-                        <!-- Farmer list table -->
                         <div style="overflow-x:auto; margin-top:1rem;">
                             <table class="customer-list-table">
                                 <thead>
@@ -896,7 +921,7 @@
                 <!-- ===== TAB: BILLS ===== -->
                 <div class="tab-panel hidden" id="tabBills">
                     <div class="grid-2">
-                        <!-- LEFT COLUMN: Customer & Bill + Summary -->
+                        <!-- LEFT COLUMN -->
                         <div>
                             <div class="card">
                                 <h2><i class="fas fa-user-plus" style="color:#f5b042;"></i> Customer & Bill</h2>
@@ -924,6 +949,21 @@
                                     <input type="text" id="tractorModel" placeholder="e.g. Mahindra 575 DI / GJ-01-AB-1234">
                                 </div>
 
+                                <!-- HOURLY RATE PANEL -->
+                                <div class="rate-panel mt-2">
+                                    <div class="flex-row">
+                                        <div>
+                                            <div class="rate-label"><i class="fas fa-clock"></i> Hourly Rate (₹/hr)</div>
+                                            <div class="rate-value" id="displayHourlyRate">₹500</div>
+                                        </div>
+                                        <div style="display:flex; gap:0.5rem; align-items:center;">
+                                            <input type="number" id="hourlyRateInput" placeholder="500" value="500" min="0" step="10" style="max-width:120px;">
+                                            <button class="btn btn-small btn-warning" id="setHourlyRateBtn"><i class="fas fa-save"></i> Set Rate</button>
+                                        </div>
+                                    </div>
+                                    <p class="text-small mt-1"><i class="fas fa-info-circle"></i> This rate applies to all hourly work entries below.</p>
+                                </div>
+
                                 <!-- Work log add row -->
                                 <div class="tractor-card mt-2">
                                     <h3 style="font-size:1rem; margin-bottom:0.8rem;"><i class="fas fa-wrench"></i> Add work / service</h3>
@@ -933,12 +973,28 @@
                                             <input type="text" id="workDesc" placeholder="e.g. Engine oil change">
                                         </div>
                                         <div>
-                                            <label>Price (₹)</label>
+                                            <label>Work type</label>
+                                            <select id="workType">
+                                                <option value="fixed">Fixed price (₹)</option>
+                                                <option value="hourly">Hourly (per hour)</option>
+                                            </select>
+                                        </div>
+                                        <div>
+                                            <label id="priceLabel">Price (₹)</label>
                                             <input type="number" id="workPrice" placeholder="0" value="0" min="0" step="1">
+                                        </div>
+                                    </div>
+                                    <div class="grid-3 mt-1">
+                                        <div>
+                                            <label>Hours worked</label>
+                                            <input type="number" id="workHours" placeholder="0" value="0" min="0" step="0.5" disabled style="background:#f0f5ed;">
                                         </div>
                                         <div>
                                             <label>Photo (optional)</label>
                                             <input type="file" id="workPhoto" accept="image/*" style="padding:0.4rem;">
+                                        </div>
+                                        <div style="display:flex; align-items:flex-end;">
+                                            <div class="text-small" id="calcPreview" style="font-weight:600; color:#2a5c36;"></div>
                                         </div>
                                     </div>
                                     <div class="flex-row mt-1">
@@ -988,21 +1044,22 @@
                             </div>
                         </div>
 
-                        <!-- RIGHT COLUMN: Work log + Payment log + Admin controls -->
+                        <!-- RIGHT COLUMN -->
                         <div>
                             <div class="card">
                                 <div class="flex-row">
                                     <h2><i class="fas fa-list-ul"></i> Work log</h2>
                                     <span class="badge" id="workCount">0 entries</span>
                                 </div>
-                                <div class="worklog-list mt-1" style="max-height:260px; overflow-y:auto;">
+                                <div class="worklog-list mt-1" style="max-height:320px; overflow-y:auto;">
                                     <table id="workTable">
                                         <thead>
-                                            <tr><th>Work</th><th>Price</th><th>Photo</th><th></th></tr>
+                                            <tr><th>Work</th><th>Type</th><th>Hours</th><th>Price</th><th>Photo</th><th></th></tr>
                                         </thead>
                                         <tbody id="workTableBody"></tbody>
                                     </table>
                                 </div>
+                                <p class="text-small mt-1"><i class="fas fa-info-circle"></i> Hourly entries automatically calculate price = hours × rate.</p>
                             </div>
 
                             <div class="card">
@@ -1182,7 +1239,6 @@
             });
             const panel = document.getElementById('tab' + tabName.charAt(0).toUpperCase() + tabName.slice(1));
             if (panel) panel.classList.remove('hidden');
-            // Close tool panel when switching tabs
             document.getElementById('toolPanel').classList.add('hidden');
         }
 
@@ -1191,8 +1247,18 @@
         });
 
         // ================= CUSTOMER DATA STORAGE =================
-        const CUSTOMERS_KEY = 'damor_customers_v2';
+        const CUSTOMERS_KEY = 'damor_customers_v3';
+        const HOURLY_RATE_KEY = 'damor_hourly_rate';
         let activeCustomerId = null;
+
+        function getHourlyRate() {
+            const r = localStorage.getItem(HOURLY_RATE_KEY);
+            return r ? parseFloat(r) : 500;
+        }
+
+        function setHourlyRate(rate) {
+            localStorage.setItem(HOURLY_RATE_KEY, rate);
+        }
 
         function loadCustomers() {
             const saved = localStorage.getItem(CUSTOMERS_KEY);
@@ -1214,11 +1280,10 @@
             return '₹' + Number(num).toFixed(0);
         }
 
-        // ================= REFRESH DASHBOARD SUMMARY & FARMER LIST =================
+        // ================= REFRESH DASHBOARD =================
         function refreshDashboard() {
             const customers = loadCustomers();
 
-            // Summary stats
             const totalCustomers = customers.length;
             let totalRevenue = 0;
             let totalDue = 0;
@@ -1234,7 +1299,6 @@
             document.getElementById('totalRevenueFarmers').innerText = formatCurrency(totalRevenue);
             document.getElementById('totalDueFarmers').innerText = formatCurrency(totalDue);
 
-            // Farmer list table
             const tbody = document.getElementById('farmerListBody');
             tbody.innerHTML = '';
 
@@ -1288,17 +1352,22 @@
             document.getElementById('tractorModel').value = c.tractorModel || '';
             document.getElementById('adminBillNo').value = c.billNo || '';
 
+            // Set hourly rate display
+            const rate = c.hourlyRate || getHourlyRate();
+            document.getElementById('displayHourlyRate').innerText = formatCurrency(rate);
+            document.getElementById('hourlyRateInput').value = rate;
+
             renderWorkTableForCustomer(c.works || []);
             renderPaymentTableForCustomer(c.payments || []);
             updateSummaryForCustomer(c);
         }
 
-        // ================= RENDER WORK TABLE =================
+        // ================= RENDER WORK TABLE (with type & hours) =================
         function renderWorkTableForCustomer(works) {
             const tbody = document.getElementById('workTableBody');
             tbody.innerHTML = '';
             if (!works || works.length === 0) {
-                tbody.innerHTML = '<tr><td colspan="4" style="text-align:center; color:#7d917f;">No work entries yet.</td></tr>';
+                tbody.innerHTML = '<tr><td colspan="6" style="text-align:center; color:#7d917f;">No work entries yet.</td></tr>';
                 document.getElementById('workCount').innerText = '0 entries';
                 return;
             }
@@ -1306,8 +1375,18 @@
                 const row = document.createElement('tr');
                 const descCell = document.createElement('td');
                 descCell.innerText = work.desc || '—';
+
+                const typeCell = document.createElement('td');
+                typeCell.innerHTML = work.type === 'hourly'
+                    ? '<span class="hours-badge"><i class="fas fa-clock"></i> Hourly</span>'
+                    : '<span class="hours-badge" style="background:#e0ebe0;">Fixed</span>';
+
+                const hoursCell = document.createElement('td');
+                hoursCell.innerText = work.type === 'hourly' ? (work.hours || 0) + ' hrs' : '—';
+
                 const priceCell = document.createElement('td');
                 priceCell.innerText = formatCurrency(work.price || 0);
+
                 const photoCell = document.createElement('td');
                 if (work.photo) {
                     const img = document.createElement('img');
@@ -1318,6 +1397,7 @@
                 } else {
                     photoCell.innerText = '📷';
                 }
+
                 const actionCell = document.createElement('td');
                 const delBtn = document.createElement('button');
                 delBtn.className = 'btn-small btn-danger';
@@ -1333,6 +1413,8 @@
                 actionCell.appendChild(delBtn);
 
                 row.appendChild(descCell);
+                row.appendChild(typeCell);
+                row.appendChild(hoursCell);
                 row.appendChild(priceCell);
                 row.appendChild(photoCell);
                 row.appendChild(actionCell);
@@ -1369,7 +1451,7 @@
             });
         }
 
-        // ================= SUMMARY & REMINDER =================
+        // ================= SUMMARY =================
         function calculateTotalsForCustomer(c) {
             const total = (c.works || []).reduce((s, w) => s + (Number(w.price) || 0), 0);
             const paid = (c.payments || []).reduce((s, p) => s + (Number(p.amount) || 0), 0);
@@ -1399,7 +1481,7 @@
             else reminderBadge.style.background = '#e3f0de';
         }
 
-        // ================= SYNC INPUTS TO ACTIVE CUSTOMER =================
+        // ================= SYNC INPUTS =================
         function syncActiveCustomerFromInputs() {
             if (!activeCustomerId) return;
 
@@ -1418,6 +1500,65 @@
             updateSummaryForCustomer(c);
         }
 
+        // ================= HOURLY RATE LOGIC =================
+        document.getElementById('setHourlyRateBtn').addEventListener('click', () => {
+            const rate = parseFloat(document.getElementById('hourlyRateInput').value) || 0;
+            if (rate <= 0) { alert('Enter a valid rate'); return; }
+            setHourlyRate(rate);
+            document.getElementById('displayHourlyRate').innerText = formatCurrency(rate);
+
+            // If a customer is active, save rate to their record too
+            if (activeCustomerId) {
+                const customers = loadCustomers();
+                const c = customers.find(x => x.id === activeCustomerId);
+                if (c) {
+                    c.hourlyRate = rate;
+                    saveCustomers(customers);
+                }
+            }
+            alert('Hourly rate set to ' + formatCurrency(rate) + ' per hour');
+        });
+
+        // Work type toggle
+        document.getElementById('workType').addEventListener('change', (e) => {
+            const type = e.target.value;
+            const priceInput = document.getElementById('workPrice');
+            const hoursInput = document.getElementById('workHours');
+            const priceLabel = document.getElementById('priceLabel');
+            const calcPreview = document.getElementById('calcPreview');
+
+            if (type === 'hourly') {
+                priceLabel.innerText = 'Rate (₹/hr)';
+                priceInput.value = getHourlyRate();
+                hoursInput.disabled = false;
+                hoursInput.style.background = '#fefefb';
+                calcPreview.innerText = '';
+            } else {
+                priceLabel.innerText = 'Price (₹)';
+                priceInput.value = '0';
+                hoursInput.disabled = true;
+                hoursInput.style.background = '#f0f5ed';
+                hoursInput.value = '0';
+                calcPreview.innerText = '';
+            }
+        });
+
+        // Auto-calculate preview for hourly
+        function updateHourlyPreview() {
+            const type = document.getElementById('workType').value;
+            const rate = parseFloat(document.getElementById('workPrice').value) || 0;
+            const hours = parseFloat(document.getElementById('workHours').value) || 0;
+            const calcPreview = document.getElementById('calcPreview');
+            if (type === 'hourly' && hours > 0 && rate > 0) {
+                calcPreview.innerText = `= ${hours} hrs × ${formatCurrency(rate)} = ${formatCurrency(hours * rate)}`;
+            } else {
+                calcPreview.innerText = '';
+            }
+        }
+
+        document.getElementById('workPrice').addEventListener('input', updateHourlyPreview);
+        document.getElementById('workHours').addEventListener('input', updateHourlyPreview);
+
         // ================= ADD WORK =================
         document.getElementById('addWorkBtn').addEventListener('click', () => {
             if (!activeCustomerId) {
@@ -1426,7 +1567,9 @@
             }
 
             const desc = document.getElementById('workDesc').value.trim();
-            const price = parseFloat(document.getElementById('workPrice').value) || 0;
+            const type = document.getElementById('workType').value;
+            const priceInput = parseFloat(document.getElementById('workPrice').value) || 0;
+            const hours = parseFloat(document.getElementById('workHours').value) || 0;
             const photoInput = document.getElementById('workPhoto');
 
             if (!desc) {
@@ -1434,10 +1577,23 @@
                 return;
             }
 
+            let finalPrice = 0;
+            if (type === 'hourly') {
+                if (hours <= 0) { alert('Please enter hours worked'); return; }
+                if (priceInput <= 0) { alert('Please set a rate per hour'); return; }
+                finalPrice = hours * priceInput;
+            } else {
+                if (priceInput <= 0) { alert('Please enter a price'); return; }
+                finalPrice = priceInput;
+            }
+
             const newWork = {
                 id: generateId(),
                 desc: desc,
-                price: price,
+                type: type,
+                hours: type === 'hourly' ? hours : 0,
+                rate: type === 'hourly' ? priceInput : 0,
+                price: finalPrice,
                 photo: null
             };
 
@@ -1457,11 +1613,7 @@
                     renderWorkTableForCustomer(c.works);
                     updateSummaryForCustomer(c);
                     refreshDashboard();
-
-                    document.getElementById('workDesc').value = '';
-                    document.getElementById('workPrice').value = '0';
-                    document.getElementById('workPhoto').value = '';
-                    document.getElementById('photoNamePreview').innerText = '';
+                    clearWorkInputs();
                 };
                 reader.readAsDataURL(file);
             } else {
@@ -1470,13 +1622,22 @@
                 renderWorkTableForCustomer(c.works);
                 updateSummaryForCustomer(c);
                 refreshDashboard();
-
-                document.getElementById('workDesc').value = '';
-                document.getElementById('workPrice').value = '0';
-                document.getElementById('workPhoto').value = '';
-                document.getElementById('photoNamePreview').innerText = '';
+                clearWorkInputs();
             }
         });
+
+        function clearWorkInputs() {
+            document.getElementById('workDesc').value = '';
+            document.getElementById('workType').value = 'fixed';
+            document.getElementById('workPrice').value = '0';
+            document.getElementById('workHours').value = '0';
+            document.getElementById('workHours').disabled = true;
+            document.getElementById('workHours').style.background = '#f0f5ed';
+            document.getElementById('priceLabel').innerText = 'Price (₹)';
+            document.getElementById('workPhoto').value = '';
+            document.getElementById('photoNamePreview').innerText = '';
+            document.getElementById('calcPreview').innerText = '';
+        }
 
         // ================= ADD PAYMENT =================
         document.getElementById('addPaymentBtn').addEventListener('click', () => {
@@ -1535,6 +1696,7 @@
                     billNo: document.getElementById('billNo').value.trim() || 'TS-' + (customers.length + 101),
                     billDate: document.getElementById('billDate').value || new Date().toISOString().split('T')[0],
                     tractorModel: document.getElementById('tractorModel').value.trim(),
+                    hourlyRate: getHourlyRate(),
                     works: [],
                     payments: [],
                     reminder: ''
@@ -1558,6 +1720,9 @@
             document.getElementById('billDate').value = new Date().toISOString().split('T')[0];
             document.getElementById('tractorModel').value = '';
             document.getElementById('adminBillNo').value = 'TS-' + nextNum;
+            const rate = getHourlyRate();
+            document.getElementById('displayHourlyRate').innerText = formatCurrency(rate);
+            document.getElementById('hourlyRateInput').value = rate;
             renderWorkTableForCustomer([]);
             renderPaymentTableForCustomer([]);
             document.getElementById('displayTotal').innerText = '₹0';
@@ -1565,9 +1730,10 @@
             document.getElementById('displayDue').innerText = '₹0';
             document.getElementById('reminderText').innerHTML = '<i class="fas fa-bell"></i> No active reminders';
             document.getElementById('reminderBadge').innerHTML = '<i class="fas fa-clock"></i> Reminder: none';
+            clearWorkInputs();
         });
 
-        // ================= ADD FARMER (from Farmers tab) =================
+        // ================= ADD FARMER =================
         document.getElementById('addFarmerBtn').addEventListener('click', () => {
             switchDashTab('bills');
             document.getElementById('newCustomerBtn').click();
@@ -1655,10 +1821,11 @@
 
             let workRowsHtml = '';
             if (!c.works || c.works.length === 0) {
-                workRowsHtml = '<tr><td colspan="2">No work entries</td></tr>';
+                workRowsHtml = '<tr><td colspan="3">No work entries</td></tr>';
             } else {
                 c.works.forEach(w => {
-                    workRowsHtml += `<tr><td>${w.desc}</td><td>${formatCurrency(w.price)}</td></tr>`;
+                    const typeLabel = w.type === 'hourly' ? `Hourly (${w.hours} hrs × ${formatCurrency(w.rate)})` : 'Fixed';
+                    workRowsHtml += `<tr><td>${w.desc}</td><td>${typeLabel}</td><td>${formatCurrency(w.price)}</td></tr>`;
                 });
             }
 
@@ -1699,7 +1866,7 @@
                     </div>
                     <h3 style="margin-bottom:6px;">📋 Work & Service</h3>
                     <table style="width:100%; border-collapse:collapse; font-size:14px;">
-                        <thead><tr style="background:#eef3ea;"><th style="text-align:left; padding:8px;">Description</th><th style="text-align:left; padding:8px;">Price</th></tr></thead>
+                        <thead><tr style="background:#eef3ea;"><th style="text-align:left; padding:8px;">Description</th><th style="text-align:left; padding:8px;">Type</th><th style="text-align:left; padding:8px;">Price</th></tr></thead>
                         <tbody>${workRowsHtml}</tbody>
                     </table>
                     ${photoSection}
@@ -2003,9 +2170,10 @@
                     billNo: 'TS-101',
                     billDate: new Date().toISOString().split('T')[0],
                     tractorModel: 'Mahindra 575 DI / GJ-01-AB-1234',
+                    hourlyRate: 500,
                     works: [
-                        { id: generateId(), desc: 'Engine oil change', price: 1200, photo: null },
-                        { id: generateId(), desc: 'Air filter cleaning', price: 350, photo: null }
+                        { id: generateId(), desc: 'Engine oil change', type: 'fixed', hours: 0, rate: 0, price: 1200, photo: null },
+                        { id: generateId(), desc: 'Tractor servicing', type: 'hourly', hours: 2, rate: 500, price: 1000, photo: null }
                     ],
                     payments: [
                         { id: generateId(), amount: 800, date: new Date().toISOString().split('T')[0], note: 'Advance' }

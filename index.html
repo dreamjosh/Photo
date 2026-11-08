@@ -6,7 +6,8 @@
 <title>Damor Tractore Service · Tractor Book</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
 <style>
 :root{--primary:#2a5c36;--primary-dark:#1e4429;--accent:#f5b042;--bg:#f3f7f0;--card-bg:#fff;--text:#1e2f23;--text-light:#4d6552;--border:#dfeadb;--danger:#b13b3b;--success:#1e7a3a;}
 body.theme-blue{--primary:#1e3a8a;--primary-dark:#172554;--accent:#60a5fa;--bg:#f0f4ff;--border:#dbeafe;--text:#1e293b;--text-light:#475569;}
@@ -169,7 +170,6 @@ td{padding:0.7rem 0.3rem;border-bottom:1px solid var(--border);vertical-align:mi
 .logo-preview{max-height:60px;max-width:180px;object-fit:contain;border-radius:10px;border:1px dashed var(--border);padding:4px;background:var(--bg);}
 
 .bill-card-view{background:var(--bg);border-radius:20px;padding:1.5rem;border:1px solid var(--border);margin-bottom:1rem;}
-.bill-card-view h3{color:var(--primary);font-size:1.1rem;margin-bottom:0.6rem;}
 
 @media (max-width:900px){
   .grid-2{grid-template-columns:1fr;}
@@ -263,7 +263,6 @@ td{padding:0.7rem 0.3rem;border-bottom:1px solid var(--border);vertical-align:mi
 
 <div class="page" id="adminPage">
 
-  <!-- ================= LOGIN ================= -->
   <div id="adminLoginScreen">
     <div class="login-box">
       <i class="fas fa-user-shield login-icon"></i>
@@ -304,7 +303,6 @@ td{padding:0.7rem 0.3rem;border-bottom:1px solid var(--border);vertical-align:mi
     </div>
   </div>
 
-  <!-- ================= DASHBOARD ================= -->
   <div id="adminDashboard" class="hidden">
     <div class="flex-row mb-1">
       <h1 style="margin-bottom:0;">
@@ -325,7 +323,6 @@ td{padding:0.7rem 0.3rem;border-bottom:1px solid var(--border);vertical-align:mi
       <button class="tab-btn hidden" data-tab="mybill" id="tabBtnMyBill"><i class="fas fa-file-invoice-dollar"></i> My Bill</button>
     </div>
 
-    <!-- ===== FARMERS TAB ===== -->
     <div class="tab-panel" id="tabFarmers">
       <div class="card">
         <div class="flex-row">
@@ -346,7 +343,6 @@ td{padding:0.7rem 0.3rem;border-bottom:1px solid var(--border);vertical-align:mi
       </div>
     </div>
 
-    <!-- ===== BILLS TAB ===== -->
     <div class="tab-panel hidden" id="tabBills">
       <div class="grid-2">
         <div>
@@ -459,7 +455,6 @@ td{padding:0.7rem 0.3rem;border-bottom:1px solid var(--border);vertical-align:mi
       </div>
     </div>
 
-    <!-- ===== MORE TAB ===== -->
     <div class="tab-panel hidden" id="tabMore">
       <div class="card">
         <h2><i class="fas fa-ellipsis-h"></i> More Tools</h2>
@@ -479,7 +474,6 @@ td{padding:0.7rem 0.3rem;border-bottom:1px solid var(--border);vertical-align:mi
       </div>
     </div>
 
-    <!-- ===== SETTINGS TAB ===== -->
     <div class="tab-panel hidden" id="tabSettings">
       <div class="grid-2">
         <div>
@@ -571,7 +565,6 @@ td{padding:0.7rem 0.3rem;border-bottom:1px solid var(--border);vertical-align:mi
       </div>
     </div>
 
-    <!-- ===== MY BILL TAB (Customer only) ===== -->
     <div class="tab-panel hidden" id="tabMybill">
       <div id="customerBillViewContainer"></div>
     </div>
@@ -583,7 +576,6 @@ td{padding:0.7rem 0.3rem;border-bottom:1px solid var(--border);vertical-align:mi
 
 <div class="site-footer"><span data-lang="footer_text">Damor Tractore Service · Tractor Book · All data stored in your browser</span></div>
 
-<!-- PDF Language Modal -->
 <div class="modal-overlay" id="pdfLangModal">
   <div class="modal-box">
     <h3><i class="fas fa-file-pdf"></i> Choose Bill Language</h3>
@@ -798,20 +790,15 @@ function updateAdminUI(){
     dashboard.classList.remove('hidden');
     document.getElementById('loggedInUserName').innerText = loggedInUserName || 'User';
 
-    // Admin-only cards
     document.getElementById('adminSecurityCard').classList.toggle('hidden', !isAdmin);
     document.getElementById('staffManagementCard').classList.toggle('hidden', !isAdmin);
     document.getElementById('brandingCard').classList.toggle('hidden', !isAdmin);
-    // My password — staff and customer only
     document.getElementById('myPasswordCard').classList.toggle('hidden', isAdmin);
 
-    // Tabs visibility per role
     document.getElementById('tabBtnFarmers').classList.toggle('hidden', isCustomer);
     document.getElementById('tabBtnBills').classList.toggle('hidden', isCustomer);
     document.getElementById('tabBtnMore').classList.toggle('hidden', isCustomer);
     document.getElementById('tabBtnMyBill').classList.toggle('hidden', !isCustomer);
-
-    // Settings tab visible to all (customer gets appearance + my password only)
     document.getElementById('tabBtnSettings').classList.remove('hidden');
 
     refreshDashboard();
@@ -865,16 +852,13 @@ function saveAllCustomers(arr){ localStorage.setItem(CUSTOMERS_KEY, JSON.stringi
 function loadCustomers(){
   const all = loadAllCustomers();
   if(loggedInUserType==='admin') return all;
-  if(loggedInUserType==='customer') return []; // customer does not see list
+  if(loggedInUserType==='customer') return [];
   return all.filter(c => c.createdByMobile === loggedInUserMobile);
 }
 
 function saveCustomers(filteredList){
-  if(loggedInUserType==='admin'){
-    saveAllCustomers(filteredList);
-    return;
-  }
-  if(loggedInUserType==='customer') return; // no write
+  if(loggedInUserType==='admin'){ saveAllCustomers(filteredList); return; }
+  if(loggedInUserType==='customer') return;
   const all = loadAllCustomers();
   const others = all.filter(c => c.createdByMobile !== loggedInUserMobile);
   saveAllCustomers([...others, ...filteredList]);
@@ -883,7 +867,6 @@ function saveCustomers(filteredList){
 function generateId(){ return Date.now()+'-'+Math.random().toString(36).substr(2,9); }
 function formatCurrency(num){ return '₹'+Number(num).toFixed(0); }
 
-// ================= REFRESH DASHBOARD =================
 function refreshDashboard(){
   if(loggedInUserType==='customer') return;
   const customers = loadCustomers();
@@ -929,9 +912,7 @@ function refreshDashboard(){
   });
 }
 
-// ================= CUSTOMER BILL VIEW (read-only) =================
 function getMyCustomers(){
-  // Customer sees customers whose mobile matches their own registered mobile
   const all = loadAllCustomers();
   return all.filter(c => c.customerMobile === loggedInUserMobile);
 }
@@ -997,7 +978,6 @@ function renderCustomerBillView(){
   });
 }
 
-// ================= LOAD CUSTOMER =================
 function loadCustomerIntoEditor(customerId){
   const customers = loadCustomers();
   const c = customers.find(x=>x.id===customerId);
@@ -1017,7 +997,6 @@ function loadCustomerIntoEditor(customerId){
   updateSummaryForCustomer(c);
 }
 
-// ================= WORK TABLE =================
 function renderWorkTableForCustomer(works){
   const tbody = document.getElementById('workTableBody');
   tbody.innerHTML='';
@@ -1111,7 +1090,6 @@ function syncActiveCustomerFromInputs(){
   updateSummaryForCustomer(c);
 }
 
-// ================= STAFF RENDER =================
 function renderStaffList(){
   const container = document.getElementById('staffListContainer');
   if(!container) return;
@@ -1166,7 +1144,6 @@ function clearStaffForm(){
   document.getElementById('staffEditId').value='';
 }
 
-// ================= LOGO =================
 function applyLogo(){
   const logoData = localStorage.getItem(LOGO_KEY);
   const navImg = document.getElementById('navLogoImg');
@@ -1187,7 +1164,6 @@ function loadLogoPreview(){
   else prev.style.display='none';
 }
 
-// ================= SLIDES =================
 let heroSlideIndex = 0;
 let heroSlideTimer = null;
 
@@ -1233,7 +1209,7 @@ function startHeroSlideshow(){
   }
 }
 
-// ================= PDF =================
+// ================= PDF GENERATION — jsPDF + AutoTable (FINAL) =================
 function generatePdf(lang){
   let c;
   if(loggedInUserType==='customer'){
@@ -1245,128 +1221,196 @@ function generatePdf(lang){
   }
   if(!c){ alert('Customer not found'); return; }
 
+  if(!window.jspdf || !window.jspdf.jsPDF){
+    alert('PDF library load nahi hui. Internet check karein aur page refresh karein.');
+    return;
+  }
+  const { jsPDF } = window.jspdf;
+
   const {total,paid,due} = calculateTotalsForCustomer(c);
+
   const L = {
-    en: { title:'Damor Tractore Service', subtitle:'Tractor Book · Bill Receipt', billNo:'Bill No', date:'Date', customer:'Customer', mobile:'Mobile', tractor:'Tractor', workTitle:'Work & Service', desc:'Description', type:'Type', price:'Price', total:'Total', paid:'Paid', due:'Due', payHistory:'Payment History', amount:'Amount', note:'Note', reminder:'Reminder', generated:'Generated via Damor Tractore Service', noWork:'No work entries', noPay:'No payments', fixed:'Fixed', hourly:'Hourly' },
-    hi: { title:'दामोर ट्रैक्टर सर्विस', subtitle:'ट्रैक्टर बुक · बिल रसीद', billNo:'बिल नंबर', date:'तारीख', customer:'ग्राहक', mobile:'मोबाइल', tractor:'ट्रैक्टर', workTitle:'काम और सेवा', desc:'विवरण', type:'प्रकार', price:'मूल्य', total:'कुल', paid:'भुगतान', due:'बकाया', payHistory:'भुगतान इतिहास', amount:'राशि', note:'नोट', reminder:'रिमाइंडर', generated:'दामोर ट्रैक्टर सर्विस द्वारा जनरेट किया गया', noWork:'कोई काम नहीं', noPay:'कोई भुगतान नहीं', fixed:'फिक्स', hourly:'प्रति घंटा' }
+    en: {
+      title:'Damor Tractore Service',
+      subtitle:'Tractor Book - Bill Receipt',
+      billNo:'Bill No', date:'Date',
+      customer:'Customer', mobile:'Mobile', tractor:'Tractor',
+      workTitle:'Work & Service',
+      desc:'Description', type:'Type', price:'Price',
+      total:'Total', paid:'Paid', due:'Due',
+      payHistory:'Payment History',
+      amount:'Amount', note:'Note',
+      reminder:'Reminder',
+      generated:'Generated via Damor Tractore Service',
+      noWork:'No work entries', noPay:'No payments',
+      fixed:'Fixed', hourly:'Hourly'
+    },
+    hi: {
+      title:'Damor Tractore Service',
+      subtitle:'Tractor Book - Bill Receipt',
+      billNo:'Bill No', date:'Date',
+      customer:'Customer', mobile:'Mobile', tractor:'Tractor',
+      workTitle:'Kaam aur Seva',
+      desc:'Vivaran', type:'Prakar', price:'Mulya',
+      total:'Kul', paid:'Bhugtan', due:'Bakaya',
+      payHistory:'Bhugtan Itihas',
+      amount:'Rashi', note:'Note',
+      reminder:'Reminder',
+      generated:'Damor Tractore Service',
+      noWork:'Koi kaam nahi', noPay:'Koi bhugtan nahi',
+      fixed:'Fixed', hourly:'Hourly'
+    }
   }[lang];
 
-  let workRows = '';
+  const doc = new jsPDF({ unit:'mm', format:'a4', orientation:'portrait' });
+  const pageW = doc.internal.pageSize.getWidth();
+  const margin = 14;
+  let y = margin;
+
+  // HEADER
+  doc.setFillColor(42,92,54);
+  doc.rect(0, 0, pageW, 30, 'F');
+  doc.setTextColor(255,255,255);
+  doc.setFont('helvetica','bold');
+  doc.setFontSize(18);
+  doc.text(L.title, margin, 13);
+  doc.setFont('helvetica','normal');
+  doc.setFontSize(10);
+  doc.text(L.subtitle, margin, 20);
+
+  doc.setFontSize(10);
+  doc.text(`${L.billNo}: ${c.billNo||'N/A'}`, pageW - margin, 13, { align:'right' });
+  doc.text(`${L.date}: ${c.billDate||'-'}`, pageW - margin, 20, { align:'right' });
+
+  y = 38;
+
+  // CUSTOMER INFO
+  doc.setFillColor(247,252,245);
+  doc.setDrawColor(203,220,199);
+  doc.roundedRect(margin, y, pageW - margin*2, 22, 3, 3, 'FD');
+
+  doc.setTextColor(30,47,35);
+  doc.setFont('helvetica','bold');
+  doc.setFontSize(10);
+  doc.text(`${L.customer}:`, margin + 4, y + 7);
+  doc.setFont('helvetica','normal');
+  doc.text(`${c.customerName || '-'}`, margin + 30, y + 7);
+
+  doc.setFont('helvetica','bold');
+  doc.text(`${L.mobile}:`, margin + 4, y + 14);
+  doc.setFont('helvetica','normal');
+  doc.text(`${c.customerMobile || '-'}`, margin + 30, y + 14);
+
+  doc.setFont('helvetica','bold');
+  doc.text(`${L.tractor}:`, margin + 95, y + 7);
+  doc.setFont('helvetica','normal');
+  const tractorTxt = (c.tractorModel || '-').substring(0, 45);
+  doc.text(tractorTxt, margin + 120, y + 7);
+
+  y += 30;
+
+  // WORK TABLE
+  const workBody = [];
   if(!c.works || c.works.length===0){
-    workRows = `<tr><td colspan="3" style="padding:8px;border:1px solid #cbdcc7;">${L.noWork}</td></tr>`;
+    workBody.push([L.noWork, '', '']);
   } else {
     c.works.forEach(w=>{
-      const typeLabel = w.type==='hourly' ? `${L.hourly} (${w.hours} hrs × ${formatCurrency(w.rate)})` : L.fixed;
-      workRows += `<tr>
-        <td style="padding:8px;border:1px solid #cbdcc7;">${w.desc}</td>
-        <td style="padding:8px;border:1px solid #cbdcc7;">${typeLabel}</td>
-        <td style="padding:8px;border:1px solid #cbdcc7;text-align:right;">${formatCurrency(w.price)}</td>
-      </tr>`;
+      const typeLabel = w.type==='hourly' ? `${L.hourly} (${w.hours} hr)` : L.fixed;
+      workBody.push([w.desc || '-', typeLabel, formatCurrency(w.price || 0)]);
     });
   }
 
-  let payRows = '';
+  doc.setFontSize(11);
+  doc.setFont('helvetica','bold');
+  doc.setTextColor(42,92,54);
+  doc.text(L.workTitle, margin, y);
+  y += 3;
+
+  doc.autoTable({
+    startY: y,
+    head: [[L.desc, L.type, L.price]],
+    body: workBody,
+    theme: 'grid',
+    headStyles: { fillColor: [238,243,234], textColor: [42,92,54], fontStyle: 'bold', fontSize: 10 },
+    bodyStyles: { fontSize: 9, textColor: [30,47,35] },
+    alternateRowStyles: { fillColor: [250,252,249] },
+    columnStyles: {
+      0: { cellWidth: 'auto' },
+      1: { cellWidth: 45 },
+      2: { cellWidth: 35, halign: 'right' }
+    },
+    margin: { left: margin, right: margin }
+  });
+
+  y = doc.lastAutoTable.finalY + 6;
+
+  // TOTALS
+  doc.setFillColor(247,252,245);
+  doc.setDrawColor(203,220,199);
+  doc.roundedRect(margin, y, pageW - margin*2, 16, 3, 3, 'FD');
+
+  doc.setFont('helvetica','bold');
+  doc.setFontSize(11);
+  doc.setTextColor(30,47,35);
+  doc.text(`${L.total}: ${formatCurrency(total)}`, margin + 4, y + 10);
+  doc.text(`${L.paid}: ${formatCurrency(paid)}`, margin + 70, y + 10);
+  doc.setTextColor(177,59,59);
+  doc.text(`${L.due}: ${formatCurrency(due)}`, pageW - margin - 4, y + 10, { align:'right' });
+
+  y += 24;
+
+  // PAYMENT HISTORY
+  const payBody = [];
   if(!c.payments || c.payments.length===0){
-    payRows = `<tr><td colspan="3" style="padding:6px;border:1px solid #cbdcc7;">${L.noPay}</td></tr>`;
+    payBody.push([L.noPay, '', '']);
   } else {
     [...c.payments].sort((a,b)=>new Date(b.date)-new Date(a.date)).forEach(p=>{
-      payRows += `<tr>
-        <td style="padding:6px;border:1px solid #cbdcc7;">${p.date}</td>
-        <td style="padding:6px;border:1px solid #cbdcc7;text-align:right;">${formatCurrency(p.amount)}</td>
-        <td style="padding:6px;border:1px solid #cbdcc7;">${p.note||''}</td>
-      </tr>`;
+      payBody.push([p.date || '-', formatCurrency(p.amount || 0), p.note || '-']);
     });
   }
 
-  const logo = localStorage.getItem(LOGO_KEY);
-  const logoHtml = logo ? `<img src="${logo}" style="height:50px;border-radius:8px;margin-right:10px;vertical-align:middle;">` : '';
+  doc.setFont('helvetica','bold');
+  doc.setFontSize(11);
+  doc.setTextColor(42,92,54);
+  doc.text(L.payHistory, margin, y);
+  y += 3;
 
-  const htmlContent = `
-    <div style="font-family: Arial, sans-serif; padding:24px; width:100%; max-width:760px; background:#ffffff; color:#1e2f23; box-sizing:border-box;">
-      <table style="width:100%; border-collapse:collapse; border-bottom:2px solid #2a5c36; margin-bottom:16px;">
-        <tr>
-          <td style="vertical-align:middle; padding-bottom:12px;">
-            ${logoHtml}
-            <span style="font-size:22px; font-weight:bold; color:#2a5c36;">${L.title}</span><br>
-            <span style="color:#4d6552; font-size:13px;">${L.subtitle}</span>
-          </td>
-          <td style="vertical-align:middle; text-align:right; padding-bottom:12px; font-size:13px;">
-            <div style="font-weight:bold;">${L.billNo}: ${c.billNo||'N/A'}</div>
-            <div>${L.date}: ${c.billDate||'—'}</div>
-          </td>
-        </tr>
-      </table>
-      <table style="width:100%; border-collapse:collapse; margin:16px 0; background:#f7fcf5;">
-        <tr>
-          <td style="padding:12px; font-size:13px;">
-            <strong>${L.customer}:</strong> ${c.customerName||'—'}<br>
-            <strong>${L.mobile}:</strong> ${c.customerMobile||'—'}
-          </td>
-          <td style="padding:12px; font-size:13px; text-align:right;">
-            <strong>${L.tractor}:</strong> ${c.tractorModel||'—'}
-          </td>
-        </tr>
-      </table>
-      <h3 style="margin:16px 0 8px; font-size:15px; color:#2a5c36;">📋 ${L.workTitle}</h3>
-      <table style="width:100%; border-collapse:collapse; font-size:13px;">
-        <thead>
-          <tr style="background:#eef3ea;">
-            <th style="text-align:left; padding:8px; border:1px solid #cbdcc7;">${L.desc}</th>
-            <th style="text-align:left; padding:8px; border:1px solid #cbdcc7;">${L.type}</th>
-            <th style="text-align:right; padding:8px; border:1px solid #cbdcc7;">${L.price}</th>
-          </tr>
-        </thead>
-        <tbody>${workRows}</tbody>
-      </table>
-      <table style="width:100%; border-collapse:collapse; margin-top:16px; background:#f7fcf5; font-size:14px;">
-        <tr>
-          <td style="padding:12px;"><strong>${L.total}:</strong> ${formatCurrency(total)}</td>
-          <td style="padding:12px;"><strong>${L.paid}:</strong> ${formatCurrency(paid)}</td>
-          <td style="padding:12px; text-align:right;"><strong>${L.due}:</strong> <span style="color:#b13b3b; font-weight:bold;">${formatCurrency(due)}</span></td>
-        </tr>
-      </table>
-      <h3 style="margin:20px 0 8px; font-size:15px; color:#2a5c36;">💰 ${L.payHistory}</h3>
-      <table style="width:100%; border-collapse:collapse; font-size:12px;">
-        <thead>
-          <tr style="background:#eef3ea;">
-            <th style="text-align:left; padding:6px; border:1px solid #cbdcc7;">${L.date}</th>
-            <th style="text-align:right; padding:6px; border:1px solid #cbdcc7;">${L.amount}</th>
-            <th style="text-align:left; padding:6px; border:1px solid #cbdcc7;">${L.note}</th>
-          </tr>
-        </thead>
-        <tbody>${payRows}</tbody>
-      </table>
-      <div style="margin-top:20px; padding-top:12px; border-top:1px dashed #cbdcc7; font-size:12px; color:#7d917f;">
-        ${L.reminder}: ${c.reminder||'—'}
-      </div>
-      <div style="margin-top:20px; text-align:center; font-size:11px; color:#8fa894;">
-        ${L.generated}
-      </div>
-    </div>
-  `;
+  doc.autoTable({
+    startY: y,
+    head: [[L.date, L.amount, L.note]],
+    body: payBody,
+    theme: 'grid',
+    headStyles: { fillColor: [238,243,234], textColor: [42,92,54], fontStyle: 'bold', fontSize: 10 },
+    bodyStyles: { fontSize: 9, textColor: [30,47,35] },
+    columnStyles: {
+      0: { cellWidth: 40 },
+      1: { cellWidth: 35, halign: 'right' },
+      2: { cellWidth: 'auto' }
+    },
+    margin: { left: margin, right: margin }
+  });
 
-  const wrapper = document.createElement('div');
-  wrapper.style.cssText = 'position:fixed; left:-9999px; top:0; width:800px; background:#ffffff; padding:0; margin:0;';
-  wrapper.innerHTML = htmlContent;
-  document.body.appendChild(wrapper);
+  y = doc.lastAutoTable.finalY + 6;
 
-  const opt = {
-    margin: [0.4, 0.4, 0.4, 0.4],
-    filename: `Damor_Bill_${(c.billNo||'N').replace(/[^a-zA-Z0-9_-]/g,'')}_${c.billDate||''}.pdf`,
-    image: { type: 'jpeg', quality: 0.98 },
-    html2canvas: { scale: 2, useCORS: true, allowTaint: true, backgroundColor: '#ffffff', logging: false },
-    jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
-  };
+  // REMINDER
+  if(c.reminder){
+    doc.setFont('helvetica','italic');
+    doc.setFontSize(9);
+    doc.setTextColor(125,145,127);
+    doc.text(`${L.reminder}: ${c.reminder}`, margin, y);
+    y += 6;
+  }
 
-  setTimeout(()=>{
-    html2pdf().set(opt).from(wrapper).save().then(()=>{
-      if(wrapper.parentNode) wrapper.parentNode.removeChild(wrapper);
-    }).catch(err=>{
-      console.error('PDF Error:', err);
-      if(wrapper.parentNode) wrapper.parentNode.removeChild(wrapper);
-      alert('PDF generate nahi hua. Dobara try karein.');
-    });
-  }, 300);
+  // FOOTER
+  doc.setFont('helvetica','normal');
+  doc.setFontSize(8);
+  doc.setTextColor(143,168,148);
+  doc.text(L.generated, pageW/2, doc.internal.pageSize.getHeight() - 10, { align:'center' });
+
+  // SAVE
+  const safeBill = (c.billNo||'N').replace(/[^a-zA-Z0-9_-]/g,'');
+  const safeDate = (c.billDate||'').replace(/[^a-zA-Z0-9_-]/g,'');
+  doc.save(`Damor_Bill_${safeBill}_${safeDate}.pdf`);
 }
 
 // ================= EVENT BINDINGS =================
@@ -1779,7 +1823,6 @@ document.addEventListener('DOMContentLoaded', ()=>{
     refreshDashboard();
   }
 
-  // Demo customer user for login
   if(loadStaff().length === 0){
     saveStaff([
       { id:'U-DEMO-CUST', role:'customer', name:'Ramesh Patel', mobile:'9876543210', password:'cust123', power:true }
@@ -1787,7 +1830,6 @@ document.addEventListener('DOMContentLoaded', ()=>{
   }
 });
 
-// ================= PAGE NAV =================
 function switchPage(pageName){
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   const pageMap = { home:'homePage', services:'servicesPage', about:'aboutPage', admin:'adminPage' };

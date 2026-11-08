@@ -19,12 +19,86 @@
             font-family: 'Inter', sans-serif;
             background: #f3f7f0;
             color: #1e2f23;
-            padding: 1rem;
         }
-        .app {
-            max-width: 1400px;
+        /* ---------- NAVBAR ---------- */
+        .navbar {
+            background: #ffffff;
+            padding: 1rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+            border-bottom: 1px solid #dfeadb;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: #1e4a2b;
+            text-decoration: none;
+        }
+        .logo i {
+            color: #f5b042;
+            background: #2a5c36;
+            padding: 0.5rem;
+            border-radius: 16px;
+            font-size: 1.4rem;
+        }
+        .nav-links {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+        .nav-links a {
+            text-decoration: none;
+            padding: 0.6rem 1.2rem;
+            border-radius: 40px;
+            font-weight: 500;
+            color: #2a5c36;
+            transition: 0.15s;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+        .nav-links a i {
+            font-size: 0.9rem;
+        }
+        .nav-links a:hover {
+            background: #eef6ea;
+        }
+        .nav-links a.active {
+            background: #2a5c36;
+            color: white;
+        }
+        .nav-links a.active i {
+            color: #f5b042;
+        }
+        /* ---------- PAGE CONTAINER ---------- */
+        .page-container {
+            max-width: 1300px;
             margin: 0 auto;
+            padding: 2rem 1.5rem 3rem;
         }
+        .page {
+            display: none;
+            animation: fadeIn 0.2s ease;
+        }
+        .page.active {
+            display: block;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(6px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        /* ---------- SHARED ---------- */
         h1, h2, h3 {
             font-weight: 600;
             letter-spacing: -0.02em;
@@ -110,6 +184,7 @@
             cursor: pointer;
             transition: 0.15s;
             box-shadow: 0 4px 10px rgba(42,92,54,0.2);
+            text-decoration: none;
         }
         .btn:hover {
             background: #1e4429;
@@ -236,13 +311,6 @@
             flex-wrap: wrap;
             margin-top: 0.5rem;
         }
-        .photo-thumb {
-            width: 50px;
-            height: 50px;
-            border-radius: 12px;
-            object-fit: cover;
-            border: 1.5px solid #b8d2b0;
-        }
         .hidden {
             display: none;
         }
@@ -250,642 +318,1005 @@
         .mt-2 { margin-top: 1.5rem; }
         .mb-1 { margin-bottom: 0.8rem; }
         .text-small { font-size: 0.8rem; color: #4d6552; }
-        .fa-regular, .fas, .far { pointer-events: none; }
         .worklog-list {
             max-height: 400px;
             overflow-y: auto;
             padding-right: 4px;
         }
-        .site-footer {
-            text-align: center;
-            margin-top: 2rem;
-            font-size: 0.8rem;
-            color: #6a7e6d;
-        }
-        @media (max-width: 800px) {
-            .grid-2 { grid-template-columns: 1fr; }
-            .grid-3 { grid-template-columns: 1fr; }
-        }
-        /* bill share section */
         .share-box {
             background: #f9fff7;
             border-radius: 20px;
             padding: 1rem;
             border: 1px solid #cbdcc7;
         }
+        /* ---------- HOME PAGE STYLES ---------- */
+        .hero {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            align-items: center;
+            background: linear-gradient(145deg, #ffffff 0%, #f7fcf5 100%);
+            border-radius: 40px;
+            padding: 2.5rem;
+            border: 1px solid #dfeadb;
+            margin-bottom: 2rem;
+        }
+        .hero-content h2 {
+            font-size: 2.4rem;
+            line-height: 1.2;
+            color: #1e4a2b;
+            margin-bottom: 1rem;
+        }
+        .hero-content h2 span {
+            color: #f5b042;
+            background: #2a5c36;
+            padding: 0 0.4rem;
+            border-radius: 12px;
+            display: inline-block;
+        }
+        .hero-content p {
+            font-size: 1.05rem;
+            color: #4d6552;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+        .hero-stats {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+        .stat-item {
+            text-align: center;
+        }
+        .stat-item .number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #2a5c36;
+            line-height: 1;
+        }
+        .stat-item .label {
+            font-size: 0.8rem;
+            color: #7d917f;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        .hero-image {
+            background: #e5f0e5;
+            border-radius: 28px;
+            min-height: 260px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 6rem;
+            color: #2a5c36;
+            border: 2px dashed #b8d2b0;
+            overflow: hidden;
+        }
+        .hero-image i {
+            opacity: 0.7;
+        }
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        .feature-card {
+            background: white;
+            border-radius: 24px;
+            padding: 1.5rem;
+            border: 1px solid #dfeadb;
+            text-align: center;
+            transition: 0.15s;
+        }
+        .feature-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px rgba(0,0,0,0.04);
+        }
+        .feature-card i {
+            font-size: 2.2rem;
+            color: #f5b042;
+            background: #2a5c36;
+            padding: 0.8rem;
+            border-radius: 20px;
+            margin-bottom: 1rem;
+        }
+        .feature-card h3 {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            color: #1e4a2b;
+        }
+        .feature-card p {
+            font-size: 0.85rem;
+            color: #7d917f;
+            line-height: 1.5;
+        }
+        /* ---------- SERVICES PAGE ---------- */
+        .service-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        .service-card {
+            background: white;
+            border-radius: 28px;
+            padding: 1.8rem;
+            border: 1px solid #dfeadb;
+            transition: 0.15s;
+        }
+        .service-card:hover {
+            box-shadow: 0 12px 28px rgba(42,92,54,0.08);
+        }
+        .service-card i {
+            font-size: 2rem;
+            color: #2a5c36;
+            background: #eef3ea;
+            padding: 1rem;
+            border-radius: 20px;
+            margin-bottom: 1rem;
+        }
+        .service-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.6rem;
+        }
+        .service-card p {
+            font-size: 0.9rem;
+            color: #4d6552;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+        .service-card .price-tag {
+            background: #2a5c36;
+            color: white;
+            padding: 0.4rem 1rem;
+            border-radius: 40px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            display: inline-block;
+        }
+        /* ---------- ABOUT PAGE ---------- */
+        .about-flex {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+            flex-wrap: wrap;
+            margin: 2rem 0;
+        }
+        .about-text {
+            flex: 1 1 300px;
+        }
+        .about-text h2 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: #1e4a2b;
+        }
+        .about-text p {
+            font-size: 0.95rem;
+            color: #4d6552;
+            line-height: 1.7;
+            margin-bottom: 1rem;
+        }
+        .about-icon {
+            flex: 0 0 200px;
+            background: #e5f0e5;
+            border-radius: 40px;
+            padding: 3rem 2rem;
+            text-align: center;
+            border: 2px dashed #b8d2b0;
+            font-size: 5rem;
+            color: #2a5c36;
+        }
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        .team-member {
+            background: white;
+            border-radius: 24px;
+            padding: 1.5rem;
+            text-align: center;
+            border: 1px solid #dfeadb;
+        }
+        .team-member i {
+            font-size: 2.5rem;
+            color: #2a5c36;
+            background: #eef3ea;
+            padding: 1rem;
+            border-radius: 50%;
+            margin-bottom: 0.8rem;
+        }
+        .team-member h4 {
+            font-size: 1rem;
+            margin-bottom: 0.2rem;
+        }
+        .team-member p {
+            font-size: 0.8rem;
+            color: #7d917f;
+        }
+        /* ---------- ADMIN PAGE (reuse previous styles) ---------- */
+        .page-container .page#adminPage .grid-2 {
+            grid-template-columns: 1fr 1.2fr;
+        }
+        /* ---------- FOOTER ---------- */
+        .site-footer {
+            text-align: center;
+            padding: 1.5rem;
+            font-size: 0.8rem;
+            color: #6a7e6d;
+            border-top: 1px solid #dfeadb;
+            margin-top: 2rem;
+        }
+        /* ---------- RESPONSIVE ---------- */
+        @media (max-width: 800px) {
+            .grid-2 { grid-template-columns: 1fr; }
+            .grid-3 { grid-template-columns: 1fr; }
+            .hero { grid-template-columns: 1fr; }
+            .navbar { flex-direction: column; align-items: stretch; }
+            .nav-links { justify-content: center; }
+            .page-container { padding: 1rem; }
+        }
     </style>
 </head>
 <body>
-<div class="app">
-    <h1>
-        <i class="fas fa-tractor"></i> Tractor Service · Trecter Book
-        <span class="badge"><i class="fas fa-user-shield"></i> Admin Panel</span>
-    </h1>
-
-    <!-- Two column layout: left - customer + bill, right - work log + summary -->
-    <div class="grid-2">
-        <!-- LEFT COLUMN -->
-        <div>
-            <!-- CUSTOMER & BILL CARD -->
-            <div class="card">
-                <h2><i class="fas fa-user-plus" style="color:#f5b042;"></i> Customer & Bill</h2>
-                <div class="mt-1">
-                    <label>Customer name</label>
-                    <input type="text" id="customerName" placeholder="e.g. Ramesh Patel" value="Ramesh Patel">
-                </div>
-                <div class="grid-3 mt-1">
-                    <div>
-                        <label>Mobile</label>
-                        <input type="text" id="customerMobile" placeholder="9876543210" value="9876543210">
-                    </div>
-                    <div>
-                        <label>Bill No.</label>
-                        <input type="text" id="billNo" placeholder="Auto" value="TS-101" readonly style="background:#f0f5ed;">
-                    </div>
-                    <div>
-                        <label>Date</label>
-                        <input type="date" id="billDate">
-                    </div>
-                </div>
-
-                <div class="mt-2">
-                    <label>Tractor model / Reg No.</label>
-                    <input type="text" id="tractorModel" placeholder="e.g. Mahindra 575 DI / GJ-01-AB-1234" value="Mahindra 575 DI / GJ-01-AB-1234">
-                </div>
-
-                <!-- Work log add row -->
-                <div class="tractor-card mt-2">
-                    <h3 style="font-size:1rem; margin-bottom:0.8rem;"><i class="fas fa-wrench"></i> Add work / service</h3>
-                    <div class="grid-3">
-                        <div>
-                            <label>Work description</label>
-                            <input type="text" id="workDesc" placeholder="e.g. Engine oil change">
-                        </div>
-                        <div>
-                            <label>Price (₹)</label>
-                            <input type="number" id="workPrice" placeholder="0" value="0" min="0" step="1">
-                        </div>
-                        <div>
-                            <label>Photo (optional)</label>
-                            <input type="file" id="workPhoto" accept="image/*" style="padding:0.4rem;">
-                        </div>
-                    </div>
-                    <div class="flex-row mt-1">
-                        <button class="btn btn-small" id="addWorkBtn"><i class="fas fa-plus-circle"></i> Add work entry</button>
-                        <span class="text-small" id="photoNamePreview"></span>
-                    </div>
-                </div>
-
-                <!-- Payment recording -->
-                <div class="tractor-card mt-2">
-                    <h3 style="font-size:1rem; margin-bottom:0.8rem;"><i class="fas fa-money-bill-wave"></i> Payment / Reminder</h3>
-                    <div class="grid-3">
-                        <div>
-                            <label>Amount paid (₹)</label>
-                            <input type="number" id="paymentAmount" placeholder="0" value="0" min="0">
-                        </div>
-                        <div>
-                            <label>Payment date</label>
-                            <input type="date" id="paymentDate">
-                        </div>
-                        <div>
-                            <label>Reminder note</label>
-                            <input type="text" id="paymentNote" placeholder="e.g. next due 10 Nov">
-                        </div>
-                    </div>
-                    <button class="btn btn-outline btn-small mt-1" id="addPaymentBtn"><i class="fas fa-rupee-sign"></i> Record payment</button>
-                </div>
-            </div>
-
-            <!-- BILL SUMMARY & SHARE -->
-            <div class="card share-box">
-                <div class="flex-row">
-                    <div class="total-box">
-                        <i class="fas fa-calculator"></i> Total: <span id="displayTotal">₹0</span>
-                    </div>
-                    <div class="payment-status">
-                        <span>Paid: <span class="paid" id="displayPaid">₹0</span></span>
-                        <span>Due: <span class="due" id="displayDue">₹0</span></span>
-                    </div>
-                </div>
-                <div class="flex-row mt-2">
-                    <button class="btn" id="sharePdfBtn"><i class="fas fa-file-pdf"></i> Share Bill as PDF</button>
-                    <button class="btn btn-outline" id="refreshBillBtn"><i class="fas fa-sync-alt"></i> Refresh summary</button>
-                </div>
-                <div class="text-small mt-1" id="reminderText"><i class="fas fa-bell"></i> No active reminders</div>
-            </div>
+    <!-- ================= NAVBAR ================= -->
+    <nav class="navbar">
+        <a href="#" class="logo" onclick="switchPage('home'); return false;">
+            <i class="fas fa-tractor"></i> Tractor Service
+        </a>
+        <div class="nav-links">
+            <a href="#" class="active" data-page="home" onclick="switchPage('home'); return false;"><i class="fas fa-home"></i> Home</a>
+            <a href="#" data-page="services" onclick="switchPage('services'); return false;"><i class="fas fa-tools"></i> Services</a>
+            <a href="#" data-page="about" onclick="switchPage('about'); return false;"><i class="fas fa-info-circle"></i> About</a>
+            <a href="#" data-page="admin" onclick="switchPage('admin'); return false;"><i class="fas fa-user-shield"></i> Admin</a>
         </div>
+    </nav>
 
-        <!-- RIGHT COLUMN: WORK LOG + PAYMENT LOG + ADMIN -->
-        <div>
-            <!-- WORK LOG TABLE -->
-            <div class="card">
-                <div class="flex-row">
-                    <h2><i class="fas fa-list-ul"></i> Work log (what & where)</h2>
-                    <span class="badge" id="workCount">0 entries</span>
-                </div>
-                <div class="worklog-list mt-1" style="max-height:260px; overflow-y:auto;">
-                    <table id="workTable">
-                        <thead>
-                            <tr><th>Work / Location</th><th>Price</th><th>Photo</th><th></th></tr>
-                        </thead>
-                        <tbody id="workTableBody">
-                            <!-- dynamic rows -->
-                        </tbody>
-                    </table>
-                </div>
-                <p class="text-small mt-1"><i class="fas fa-camera"></i> Photo attached shows the work spot / condition.</p>
-            </div>
+    <!-- ================= PAGE CONTAINER ================= -->
+    <div class="page-container">
 
-            <!-- PAYMENT LOG -->
-            <div class="card">
-                <h2><i class="fas fa-history"></i> Payment history</h2>
-                <div style="max-height:140px; overflow-y:auto;" class="mt-1">
-                    <table>
-                        <thead><tr><th>Date</th><th>Amount</th><th>Note</th></tr></thead>
-                        <tbody id="paymentTableBody">
-                            <!-- dynamic -->
-                        </tbody>
-                    </table>
-                </div>
-                <div class="reminder-tag mt-1" id="reminderBadge"><i class="fas fa-clock"></i> Reminder: none</div>
-            </div>
-
-            <!-- ADMIN PANEL (extra controls) -->
-            <div class="card admin-panel">
-                <h3><i class="fas fa-user-cog"></i> Admin panel · manage bill</h3>
-                <div class="grid-3 mt-1">
-                    <button class="btn btn-small btn-outline" id="clearWorkLogBtn"><i class="fas fa-trash-alt"></i> Clear work log</button>
-                    <button class="btn btn-small btn-outline" id="clearPaymentsBtn"><i class="fas fa-eraser"></i> Clear payments</button>
-                    <button class="btn btn-small btn-danger" id="resetAllBtn"><i class="fas fa-undo-alt"></i> Reset all data</button>
-                </div>
-                <div class="mt-2">
-                    <label>Set bill no. manually</label>
+        <!-- ========== HOME PAGE ========== -->
+        <div class="page active" id="homePage">
+            <div class="hero">
+                <div class="hero-content">
+                    <h2>Keep your <span>tractor</span> running like new</h2>
+                    <p>Book service, track bills, and manage all tractor work in one place. Professional care for your farm machinery.</p>
                     <div class="flex-row">
-                        <input type="text" id="adminBillNo" placeholder="TS-101" style="max-width:200px;">
-                        <button class="btn btn-small btn-warning" id="setBillNoBtn"><i class="fas fa-save"></i> Update</button>
+                        <a href="#" class="btn" onclick="switchPage('admin'); return false;"><i class="fas fa-wrench"></i> Open Tractor Book</a>
+                        <a href="#" class="btn btn-outline" onclick="switchPage('services'); return false;"><i class="fas fa-list"></i> View Services</a>
+                    </div>
+                    <div class="hero-stats mt-2">
+                        <div class="stat-item">
+                            <div class="number">1200+</div>
+                            <div class="label">Tractors Serviced</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="number">15+</div>
+                            <div class="label">Years Experience</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="number">4.9★</div>
+                            <div class="label">Customer Rating</div>
+                        </div>
                     </div>
                 </div>
-                <p class="text-small mt-1"><i class="fas fa-info-circle"></i> Admin can reset or update bill number. All changes saved locally.</p>
+                <div class="hero-image">
+                    <i class="fas fa-tractor"></i>
+                </div>
+            </div>
+
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <i class="fas fa-file-invoice"></i>
+                    <h3>Bill Management</h3>
+                    <p>Create and share professional bills with PDF export.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-camera"></i>
+                    <h3>Photo Attachments</h3>
+                    <p>Attach photos of work spots and conditions.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-bell"></i>
+                    <h3>Payment Reminders</h3>
+                    <p>Track dues and get reminders for pending payments.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-chart-line"></i>
+                    <h3>Work History</h3>
+                    <p>Complete log of all services and parts replaced.</p>
+                </div>
             </div>
         </div>
+
+        <!-- ========== SERVICES PAGE ========== -->
+        <div class="page" id="servicesPage">
+            <h1><i class="fas fa-tools"></i> Our Services</h1>
+            <p class="text-small" style="margin-bottom:1.5rem;">Expert tractor maintenance and repair services for all major brands.</p>
+            <div class="service-grid">
+                <div class="service-card">
+                    <i class="fas fa-oil-can"></i>
+                    <h3>Engine Oil Change</h3>
+                    <p>Complete oil drain and refill with premium grade oil. Includes filter check.</p>
+                    <span class="price-tag">Starting ₹1,200</span>
+                </div>
+                <div class="service-card">
+                    <i class="fas fa-filter"></i>
+                    <h3>Air Filter Cleaning</h3>
+                    <p>Thorough cleaning of air filters to ensure optimal engine performance.</p>
+                    <span class="price-tag">₹350</span>
+                </div>
+                <div class="service-card">
+                    <i class="fas fa-cogs"></i>
+                    <h3>Transmission Repair</h3>
+                    <p>Full transmission inspection, fluid change, and gear repair.</p>
+                    <span class="price-tag">Starting ₹3,500</span>
+                </div>
+                <div class="service-card">
+                    <i class="fas fa-bolt"></i>
+                    <h3>Electrical System</h3>
+                    <p>Battery check, wiring repair, alternator and starter service.</p>
+                    <span class="price-tag">Starting ₹800</span>
+                </div>
+                <div class="service-card">
+                    <i class="fas fa-tire"></i>
+                    <h3>Tire & Brake Service</h3>
+                    <p>Tire rotation, pressure check, brake pad replacement and adjustment.</p>
+                    <span class="price-tag">Starting ₹1,500</span>
+                </div>
+                <div class="service-card">
+                    <i class="fas fa-clipboard-check"></i>
+                    <h3>Full Tractor Inspection</h3>
+                    <p>Comprehensive 50-point check covering engine, hydraulics, and more.</p>
+                    <span class="price-tag">Starting ₹2,000</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- ========== ABOUT PAGE ========== -->
+        <div class="page" id="aboutPage">
+            <h1><i class="fas fa-info-circle"></i> About Us</h1>
+            <div class="about-flex">
+                <div class="about-text">
+                    <h2>Trusted tractor care since 2010</h2>
+                    <p>We are a dedicated team of tractor mechanics and service professionals committed to keeping your farm equipment running at peak performance. Our mission is to provide transparent, reliable, and affordable service to every farmer.</p>
+                    <p>With over 15 years of experience, we understand the critical role tractors play in agriculture. That's why we offer doorstep service, genuine parts, and a digital bill management system to keep you informed every step of the way.</p>
+                    <p>Our Trecter Book system allows you to track all work done, payments made, and pending dues in one place — with photo documentation and PDF bills you can share instantly.</p>
+                </div>
+                <div class="about-icon">
+                    <i class="fas fa-tractor"></i>
+                </div>
+            </div>
+
+            <h2 style="margin-top:2rem;">Meet the team</h2>
+            <div class="team-grid">
+                <div class="team-member">
+                    <i class="fas fa-user-tie"></i>
+                    <h4>Rajesh Kumar</h4>
+                    <p>Senior Mechanic</p>
+                </div>
+                <div class="team-member">
+                    <i class="fas fa-user-cog"></i>
+                    <h4>Suresh Patel</h4>
+                    <p>Engine Specialist</p>
+                </div>
+                <div class="team-member">
+                    <i class="fas fa-user-hard-hat"></i>
+                    <h4>Mahesh Singh</h4>
+                    <p>Field Technician</p>
+                </div>
+                <div class="team-member">
+                    <i class="fas fa-user-graduate"></i>
+                    <h4>Priya Sharma</h4>
+                    <p>Customer Support</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ========== ADMIN PAGE (Full Tractor Book) ========== -->
+        <div class="page" id="adminPage">
+            <h1>
+                <i class="fas fa-tractor"></i> Tractor Service · Trecter Book
+                <span class="badge"><i class="fas fa-user-shield"></i> Admin Panel</span>
+            </h1>
+
+            <div class="grid-2">
+                <!-- LEFT COLUMN -->
+                <div>
+                    <!-- CUSTOMER & BILL CARD -->
+                    <div class="card">
+                        <h2><i class="fas fa-user-plus" style="color:#f5b042;"></i> Customer & Bill</h2>
+                        <div class="mt-1">
+                            <label>Customer name</label>
+                            <input type="text" id="customerName" placeholder="e.g. Ramesh Patel" value="Ramesh Patel">
+                        </div>
+                        <div class="grid-3 mt-1">
+                            <div>
+                                <label>Mobile</label>
+                                <input type="text" id="customerMobile" placeholder="9876543210" value="9876543210">
+                            </div>
+                            <div>
+                                <label>Bill No.</label>
+                                <input type="text" id="billNo" placeholder="Auto" value="TS-101" readonly style="background:#f0f5ed;">
+                            </div>
+                            <div>
+                                <label>Date</label>
+                                <input type="date" id="billDate">
+                            </div>
+                        </div>
+
+                        <div class="mt-2">
+                            <label>Tractor model / Reg No.</label>
+                            <input type="text" id="tractorModel" placeholder="e.g. Mahindra 575 DI / GJ-01-AB-1234" value="Mahindra 575 DI / GJ-01-AB-1234">
+                        </div>
+
+                        <!-- Work log add row -->
+                        <div class="tractor-card mt-2">
+                            <h3 style="font-size:1rem; margin-bottom:0.8rem;"><i class="fas fa-wrench"></i> Add work / service</h3>
+                            <div class="grid-3">
+                                <div>
+                                    <label>Work description</label>
+                                    <input type="text" id="workDesc" placeholder="e.g. Engine oil change">
+                                </div>
+                                <div>
+                                    <label>Price (₹)</label>
+                                    <input type="number" id="workPrice" placeholder="0" value="0" min="0" step="1">
+                                </div>
+                                <div>
+                                    <label>Photo (optional)</label>
+                                    <input type="file" id="workPhoto" accept="image/*" style="padding:0.4rem;">
+                                </div>
+                            </div>
+                            <div class="flex-row mt-1">
+                                <button class="btn btn-small" id="addWorkBtn"><i class="fas fa-plus-circle"></i> Add work entry</button>
+                                <span class="text-small" id="photoNamePreview"></span>
+                            </div>
+                        </div>
+
+                        <!-- Payment recording -->
+                        <div class="tractor-card mt-2">
+                            <h3 style="font-size:1rem; margin-bottom:0.8rem;"><i class="fas fa-money-bill-wave"></i> Payment / Reminder</h3>
+                            <div class="grid-3">
+                                <div>
+                                    <label>Amount paid (₹)</label>
+                                    <input type="number" id="paymentAmount" placeholder="0" value="0" min="0">
+                                </div>
+                                <div>
+                                    <label>Payment date</label>
+                                    <input type="date" id="paymentDate">
+                                </div>
+                                <div>
+                                    <label>Reminder note</label>
+                                    <input type="text" id="paymentNote" placeholder="e.g. next due 10 Nov">
+                                </div>
+                            </div>
+                            <button class="btn btn-outline btn-small mt-1" id="addPaymentBtn"><i class="fas fa-rupee-sign"></i> Record payment</button>
+                        </div>
+                    </div>
+
+                    <!-- BILL SUMMARY & SHARE -->
+                    <div class="card share-box">
+                        <div class="flex-row">
+                            <div class="total-box">
+                                <i class="fas fa-calculator"></i> Total: <span id="displayTotal">₹0</span>
+                            </div>
+                            <div class="payment-status">
+                                <span>Paid: <span class="paid" id="displayPaid">₹0</span></span>
+                                <span>Due: <span class="due" id="displayDue">₹0</span></span>
+                            </div>
+                        </div>
+                        <div class="flex-row mt-2">
+                            <button class="btn" id="sharePdfBtn"><i class="fas fa-file-pdf"></i> Share Bill as PDF</button>
+                            <button class="btn btn-outline" id="refreshBillBtn"><i class="fas fa-sync-alt"></i> Refresh summary</button>
+                        </div>
+                        <div class="text-small mt-1" id="reminderText"><i class="fas fa-bell"></i> No active reminders</div>
+                    </div>
+                </div>
+
+                <!-- RIGHT COLUMN: WORK LOG + PAYMENT LOG + ADMIN -->
+                <div>
+                    <!-- WORK LOG TABLE -->
+                    <div class="card">
+                        <div class="flex-row">
+                            <h2><i class="fas fa-list-ul"></i> Work log (what & where)</h2>
+                            <span class="badge" id="workCount">0 entries</span>
+                        </div>
+                        <div class="worklog-list mt-1" style="max-height:260px; overflow-y:auto;">
+                            <table id="workTable">
+                                <thead>
+                                    <tr><th>Work / Location</th><th>Price</th><th>Photo</th><th></th></tr>
+                                </thead>
+                                <tbody id="workTableBody">
+                                    <!-- dynamic rows -->
+                                </tbody>
+                            </table>
+                        </div>
+                        <p class="text-small mt-1"><i class="fas fa-camera"></i> Photo attached shows the work spot / condition.</p>
+                    </div>
+
+                    <!-- PAYMENT LOG -->
+                    <div class="card">
+                        <h2><i class="fas fa-history"></i> Payment history</h2>
+                        <div style="max-height:140px; overflow-y:auto;" class="mt-1">
+                            <table>
+                                <thead><tr><th>Date</th><th>Amount</th><th>Note</th></tr></thead>
+                                <tbody id="paymentTableBody">
+                                    <!-- dynamic -->
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="reminder-tag mt-1" id="reminderBadge"><i class="fas fa-clock"></i> Reminder: none</div>
+                    </div>
+
+                    <!-- ADMIN PANEL (extra controls) -->
+                    <div class="card admin-panel">
+                        <h3><i class="fas fa-user-cog"></i> Admin panel · manage bill</h3>
+                        <div class="grid-3 mt-1">
+                            <button class="btn btn-small btn-outline" id="clearWorkLogBtn"><i class="fas fa-trash-alt"></i> Clear work log</button>
+                            <button class="btn btn-small btn-outline" id="clearPaymentsBtn"><i class="fas fa-eraser"></i> Clear payments</button>
+                            <button class="btn btn-small btn-danger" id="resetAllBtn"><i class="fas fa-undo-alt"></i> Reset all data</button>
+                        </div>
+                        <div class="mt-2">
+                            <label>Set bill no. manually</label>
+                            <div class="flex-row">
+                                <input type="text" id="adminBillNo" placeholder="TS-101" style="max-width:200px;">
+                                <button class="btn btn-small btn-warning" id="setBillNoBtn"><i class="fas fa-save"></i> Update</button>
+                            </div>
+                        </div>
+                        <p class="text-small mt-1"><i class="fas fa-info-circle"></i> Admin can reset or update bill number. All changes saved locally.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
-    <div class="site-footer">Tractor Service · Trecter Book · All data stored in your browser</div>
-</div>
 
-<script>
-    (function() {
-        // ---------- STORAGE KEYS ----------
-        const STORAGE_KEY = 'tractorServiceData_v1';
+    <!-- ================= FOOTER ================= -->
+    <div class="site-footer">
+        Tractor Service · Trecter Book · All data stored in your browser
+    </div>
 
-        // Default initial data
-        const defaultData = {
-            customerName: 'Ramesh Patel',
-            customerMobile: '9876543210',
-            billNo: 'TS-101',
-            billDate: new Date().toISOString().split('T')[0],
-            tractorModel: 'Mahindra 575 DI / GJ-01-AB-1234',
-            works: [
-                { id: 'w1', desc: 'Engine oil change', price: 1200, photo: null },
-                { id: 'w2', desc: 'Air filter cleaning', price: 350, photo: null }
-            ],
-            payments: [
-                { id: 'p1', amount: 800, date: new Date().toISOString().split('T')[0], note: 'Advance' }
-            ],
-            reminder: 'Next service due 15 Nov'
-        };
-
-        // ---------- GLOBAL STATE ----------
-        let state = {
-            customerName: '',
-            customerMobile: '',
-            billNo: '',
-            billDate: '',
-            tractorModel: '',
-            works: [],        // { id, desc, price, photo (base64 or null) }
-            payments: [],     // { id, amount, date, note }
-            reminder: ''
-        };
-
-        // ---------- HELPER FUNCTIONS ----------
-        function generateId() {
-            return Date.now() + '-' + Math.random().toString(36).substr(2, 9);
-        }
-
-        function formatCurrency(num) {
-            return '₹' + Number(num).toFixed(0);
-        }
-
-        // Save to localStorage
-        function persistState() {
-            try {
-                localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
-            } catch (e) {
-                console.warn('Could not save to localStorage', e);
+    <script>
+        // ================= PAGE NAVIGATION =================
+        function switchPage(pageName) {
+            // hide all pages
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            // show selected
+            const pageMap = {
+                'home': 'homePage',
+                'services': 'servicesPage',
+                'about': 'aboutPage',
+                'admin': 'adminPage'
+            };
+            const pageId = pageMap[pageName];
+            if (pageId) {
+                document.getElementById(pageId).classList.add('active');
             }
-        }
-
-        // Load from localStorage
-        function loadState() {
-            const saved = localStorage.getItem(STORAGE_KEY);
-            if (saved) {
-                try {
-                    const parsed = JSON.parse(saved);
-                    state = { ...state, ...parsed };
-                } catch (e) {
-                    console.warn('Corrupted data, using default');
-                    state = JSON.parse(JSON.stringify(defaultData));
-                }
-            } else {
-                state = JSON.parse(JSON.stringify(defaultData));
-            }
-            // ensure billDate and payment dates are set if missing
-            if (!state.billDate) state.billDate = new Date().toISOString().split('T')[0];
-        }
-
-        // ---------- RENDER FUNCTIONS ----------
-        function renderAll() {
-            // sync inputs
-            document.getElementById('customerName').value = state.customerName || '';
-            document.getElementById('customerMobile').value = state.customerMobile || '';
-            document.getElementById('billNo').value = state.billNo || '';
-            document.getElementById('billDate').value = state.billDate || new Date().toISOString().split('T')[0];
-            document.getElementById('tractorModel').value = state.tractorModel || '';
-            document.getElementById('adminBillNo').value = state.billNo || '';
-
-            renderWorkTable();
-            renderPaymentTable();
-            updateSummary();
-            updateReminderDisplay();
-        }
-
-        function renderWorkTable() {
-            const tbody = document.getElementById('workTableBody');
-            tbody.innerHTML = '';
-            if (!state.works || state.works.length === 0) {
-                tbody.innerHTML = '<tr><td colspan="4" style="text-align:center; color:#7d917f;">No work entries yet.</td></tr>';
-                document.getElementById('workCount').innerText = '0 entries';
-                return;
-            }
-            state.works.forEach((work, index) => {
-                const row = document.createElement('tr');
-                // work desc + location
-                const descCell = document.createElement('td');
-                descCell.innerText = work.desc || '—';
-                // price
-                const priceCell = document.createElement('td');
-                priceCell.innerText = formatCurrency(work.price || 0);
-                // photo
-                const photoCell = document.createElement('td');
-                if (work.photo) {
-                    const img = document.createElement('img');
-                    img.src = work.photo;
-                    img.className = 'worklog-img';
-                    img.alt = 'work photo';
-                    photoCell.appendChild(img);
-                } else {
-                    photoCell.innerText = '📷';
-                }
-                // delete button (admin)
-                const actionCell = document.createElement('td');
-                const delBtn = document.createElement('button');
-                delBtn.className = 'btn-small btn-danger';
-                delBtn.style.padding = '0.2rem 0.6rem';
-                delBtn.innerHTML = '<i class="fas fa-trash"></i>';
-                delBtn.addEventListener('click', () => {
-                    state.works.splice(index, 1);
-                    persistState();
-                    renderAll();
-                });
-                actionCell.appendChild(delBtn);
-
-                row.appendChild(descCell);
-                row.appendChild(priceCell);
-                row.appendChild(photoCell);
-                row.appendChild(actionCell);
-                tbody.appendChild(row);
+            // update nav active class
+            document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+            document.querySelectorAll('.nav-links a').forEach(a => {
+                if (a.dataset.page === pageName) a.classList.add('active');
             });
-            document.getElementById('workCount').innerText = state.works.length + ' entries';
+            // scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        function renderPaymentTable() {
-            const tbody = document.getElementById('paymentTableBody');
-            tbody.innerHTML = '';
-            if (!state.payments || state.payments.length === 0) {
-                tbody.innerHTML = '<tr><td colspan="3" style="text-align:center; color:#7d917f;">No payments recorded.</td></tr>';
-                return;
-            }
-            // Show newest first
-            const sorted = [...state.payments].sort((a,b) => new Date(b.date) - new Date(a.date));
-            sorted.forEach((p) => {
-                const row = document.createElement('tr');
-                row.innerHTML = `<td>${p.date || '—'}</td><td>${formatCurrency(p.amount || 0)}</td><td>${p.note || '—'}</td>`;
-                tbody.appendChild(row);
-            });
-        }
+        // ================= TRACTOR BOOK LOGIC (from previous version) =================
+        (function() {
+            // ---------- STORAGE KEYS ----------
+            const STORAGE_KEY = 'tractorServiceData_v2';
 
-        function calculateTotals() {
-            const total = state.works.reduce((sum, w) => sum + (Number(w.price) || 0), 0);
-            const paid = state.payments.reduce((sum, p) => sum + (Number(p.amount) || 0), 0);
-            const due = Math.max(0, total - paid);
-            return { total, paid, due };
-        }
-
-        function updateSummary() {
-            const { total, paid, due } = calculateTotals();
-            document.getElementById('displayTotal').innerText = formatCurrency(total);
-            document.getElementById('displayPaid').innerText = formatCurrency(paid);
-            document.getElementById('displayDue').innerText = formatCurrency(due);
-
-            // reminder text
-            const reminderEl = document.getElementById('reminderText');
-            const reminderBadge = document.getElementById('reminderBadge');
-            let reminderMsg = state.reminder || 'No active reminders';
-            if (due > 0) {
-                reminderMsg += ` · Due: ${formatCurrency(due)}`;
-                reminderEl.innerHTML = `<i class="fas fa-bell"></i> ${reminderMsg}`;
-                reminderBadge.innerHTML = `<i class="fas fa-clock"></i> Reminder: ${reminderMsg}`;
-            } else {
-                reminderEl.innerHTML = `<i class="fas fa-check-circle" style="color:#1e7a3a;"></i> All clear · ${reminderMsg}`;
-                reminderBadge.innerHTML = `<i class="fas fa-check-circle"></i> ${reminderMsg}`;
-            }
-            // update badge class
-            reminderBadge.className = due > 0 ? 'reminder-tag' : 'reminder-tag';
-            if (due > 0) reminderBadge.style.background = '#fff1d6';
-            else reminderBadge.style.background = '#e3f0de';
-        }
-
-        function updateReminderDisplay() {
-            // handled inside updateSummary
-        }
-
-        // ---------- READ INPUTS & UPDATE STATE ----------
-        function syncStateFromInputs() {
-            state.customerName = document.getElementById('customerName').value.trim();
-            state.customerMobile = document.getElementById('customerMobile').value.trim();
-            state.billNo = document.getElementById('billNo').value.trim();
-            state.billDate = document.getElementById('billDate').value;
-            state.tractorModel = document.getElementById('tractorModel').value.trim();
-            persistState();
-        }
-
-        // ---------- ADD WORK ----------
-        function addWorkEntry() {
-            const desc = document.getElementById('workDesc').value.trim();
-            const price = parseFloat(document.getElementById('workPrice').value) || 0;
-            const photoInput = document.getElementById('workPhoto');
-
-            if (!desc) {
-                alert('Please enter work description');
-                return;
-            }
-
-            const newWork = {
-                id: generateId(),
-                desc: desc,
-                price: price,
-                photo: null
+            // Default initial data
+            const defaultData = {
+                customerName: 'Ramesh Patel',
+                customerMobile: '9876543210',
+                billNo: 'TS-101',
+                billDate: new Date().toISOString().split('T')[0],
+                tractorModel: 'Mahindra 575 DI / GJ-01-AB-1234',
+                works: [
+                    { id: 'w1', desc: 'Engine oil change', price: 1200, photo: null },
+                    { id: 'w2', desc: 'Air filter cleaning', price: 350, photo: null }
+                ],
+                payments: [
+                    { id: 'p1', amount: 800, date: new Date().toISOString().split('T')[0], note: 'Advance' }
+                ],
+                reminder: 'Next service due 15 Nov'
             };
 
-            if (photoInput.files && photoInput.files[0]) {
-                const file = photoInput.files[0];
-                const reader = new FileReader();
-                reader.onload = (e) => {
-                    newWork.photo = e.target.result;
+            // ---------- GLOBAL STATE ----------
+            let state = {
+                customerName: '',
+                customerMobile: '',
+                billNo: '',
+                billDate: '',
+                tractorModel: '',
+                works: [],
+                payments: [],
+                reminder: ''
+            };
+
+            // ---------- HELPER FUNCTIONS ----------
+            function generateId() {
+                return Date.now() + '-' + Math.random().toString(36).substr(2, 9);
+            }
+
+            function formatCurrency(num) {
+                return '₹' + Number(num).toFixed(0);
+            }
+
+            function persistState() {
+                try {
+                    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+                } catch (e) {
+                    console.warn('Could not save to localStorage', e);
+                }
+            }
+
+            function loadState() {
+                const saved = localStorage.getItem(STORAGE_KEY);
+                if (saved) {
+                    try {
+                        const parsed = JSON.parse(saved);
+                        state = { ...state, ...parsed };
+                    } catch (e) {
+                        console.warn('Corrupted data, using default');
+                        state = JSON.parse(JSON.stringify(defaultData));
+                    }
+                } else {
+                    state = JSON.parse(JSON.stringify(defaultData));
+                }
+                if (!state.billDate) state.billDate = new Date().toISOString().split('T')[0];
+            }
+
+            // ---------- RENDER FUNCTIONS ----------
+            function renderAll() {
+                document.getElementById('customerName').value = state.customerName || '';
+                document.getElementById('customerMobile').value = state.customerMobile || '';
+                document.getElementById('billNo').value = state.billNo || '';
+                document.getElementById('billDate').value = state.billDate || new Date().toISOString().split('T')[0];
+                document.getElementById('tractorModel').value = state.tractorModel || '';
+                document.getElementById('adminBillNo').value = state.billNo || '';
+
+                renderWorkTable();
+                renderPaymentTable();
+                updateSummary();
+            }
+
+            function renderWorkTable() {
+                const tbody = document.getElementById('workTableBody');
+                tbody.innerHTML = '';
+                if (!state.works || state.works.length === 0) {
+                    tbody.innerHTML = '<tr><td colspan="4" style="text-align:center; color:#7d917f;">No work entries yet.</td></tr>';
+                    document.getElementById('workCount').innerText = '0 entries';
+                    return;
+                }
+                state.works.forEach((work, index) => {
+                    const row = document.createElement('tr');
+                    const descCell = document.createElement('td');
+                    descCell.innerText = work.desc || '—';
+                    const priceCell = document.createElement('td');
+                    priceCell.innerText = formatCurrency(work.price || 0);
+                    const photoCell = document.createElement('td');
+                    if (work.photo) {
+                        const img = document.createElement('img');
+                        img.src = work.photo;
+                        img.className = 'worklog-img';
+                        img.alt = 'work photo';
+                        photoCell.appendChild(img);
+                    } else {
+                        photoCell.innerText = '📷';
+                    }
+                    const actionCell = document.createElement('td');
+                    const delBtn = document.createElement('button');
+                    delBtn.className = 'btn-small btn-danger';
+                    delBtn.style.padding = '0.2rem 0.6rem';
+                    delBtn.innerHTML = '<i class="fas fa-trash"></i>';
+                    delBtn.addEventListener('click', () => {
+                        state.works.splice(index, 1);
+                        persistState();
+                        renderAll();
+                    });
+                    actionCell.appendChild(delBtn);
+
+                    row.appendChild(descCell);
+                    row.appendChild(priceCell);
+                    row.appendChild(photoCell);
+                    row.appendChild(actionCell);
+                    tbody.appendChild(row);
+                });
+                document.getElementById('workCount').innerText = state.works.length + ' entries';
+            }
+
+            function renderPaymentTable() {
+                const tbody = document.getElementById('paymentTableBody');
+                tbody.innerHTML = '';
+                if (!state.payments || state.payments.length === 0) {
+                    tbody.innerHTML = '<tr><td colspan="3" style="text-align:center; color:#7d917f;">No payments recorded.</td></tr>';
+                    return;
+                }
+                const sorted = [...state.payments].sort((a,b) => new Date(b.date) - new Date(a.date));
+                sorted.forEach((p) => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `<td>${p.date || '—'}</td><td>${formatCurrency(p.amount || 0)}</td><td>${p.note || '—'}</td>`;
+                    tbody.appendChild(row);
+                });
+            }
+
+            function calculateTotals() {
+                const total = state.works.reduce((sum, w) => sum + (Number(w.price) || 0), 0);
+                const paid = state.payments.reduce((sum, p) => sum + (Number(p.amount) || 0), 0);
+                const due = Math.max(0, total - paid);
+                return { total, paid, due };
+            }
+
+            function updateSummary() {
+                const { total, paid, due } = calculateTotals();
+                document.getElementById('displayTotal').innerText = formatCurrency(total);
+                document.getElementById('displayPaid').innerText = formatCurrency(paid);
+                document.getElementById('displayDue').innerText = formatCurrency(due);
+
+                const reminderEl = document.getElementById('reminderText');
+                const reminderBadge = document.getElementById('reminderBadge');
+                let reminderMsg = state.reminder || 'No active reminders';
+                if (due > 0) {
+                    reminderMsg += ` · Due: ${formatCurrency(due)}`;
+                    reminderEl.innerHTML = `<i class="fas fa-bell"></i> ${reminderMsg}`;
+                    reminderBadge.innerHTML = `<i class="fas fa-clock"></i> Reminder: ${reminderMsg}`;
+                } else {
+                    reminderEl.innerHTML = `<i class="fas fa-check-circle" style="color:#1e7a3a;"></i> All clear · ${reminderMsg}`;
+                    reminderBadge.innerHTML = `<i class="fas fa-check-circle"></i> ${reminderMsg}`;
+                }
+                reminderBadge.className = 'reminder-tag';
+                if (due > 0) reminderBadge.style.background = '#fff1d6';
+                else reminderBadge.style.background = '#e3f0de';
+            }
+
+            // ---------- SYNC INPUTS ----------
+            function syncStateFromInputs() {
+                state.customerName = document.getElementById('customerName').value.trim();
+                state.customerMobile = document.getElementById('customerMobile').value.trim();
+                state.billNo = document.getElementById('billNo').value.trim();
+                state.billDate = document.getElementById('billDate').value;
+                state.tractorModel = document.getElementById('tractorModel').value.trim();
+                persistState();
+            }
+
+            // ---------- ADD WORK ----------
+            function addWorkEntry() {
+                const desc = document.getElementById('workDesc').value.trim();
+                const price = parseFloat(document.getElementById('workPrice').value) || 0;
+                const photoInput = document.getElementById('workPhoto');
+
+                if (!desc) {
+                    alert('Please enter work description');
+                    return;
+                }
+
+                const newWork = {
+                    id: generateId(),
+                    desc: desc,
+                    price: price,
+                    photo: null
+                };
+
+                if (photoInput.files && photoInput.files[0]) {
+                    const file = photoInput.files[0];
+                    const reader = new FileReader();
+                    reader.onload = (e) => {
+                        newWork.photo = e.target.result;
+                        state.works.push(newWork);
+                        persistState();
+                        renderAll();
+                        document.getElementById('workDesc').value = '';
+                        document.getElementById('workPrice').value = '0';
+                        document.getElementById('workPhoto').value = '';
+                        document.getElementById('photoNamePreview').innerText = '';
+                    };
+                    reader.readAsDataURL(file);
+                } else {
                     state.works.push(newWork);
                     persistState();
                     renderAll();
-                    // clear inputs
                     document.getElementById('workDesc').value = '';
                     document.getElementById('workPrice').value = '0';
                     document.getElementById('workPhoto').value = '';
                     document.getElementById('photoNamePreview').innerText = '';
-                };
-                reader.readAsDataURL(file);
-            } else {
-                state.works.push(newWork);
-                persistState();
-                renderAll();
-                document.getElementById('workDesc').value = '';
-                document.getElementById('workPrice').value = '0';
-                document.getElementById('workPhoto').value = '';
-                document.getElementById('photoNamePreview').innerText = '';
-            }
-        }
-
-        // ---------- ADD PAYMENT ----------
-        function addPaymentEntry() {
-            const amount = parseFloat(document.getElementById('paymentAmount').value) || 0;
-            const date = document.getElementById('paymentDate').value || new Date().toISOString().split('T')[0];
-            const note = document.getElementById('paymentNote').value.trim() || 'Payment';
-
-            if (amount <= 0) {
-                alert('Please enter a valid amount');
-                return;
+                }
             }
 
-            state.payments.push({
-                id: generateId(),
-                amount: amount,
-                date: date,
-                note: note
-            });
+            // ---------- ADD PAYMENT ----------
+            function addPaymentEntry() {
+                const amount = parseFloat(document.getElementById('paymentAmount').value) || 0;
+                const date = document.getElementById('paymentDate').value || new Date().toISOString().split('T')[0];
+                const note = document.getElementById('paymentNote').value.trim() || 'Payment';
 
-            // update reminder if note contains "reminder" or set reminder
-            if (note.toLowerCase().includes('remind') || note.toLowerCase().includes('due')) {
-                state.reminder = note;
-            } else {
-                // optionally keep previous reminder
-            }
+                if (amount <= 0) {
+                    alert('Please enter a valid amount');
+                    return;
+                }
 
-            persistState();
-            renderAll();
-            document.getElementById('paymentAmount').value = '0';
-            document.getElementById('paymentNote').value = '';
-        }
-
-        // ---------- PDF SHARE ----------
-        function generateAndSharePDF() {
-            // first sync all visible info to state
-            syncStateFromInputs();
-
-            const { total, paid, due } = calculateTotals();
-            const customer = state.customerName || 'Customer';
-            const billNo = state.billNo || 'N/A';
-            const date = state.billDate || new Date().toISOString().split('T')[0];
-            const tractor = state.tractorModel || '—';
-
-            // Build work rows html
-            let workRowsHtml = '';
-            if (state.works.length === 0) {
-                workRowsHtml = '<tr><td colspan="2">No work entries</td></tr>';
-            } else {
-                state.works.forEach(w => {
-                    workRowsHtml += `<tr><td>${w.desc}</td><td>${formatCurrency(w.price)}</td></tr>`;
+                state.payments.push({
+                    id: generateId(),
+                    amount: amount,
+                    date: date,
+                    note: note
                 });
-            }
 
-            let paymentRowsHtml = '';
-            if (state.payments.length === 0) {
-                paymentRowsHtml = '<tr><td colspan="3">No payments</td></tr>';
-            } else {
-                [...state.payments].sort((a,b)=>new Date(b.date)-new Date(a.date)).forEach(p => {
-                    paymentRowsHtml += `<tr><td>${p.date}</td><td>${formatCurrency(p.amount)}</td><td>${p.note || ''}</td></tr>`;
-                });
-            }
+                if (note.toLowerCase().includes('remind') || note.toLowerCase().includes('due')) {
+                    state.reminder = note;
+                }
 
-            // Build photo images (only if any work has photo) but we will not embed all images to keep pdf small; but we can show a note.
-            // However the task requires "photo select" and share bill as PDF. We can add photos as tiny thumbnails in the bill.
-            // We'll create a separate section with thumbnails (base64) but optional for PDF. Let's include small 40px images.
-            let photoSection = '';
-            const worksWithPhotos = state.works.filter(w => w.photo);
-            if (worksWithPhotos.length > 0) {
-                photoSection = '<h4 style="margin: 12px 0 6px; font-size:14px;">📸 Work photos</h4><div style="display:flex; flex-wrap:wrap; gap:8px;">';
-                worksWithPhotos.forEach(w => {
-                    photoSection += `<div style="text-align:center; font-size:10px;"><img src="${w.photo}" style="width:50px;height:50px;object-fit:cover;border-radius:8px;border:1px solid #ccc;" /><br>${w.desc.substring(0,20)}</div>`;
-                });
-                photoSection += '</div>';
-            }
-
-            const htmlContent = `
-                <div style="font-family: 'Inter', Arial, sans-serif; padding: 20px; max-width: 800px; background: #fff; color: #1e2f23;">
-                    <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #2a5c36; padding-bottom: 12px;">
-                        <div>
-                            <h1 style="margin:0; font-size: 26px; color:#2a5c36;"><i>🚜</i> Tractor Service</h1>
-                            <p style="margin:4px 0 0; color:#4d6552;">Trecter Book · Bill Receipt</p>
-                        </div>
-                        <div style="text-align:right;">
-                            <div style="font-weight:700;">Bill No: ${billNo}</div>
-                            <div>Date: ${date}</div>
-                        </div>
-                    </div>
-                    <div style="display:flex; justify-content:space-between; margin:16px 0; background:#f7fcf5; padding:12px; border-radius:16px;">
-                        <div><strong>Customer:</strong> ${customer}<br><strong>Mobile:</strong> ${state.customerMobile || '—'}</div>
-                        <div><strong>Tractor:</strong> ${tractor}</div>
-                    </div>
-                    <h3 style="margin-bottom:6px;">📋 Work & Service</h3>
-                    <table style="width:100%; border-collapse:collapse; font-size:14px;">
-                        <thead><tr style="background:#eef3ea;"><th style="text-align:left; padding:8px;">Description</th><th style="text-align:left; padding:8px;">Price</th></tr></thead>
-                        <tbody>${workRowsHtml}</tbody>
-                    </table>
-                    ${photoSection}
-                    <div style="margin-top:20px; display:flex; justify-content:space-between; background:#f7fcf5; padding:12px; border-radius:16px;">
-                        <div><strong>Total:</strong> ${formatCurrency(total)}</div>
-                        <div><strong>Paid:</strong> ${formatCurrency(paid)}</div>
-                        <div><strong>Due:</strong> <span style="color:#b13b3b;">${formatCurrency(due)}</span></div>
-                    </div>
-                    <h3 style="margin:16px 0 6px;">💰 Payment history</h3>
-                    <table style="width:100%; border-collapse:collapse; font-size:13px;">
-                        <thead><tr style="background:#eef3ea;"><th style="text-align:left; padding:6px;">Date</th><th style="text-align:left; padding:6px;">Amount</th><th style="text-align:left; padding:6px;">Note</th></tr></thead>
-                        <tbody>${paymentRowsHtml}</tbody>
-                    </table>
-                    <div style="margin-top:16px; font-size:12px; color:#7d917f; border-top:1px dashed #cbdcc7; padding-top:12px;">
-                        Reminder: ${state.reminder || '—'}
-                    </div>
-                    <div style="margin-top:24px; text-align:center; font-size:11px; color:#8fa894;">Generated via Tractor Service · Trecter Book</div>
-                </div>
-            `;
-
-            // Use html2pdf to generate and download/share
-            const element = document.createElement('div');
-            element.innerHTML = htmlContent;
-            const opt = {
-                margin: [0.5, 0.5, 0.5, 0.5],
-                filename: `Tractor_Bill_${billNo}_${date}.pdf`,
-                image: { type: 'jpeg', quality: 0.98 },
-                html2canvas: { scale: 2, useCORS: true },
-                jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
-            };
-            html2pdf().set(opt).from(element).save();
-        }
-
-        // ---------- RESET / CLEAR ----------
-        function clearWorkLog() {
-            if (confirm('Delete all work entries?')) {
-                state.works = [];
                 persistState();
                 renderAll();
+                document.getElementById('paymentAmount').value = '0';
+                document.getElementById('paymentNote').value = '';
             }
-        }
 
-        function clearPayments() {
-            if (confirm('Delete all payment records?')) {
-                state.payments = [];
-                persistState();
-                renderAll();
-            }
-        }
-
-        function resetAll() {
-            if (confirm('Reset everything to default? All data will be lost.')) {
-                state = JSON.parse(JSON.stringify(defaultData));
-                persistState();
-                renderAll();
-                // also reset file input
-                document.getElementById('workPhoto').value = '';
-                document.getElementById('photoNamePreview').innerText = '';
-            }
-        }
-
-        // ---------- INITIAL SETUP ----------
-        document.addEventListener('DOMContentLoaded', () => {
-            loadState();
-            // set default date fields
-            if (!state.billDate) state.billDate = new Date().toISOString().split('T')[0];
-            const today = new Date().toISOString().split('T')[0];
-            document.getElementById('paymentDate').value = today;
-            document.getElementById('billDate').value = state.billDate || today;
-            // set reminder
-            if (!state.reminder) state.reminder = 'Next service due in 15 days';
-            renderAll();
-
-            // event listeners
-            document.getElementById('addWorkBtn').addEventListener('click', addWorkEntry);
-            document.getElementById('addPaymentBtn').addEventListener('click', addPaymentEntry);
-            document.getElementById('sharePdfBtn').addEventListener('click', generateAndSharePDF);
-            document.getElementById('refreshBillBtn').addEventListener('click', () => {
+            // ---------- PDF SHARE ----------
+            function generateAndSharePDF() {
                 syncStateFromInputs();
-                renderAll();
-            });
-            // admin clear buttons
-            document.getElementById('clearWorkLogBtn').addEventListener('click', clearWorkLog);
-            document.getElementById('clearPaymentsBtn').addEventListener('click', clearPayments);
-            document.getElementById('resetAllBtn').addEventListener('click', resetAll);
-            document.getElementById('setBillNoBtn').addEventListener('click', () => {
-                const newBill = document.getElementById('adminBillNo').value.trim();
-                if (newBill) {
-                    state.billNo = newBill;
-                    document.getElementById('billNo').value = newBill;
+
+                const { total, paid, due } = calculateTotals();
+                const customer = state.customerName || 'Customer';
+                const billNo = state.billNo || 'N/A';
+                const date = state.billDate || new Date().toISOString().split('T')[0];
+                const tractor = state.tractorModel || '—';
+
+                let workRowsHtml = '';
+                if (state.works.length === 0) {
+                    workRowsHtml = '<tr><td colspan="2">No work entries</td></tr>';
+                } else {
+                    state.works.forEach(w => {
+                        workRowsHtml += `<tr><td>${w.desc}</td><td>${formatCurrency(w.price)}</td></tr>`;
+                    });
+                }
+
+                let paymentRowsHtml = '';
+                if (state.payments.length === 0) {
+                    paymentRowsHtml = '<tr><td colspan="3">No payments</td></tr>';
+                } else {
+                    [...state.payments].sort((a,b)=>new Date(b.date)-new Date(a.date)).forEach(p => {
+                        paymentRowsHtml += `<tr><td>${p.date}</td><td>${formatCurrency(p.amount)}</td><td>${p.note || ''}</td></tr>`;
+                    });
+                }
+
+                let photoSection = '';
+                const worksWithPhotos = state.works.filter(w => w.photo);
+                if (worksWithPhotos.length > 0) {
+                    photoSection = '<h4 style="margin: 12px 0 6px; font-size:14px;">📸 Work photos</h4><div style="display:flex; flex-wrap:wrap; gap:8px;">';
+                    worksWithPhotos.forEach(w => {
+                        photoSection += `<div style="text-align:center; font-size:10px;"><img src="${w.photo}" style="width:50px;height:50px;object-fit:cover;border-radius:8px;border:1px solid #ccc;" /><br>${w.desc.substring(0,20)}</div>`;
+                    });
+                    photoSection += '</div>';
+                }
+
+                const htmlContent = `
+                    <div style="font-family: 'Inter', Arial, sans-serif; padding: 20px; max-width: 800px; background: #fff; color: #1e2f23;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #2a5c36; padding-bottom: 12px;">
+                            <div>
+                                <h1 style="margin:0; font-size: 26px; color:#2a5c36;"><i>🚜</i> Tractor Service</h1>
+                                <p style="margin:4px 0 0; color:#4d6552;">Trecter Book · Bill Receipt</p>
+                            </div>
+                            <div style="text-align:right;">
+                                <div style="font-weight:700;">Bill No: ${billNo}</div>
+                                <div>Date: ${date}</div>
+                            </div>
+                        </div>
+                        <div style="display:flex; justify-content:space-between; margin:16px 0; background:#f7fcf5; padding:12px; border-radius:16px;">
+                            <div><strong>Customer:</strong> ${customer}<br><strong>Mobile:</strong> ${state.customerMobile || '—'}</div>
+                            <div><strong>Tractor:</strong> ${tractor}</div>
+                        </div>
+                        <h3 style="margin-bottom:6px;">📋 Work & Service</h3>
+                        <table style="width:100%; border-collapse:collapse; font-size:14px;">
+                            <thead><tr style="background:#eef3ea;"><th style="text-align:left; padding:8px;">Description</th><th style="text-align:left; padding:8px;">Price</th></tr></thead>
+                            <tbody>${workRowsHtml}</tbody>
+                        </table>
+                        ${photoSection}
+                        <div style="margin-top:20px; display:flex; justify-content:space-between; background:#f7fcf5; padding:12px; border-radius:16px;">
+                            <div><strong>Total:</strong> ${formatCurrency(total)}</div>
+                            <div><strong>Paid:</strong> ${formatCurrency(paid)}</div>
+                            <div><strong>Due:</strong> <span style="color:#b13b3b;">${formatCurrency(due)}</span></div>
+                        </div>
+                        <h3 style="margin:16px 0 6px;">💰 Payment history</h3>
+                        <table style="width:100%; border-collapse:collapse; font-size:13px;">
+                            <thead><tr style="background:#eef3ea;"><th style="text-align:left; padding:6px;">Date</th><th style="text-align:left; padding:6px;">Amount</th><th style="text-align:left; padding:6px;">Note</th></tr></thead>
+                            <tbody>${paymentRowsHtml}</tbody>
+                        </table>
+                        <div style="margin-top:16px; font-size:12px; color:#7d917f; border-top:1px dashed #cbdcc7; padding-top:12px;">
+                            Reminder: ${state.reminder || '—'}
+                        </div>
+                        <div style="margin-top:24px; text-align:center; font-size:11px; color:#8fa894;">Generated via Tractor Service · Trecter Book</div>
+                    </div>
+                `;
+
+                const element = document.createElement('div');
+                element.innerHTML = htmlContent;
+                const opt = {
+                    margin: [0.5, 0.5, 0.5, 0.5],
+                    filename: `Tractor_Bill_${billNo}_${date}.pdf`,
+                    image: { type: 'jpeg', quality: 0.98 },
+                    html2canvas: { scale: 2, useCORS: true },
+                    jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
+                };
+                html2pdf().set(opt).from(element).save();
+            }
+
+            // ---------- RESET / CLEAR ----------
+            function clearWorkLog() {
+                if (confirm('Delete all work entries?')) {
+                    state.works = [];
                     persistState();
                     renderAll();
                 }
-            });
+            }
 
-            // photo preview name
-            document.getElementById('workPhoto').addEventListener('change', (e) => {
-                const file = e.target.files[0];
-                document.getElementById('photoNamePreview').innerText = file ? file.name : '';
-            });
+            function clearPayments() {
+                if (confirm('Delete all payment records?')) {
+                    state.payments = [];
+                    persistState();
+                    renderAll();
+                }
+            }
 
-            // sync when leaving input fields (for safety)
-            ['customerName','customerMobile','billNo','billDate','tractorModel'].forEach(id => {
-                document.getElementById(id).addEventListener('change', () => {
+            function resetAll() {
+                if (confirm('Reset everything to default? All data will be lost.')) {
+                    state = JSON.parse(JSON.stringify(defaultData));
+                    persistState();
+                    renderAll();
+                    document.getElementById('workPhoto').value = '';
+                    document.getElementById('photoNamePreview').innerText = '';
+                }
+            }
+
+            // ---------- INIT ----------
+            document.addEventListener('DOMContentLoaded', () => {
+                loadState();
+                if (!state.billDate) state.billDate = new Date().toISOString().split('T')[0];
+                const today = new Date().toISOString().split('T')[0];
+                document.getElementById('paymentDate').value = today;
+                document.getElementById('billDate').value = state.billDate || today;
+                if (!state.reminder) state.reminder = 'Next service due in 15 days';
+                renderAll();
+
+                // Event listeners
+                document.getElementById('addWorkBtn').addEventListener('click', addWorkEntry);
+                document.getElementById('addPaymentBtn').addEventListener('click', addPaymentEntry);
+                document.getElementById('sharePdfBtn').addEventListener('click', generateAndSharePDF);
+                document.getElementById('refreshBillBtn').addEventListener('click', () => {
                     syncStateFromInputs();
+                    renderAll();
+                });
+                document.getElementById('clearWorkLogBtn').addEventListener('click', clearWorkLog);
+                document.getElementById('clearPaymentsBtn').addEventListener('click', clearPayments);
+                document.getElementById('resetAllBtn').addEventListener('click', resetAll);
+                document.getElementById('setBillNoBtn').addEventListener('click', () => {
+                    const newBill = document.getElementById('adminBillNo').value.trim();
+                    if (newBill) {
+                        state.billNo = newBill;
+                        document.getElementById('billNo').value = newBill;
+                        persistState();
+                        renderAll();
+                    }
+                });
+
+                document.getElementById('workPhoto').addEventListener('change', (e) => {
+                    const file = e.target.files[0];
+                    document.getElementById('photoNamePreview').innerText = file ? file.name : '';
+                });
+
+                ['customerName','customerMobile','billNo','billDate','tractorModel'].forEach(id => {
+                    document.getElementById(id).addEventListener('change', () => {
+                        syncStateFromInputs();
+                    });
                 });
             });
 
-            // set initial bill no readonly but updated by admin
-            // Add work via enter? not necessary
-        });
-
-        // also save state on beforeunload
-        window.addEventListener('beforeunload', () => {
-            try {
-                syncStateFromInputs();
-            } catch (e) {}
-        });
-
-    })();
-</script>
+            window.addEventListener('beforeunload', () => {
+                try { syncStateFromInputs(); } catch (e) {}
+            });
+        })();
+    </script>
 </body>
 </html>

@@ -1,766 +1,891 @@
 <!DOCTYPE html>
-<html lang="hi">
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Dream Josh Education - Study, Live Classes & Exams</title>
-
-<meta name="description"
-content="Dream Josh Education - Live Classes, Government Jobs, Study Material, PDF Notes, Online Tests and Career Guidance.">
-
-<style>
-:root {
-    --primary: #123c9b;
-    --secondary: #1976d2;
-    --accent: #ffb300;
-    --light: #f3f7ff;
-    --dark: #17233d;
-    --white: #ffffff;
-    --green: #138a45;
-}
-
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
-
-body {
-    font-family: Arial, "Noto Sans Devanagari", sans-serif;
-    background: var(--light);
-    color: var(--dark);
-    line-height: 1.6;
-}
-
-header {
-    background: linear-gradient(120deg, var(--primary), var(--secondary));
-    color: white;
-    padding: 22px 5%;
-}
-
-.header-content {
-    max-width: 1200px;
-    margin: auto;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 15px;
-    flex-wrap: wrap;
-}
-
-.logo {
-    font-size: 28px;
-    font-weight: bold;
-}
-
-.logo span {
-    color: var(--accent);
-}
-
-header p {
-    font-size: 13px;
-}
-
-nav {
-    background: #092d78;
-    padding: 12px 4%;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-}
-
-.nav-content {
-    max-width: 1200px;
-    margin: auto;
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 8px;
-}
-
-nav a {
-    color: white;
-    text-decoration: none;
-    padding: 8px 12px;
-    border-radius: 5px;
-    font-size: 14px;
-}
-
-nav a:hover {
-    background: var(--secondary);
-}
-
-.container {
-    width: 92%;
-    max-width: 1200px;
-    margin: 25px auto;
-}
-
-.hero {
-    background: linear-gradient(135deg, #123c9b, #1684d9);
-    color: white;
-    padding: 48px 25px;
-    text-align: center;
-    border-radius: 15px;
-}
-
-.hero h1 {
-    font-size: clamp(27px, 5vw, 43px);
-    margin-bottom: 12px;
-}
-
-.hero p {
-    margin-bottom: 20px;
-}
-
-.button {
-    display: inline-block;
-    background: var(--accent);
-    color: #17233d;
-    border: none;
-    border-radius: 7px;
-    padding: 11px 18px;
-    text-decoration: none;
-    font-weight: bold;
-    cursor: pointer;
-    margin: 5px;
-}
-
-.button-blue {
-    background: var(--primary);
-    color: white;
-}
-
-.button-green {
-    background: var(--green);
-    color: white;
-}
-
-.search-box {
-    margin: 20px 0;
-    display: flex;
-    gap: 10px;
-}
-
-.search-box input {
-    flex: 1;
-}
-
-input, select, textarea {
-    width: 100%;
-    padding: 12px;
-    border: 1px solid #ccd5e5;
-    border-radius: 7px;
-    margin: 5px 0 12px;
-    font: inherit;
-}
-
-.section-title {
-    font-size: 25px;
-    margin: 32px 0 18px;
-    border-left: 5px solid var(--accent);
-    padding-left: 12px;
-}
-
-.grid {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 18px;
-}
-
-.card {
-    background: white;
-    border-radius: 12px;
-    padding: 20px;
-    box-shadow: 0 3px 14px #142f5510;
-    border: 1px solid #e5eaf4;
-    overflow-wrap: anywhere;
-}
-
-.card h3 {
-    margin-bottom: 8px;
-    color: var(--primary);
-}
-
-.card p {
-    font-size: 14px;
-    margin-bottom: 12px;
-}
-
-.icon {
-    font-size: 35px;
-    margin-bottom: 8px;
-}
-
-.tag {
-    display: inline-block;
-    background: #e5f5e9;
-    color: #126c37;
-    padding: 4px 9px;
-    border-radius: 20px;
-    font-size: 12px;
-    margin-bottom: 10px;
-}
-
-.live-banner {
-    background: #fff4e5;
-    border: 1px solid #ffd08a;
-    padding: 20px;
-    border-radius: 12px;
-    margin-top: 20px;
-}
-
-.live-banner h3 {
-    color: #a34800;
-}
-
-.notice {
-    background: white;
-    padding: 15px;
-    border-radius: 10px;
-    margin-top: 18px;
-    border-left: 4px solid var(--secondary);
-}
-
-footer {
-    background: #092d78;
-    color: white;
-    text-align: center;
-    padding: 28px 15px;
-    margin-top: 40px;
-}
-
-footer a {
-    color: #ffcf58;
-    margin: 5px;
-}
-
-.hidden {
-    display: none !important;
-}
-
-@media(max-width: 800px) {
-    .grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-}
-
-@media(max-width: 520px) {
-    .grid {
-        grid-template-columns: 1fr;
-    }
-
-    .hero {
-        padding: 30px 16px;
-    }
-
-    .search-box {
-        flex-direction: column;
-    }
-
-    nav a {
-        font-size: 12px;
-        padding: 7px;
-    }
-}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tractor Service · Trecter Book</title>
+    <!-- Font Awesome & Google Fonts -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <!-- html2pdf for PDF export -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f3f7f0;
+            color: #1e2f23;
+            padding: 1rem;
+        }
+        .app {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        h1, h2, h3 {
+            font-weight: 600;
+            letter-spacing: -0.02em;
+        }
+        h1 {
+            font-size: 1.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            color: #1e4a2b;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+        h1 i {
+            color: #f5b042;
+            background: #2a5c36;
+            padding: 0.5rem;
+            border-radius: 16px;
+            font-size: 1.6rem;
+        }
+        .badge {
+            background: #e5f0e5;
+            border-radius: 100px;
+            padding: 0.2rem 0.9rem;
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: #2a5c36;
+        }
+        .card {
+            background: #ffffff;
+            border-radius: 28px;
+            padding: 1.5rem;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.04), 0 2px 6px rgba(0,20,10,0.06);
+            margin-bottom: 1.5rem;
+            border: 1px solid #dfeadb;
+        }
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 1.5rem;
+        }
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+        }
+        label {
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
+            color: #3b5e48;
+            display: block;
+            margin-bottom: 0.35rem;
+        }
+        input, select, textarea {
+            width: 100%;
+            padding: 0.7rem 1rem;
+            border-radius: 18px;
+            border: 1.5px solid #d4e2d1;
+            background: #fefefb;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+            transition: 0.15s;
+        }
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: #2a5c36;
+            box-shadow: 0 0 0 3px rgba(42,92,54,0.1);
+        }
+        .btn {
+            border: none;
+            background: #2a5c36;
+            color: white;
+            padding: 0.85rem 1.5rem;
+            border-radius: 40px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            cursor: pointer;
+            transition: 0.15s;
+            box-shadow: 0 4px 10px rgba(42,92,54,0.2);
+        }
+        .btn:hover {
+            background: #1e4429;
+            transform: translateY(-1px);
+        }
+        .btn-outline {
+            background: transparent;
+            color: #2a5c36;
+            border: 1.5px solid #2a5c36;
+            box-shadow: none;
+        }
+        .btn-outline:hover {
+            background: #eef6ea;
+        }
+        .btn-small {
+            padding: 0.4rem 1rem;
+            font-size: 0.8rem;
+            border-radius: 30px;
+        }
+        .btn-danger {
+            background: #b13b3b;
+        }
+        .btn-danger:hover {
+            background: #922e2e;
+        }
+        .btn-warning {
+            background: #f5b042;
+            color: #1e2f23;
+            box-shadow: none;
+        }
+        .btn-warning:hover {
+            background: #e09e2e;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+        }
+        th {
+            text-align: left;
+            font-weight: 600;
+            color: #2a5c36;
+            padding: 0.6rem 0.3rem 0.3rem 0.3rem;
+            border-bottom: 1.5px solid #d4e2d1;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
+        }
+        td {
+            padding: 0.7rem 0.3rem;
+            border-bottom: 1px solid #edf3ea;
+            vertical-align: middle;
+        }
+        .worklog-img {
+            max-width: 60px;
+            max-height: 60px;
+            border-radius: 10px;
+            object-fit: cover;
+            border: 1px solid #cbdcc7;
+        }
+        .tractor-card {
+            background: #f7fcf5;
+            border-radius: 20px;
+            padding: 1rem 1.2rem;
+            border: 1px solid #cbdcc7;
+            margin-bottom: 1rem;
+        }
+        .flex-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        .total-box {
+            background: #2a5c36;
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 40px;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        .total-box span {
+            font-size: 1.3rem;
+            font-weight: 700;
+        }
+        .payment-status {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            background: #f7fcf5;
+            padding: 0.6rem 1rem;
+            border-radius: 28px;
+        }
+        .paid {
+            color: #1e7a3a;
+            font-weight: 700;
+        }
+        .due {
+            color: #b13b3b;
+            font-weight: 700;
+        }
+        .reminder-tag {
+            background: #fff1d6;
+            color: #9b5e0a;
+            font-size: 0.7rem;
+            font-weight: 700;
+            padding: 0.2rem 0.6rem;
+            border-radius: 100px;
+            display: inline-block;
+        }
+        .admin-panel {
+            background: #eef3ea;
+            border: 1px dashed #2a5c36;
+        }
+        .admin-panel h3 i {
+            color: #b8860b;
+        }
+        .photo-preview {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-top: 0.5rem;
+        }
+        .photo-thumb {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            object-fit: cover;
+            border: 1.5px solid #b8d2b0;
+        }
+        .hidden {
+            display: none;
+        }
+        .mt-1 { margin-top: 0.8rem; }
+        .mt-2 { margin-top: 1.5rem; }
+        .mb-1 { margin-bottom: 0.8rem; }
+        .text-small { font-size: 0.8rem; color: #4d6552; }
+        .fa-regular, .fas, .far { pointer-events: none; }
+        .worklog-list {
+            max-height: 400px;
+            overflow-y: auto;
+            padding-right: 4px;
+        }
+        .site-footer {
+            text-align: center;
+            margin-top: 2rem;
+            font-size: 0.8rem;
+            color: #6a7e6d;
+        }
+        @media (max-width: 800px) {
+            .grid-2 { grid-template-columns: 1fr; }
+            .grid-3 { grid-template-columns: 1fr; }
+        }
+        /* bill share section */
+        .share-box {
+            background: #f9fff7;
+            border-radius: 20px;
+            padding: 1rem;
+            border: 1px solid #cbdcc7;
+        }
+    </style>
 </head>
-
 <body>
+<div class="app">
+    <h1>
+        <i class="fas fa-tractor"></i> Tractor Service · Trecter Book
+        <span class="badge"><i class="fas fa-user-shield"></i> Admin Panel</span>
+    </h1>
 
-<header>
-    <div class="header-content">
+    <!-- Two column layout: left - customer + bill, right - work log + summary -->
+    <div class="grid-2">
+        <!-- LEFT COLUMN -->
         <div>
-            <div class="logo">DREAM <span>JOSH</span></div>
-            <p>पढ़ेंगे यहाँ, बढ़ेंगे जहाँ</p>
-        </div>
+            <!-- CUSTOMER & BILL CARD -->
+            <div class="card">
+                <h2><i class="fas fa-user-plus" style="color:#f5b042;"></i> Customer & Bill</h2>
+                <div class="mt-1">
+                    <label>Customer name</label>
+                    <input type="text" id="customerName" placeholder="e.g. Ramesh Patel" value="Ramesh Patel">
+                </div>
+                <div class="grid-3 mt-1">
+                    <div>
+                        <label>Mobile</label>
+                        <input type="text" id="customerMobile" placeholder="9876543210" value="9876543210">
+                    </div>
+                    <div>
+                        <label>Bill No.</label>
+                        <input type="text" id="billNo" placeholder="Auto" value="TS-101" readonly style="background:#f0f5ed;">
+                    </div>
+                    <div>
+                        <label>Date</label>
+                        <input type="date" id="billDate">
+                    </div>
+                </div>
 
-        <div>
-            <strong>Education & Career Portal</strong>
-            <p>Study • Motivation • Government Jobs</p>
-        </div>
-    </div>
-</header>
+                <div class="mt-2">
+                    <label>Tractor model / Reg No.</label>
+                    <input type="text" id="tractorModel" placeholder="e.g. Mahindra 575 DI / GJ-01-AB-1234" value="Mahindra 575 DI / GJ-01-AB-1234">
+                </div>
 
-<nav>
-    <div class="nav-content">
-        <a href="#home">Home</a>
-        <a href="#live">Live Classes</a>
-        <a href="#study">Study Material</a>
-        <a href="#tests">Online Tests</a>
-        <a href="#jobs">Government Jobs</a>
-        <a href="#career">Career Guide</a>
-        <a href="#student">Student Dashboard</a>
-    </div>
-</nav>
+                <!-- Work log add row -->
+                <div class="tractor-card mt-2">
+                    <h3 style="font-size:1rem; margin-bottom:0.8rem;"><i class="fas fa-wrench"></i> Add work / service</h3>
+                    <div class="grid-3">
+                        <div>
+                            <label>Work description</label>
+                            <input type="text" id="workDesc" placeholder="e.g. Engine oil change">
+                        </div>
+                        <div>
+                            <label>Price (₹)</label>
+                            <input type="number" id="workPrice" placeholder="0" value="0" min="0" step="1">
+                        </div>
+                        <div>
+                            <label>Photo (optional)</label>
+                            <input type="file" id="workPhoto" accept="image/*" style="padding:0.4rem;">
+                        </div>
+                    </div>
+                    <div class="flex-row mt-1">
+                        <button class="btn btn-small" id="addWorkBtn"><i class="fas fa-plus-circle"></i> Add work entry</button>
+                        <span class="text-small" id="photoNamePreview"></span>
+                    </div>
+                </div>
 
-<main class="container" id="home">
+                <!-- Payment recording -->
+                <div class="tractor-card mt-2">
+                    <h3 style="font-size:1rem; margin-bottom:0.8rem;"><i class="fas fa-money-bill-wave"></i> Payment / Reminder</h3>
+                    <div class="grid-3">
+                        <div>
+                            <label>Amount paid (₹)</label>
+                            <input type="number" id="paymentAmount" placeholder="0" value="0" min="0">
+                        </div>
+                        <div>
+                            <label>Payment date</label>
+                            <input type="date" id="paymentDate">
+                        </div>
+                        <div>
+                            <label>Reminder note</label>
+                            <input type="text" id="paymentNote" placeholder="e.g. next due 10 Nov">
+                        </div>
+                    </div>
+                    <button class="btn btn-outline btn-small mt-1" id="addPaymentBtn"><i class="fas fa-rupee-sign"></i> Record payment</button>
+                </div>
+            </div>
 
-    <section class="hero">
-        <h1>Welcome to Dream Josh Education</h1>
-        <p>आपकी पढ़ाई, आपकी तैयारी और आपके सपनों की उड़ान।</p>
-        <p>Live Classes | Notes | Mock Tests | Career Guidance</p>
-
-        <a class="button" href="#study">पढ़ाई शुरू करें</a>
-        <a class="button" href="#live">Live Classes</a>
-    </section>
-
-    <div class="search-box">
-        <input
-            type="search"
-            id="siteSearch"
-            placeholder="क्लास, नोट्स, परीक्षा या विषय खोजें..."
-            aria-label="वेबसाइट पर खोजें"
-        >
-        <button class="button button-blue" onclick="searchCards()">
-            Search
-        </button>
-    </div>
-
-    <div id="searchMessage" aria-live="polite"></div>
-
-    <section id="live">
-        <h2 class="section-title">🔴 Live Classroom</h2>
-
-        <div class="live-banner">
-            <h3>Dream Josh Live Learning</h3>
-            <p>
-                ऑनलाइन क्लास और ग्रुप स्टडी के लिए नीचे दिए बटन से
-                वीडियो मीटिंग सेवा खोलें।
-            </p>
-
-            <label for="roomName">क्लास या मीटिंग का नाम</label>
-            <input
-                type="text"
-                id="roomName"
-                maxlength="40"
-                placeholder="जैसे Rajasthan Police Class"
-            >
-
-            <button class="button button-green" onclick="joinLiveClass()">
-                🎥 Live Meeting खोलें
-            </button>
-
-            <p style="font-size:12px;margin-top:10px">
-                नोट: यह सार्वजनिक मीटिंग सेवा खोलता है।
-                यह सुरक्षित शिक्षक लॉगिन या निजी क्लास का सिस्टम नहीं है।
-            </p>
-        </div>
-
-        <div class="grid" style="margin-top:18px">
-
-            <article class="card searchable">
-                <div class="icon">🎓</div>
-                <h3>Live Study Class</h3>
-                <p>शिक्षक और विद्यार्थी ऑनलाइन पढ़ाई के लिए जुड़ सकते हैं।</p>
-                <a href="#live" class="button button-blue">क्लास देखें</a>
-            </article>
-
-            <article class="card searchable">
-                <div class="icon">💬</div>
-                <h3>Doubt Session</h3>
-                <p>पढ़ाई से जुड़े सवालों के लिए ऑनलाइन चर्चा।</p>
-                <a href="#live" class="button">शुरू करें</a>
-            </article>
-
-            <article class="card searchable">
-                <div class="icon">📅</div>
-                <h3>Class Schedule</h3>
-                <p>आने वाली क्लास का समय और विषय यहाँ प्रकाशित करें।</p>
-                <p>शेड्यूल एडमिन द्वारा जोड़ना होगा।</p>
-            </article>
-
-        </div>
-    </section>
-
-    <section id="study">
-        <h2 class="section-title">📚 Study Material & PDF Notes</h2>
-
-        <div class="grid">
-
-            <article class="card searchable">
-                <div class="icon">📖</div>
-                <h3>School Study</h3>
-                <p>कक्षा 6 से 12 तक के विषयवार नोट्स।</p>
-                <a href="#student" class="button button-blue">नोट्स देखें</a>
-            </article>
-
-            <article class="card searchable">
-                <div class="icon">📝</div>
-                <h3>Competitive Exams</h3>
-                <p>प्रतियोगी परीक्षाओं की तैयारी और अभ्यास सामग्री।</p>
-                <a href="#jobs" class="button button-blue">परीक्षाएँ देखें</a>
-            </article>
-
-            <article class="card searchable">
-                <div class="icon">📄</div>
-                <h3>PDF Notes</h3>
-                <p>अपने नोट्स की PDF फाइलें यहाँ जोड़ी जा सकती हैं।</p>
-                <a href="#pdf-notes" class="button button-blue">PDF सेक्शन</a>
-            </article>
-
-        </div>
-
-        <div id="pdf-notes" class="notice">
-            <h3>PDF Library</h3>
-            <p>नीचे उदाहरण के रूप में एक PDF लिंक दिया गया है।</p>
-            <p>
-                अपनी PDF फाइल को GitHub Repository में अपलोड करके
-                इस लिंक में उसका सही पथ डालें।
-            </p>
-            <a href="notes/sample.pdf" class="button button-blue">
-                Sample PDF खोलें
-            </a>
-            <p style="font-size:12px">
-                यह लिंक तभी काम करेगा जब notes/sample.pdf फाइल मौजूद हो।
-            </p>
-        </div>
-    </section>
-
-    <section id="tests">
-        <h2 class="section-title">📝 Online Test & Mock Test</h2>
-
-        <div class="grid">
-
-            <article class="card searchable">
-                <div class="icon">⏱️</div>
-                <h3>Daily Quiz</h3>
-                <p>सामान्य ज्ञान का छोटा अभ्यास टेस्ट।</p>
-                <button class="button button-blue" onclick="startQuiz()">
-                    टेस्ट शुरू करें
-                </button>
-            </article>
-
-            <article class="card searchable">
-                <div class="icon">🎯</div>
-                <h3>Mock Test</h3>
-                <p>सरकारी नौकरी की तैयारी के लिए मॉक टेस्ट।</p>
-                <a href="#quizArea" class="button button-blue">क्विज खोलें</a>
-            </article>
-
-            <article class="card searchable">
-                <div class="icon">📊</div>
-                <h3>Test Result</h3>
-                <p>इस डेमो में टेस्ट पूरा करने के बाद स्कोर दिखेगा।</p>
-            </article>
-
-        </div>
-
-        <div id="quizArea" class="card hidden" style="margin-top:20px">
-            <h3>Dream Josh General Knowledge Quiz</h3>
-            <p id="questionNumber"></p>
-            <h3 id="questionText"></h3>
-            <div id="answerOptions"></div>
-            <p id="quizResult" aria-live="polite"></p>
-            <button class="button button-blue hidden" id="nextQuestion"
-                    onclick="nextQuizQuestion()">अगला सवाल</button>
-        </div>
-    </section>
-
-    <section id="jobs">
-        <h2 class="section-title">💼 Government Jobs Preparation</h2>
-
-        <div class="grid">
-
-            <article class="card searchable">
-                <div class="icon">🏛️</div>
-                <h3>UPSC / SSC</h3>
-                <p>केंद्र सरकार की विभिन्न प्रतियोगी परीक्षाएँ।</p>
-                <a href="https://upsc.gov.in/" target="_blank"
-                   rel="noopener noreferrer" class="button button-blue">
-                    UPSC Website
-                </a>
-                <a href="https://ssc.gov.in/" target="_blank"
-                   rel="noopener noreferrer" class="button button-blue">
-                    SSC Website
-                </a>
-            </article>
-
-            <article class="card searchable">
-                <div class="icon">🚔</div>
-                <h3>Rajasthan Police</h3>
-                <p>राजस्थान पुलिस भर्ती की आधिकारिक सूचनाएँ।</p>
-                <a href="https://police.rajasthan.gov.in/" target="_blank"
-                   rel="noopener noreferrer" class="button button-blue">
-                    Official Website
-                </a>
-            </article>
-
-            <article class="card searchable">
-                <div class="icon">📋</div>
-                <h3>RPSC / RSSB</h3>
-                <p>RAS, CET और अन्य भर्ती परीक्षाओं की तैयारी।</p>
-                <a href="https://rpsc.rajasthan.gov.in/" target="_blank"
-                   rel="noopener noreferrer" class="button button-blue">
-                    RPSC
-                </a>
-                <a href="https://rssb.rajasthan.gov.in/" target="_blank"
-                   rel="noopener noreferrer" class="button button-blue">
-                    RSSB
-                </a>
-            </article>
-
-        </div>
-
-        <div class="notice">
-            <strong>महत्वपूर्ण:</strong>
-            भर्ती की तारीख, आवेदन लिंक, एडमिट कार्ड और रिजल्ट
-            प्रकाशित करने से पहले आधिकारिक वेबसाइट पर जानकारी सत्यापित करें।
-        </div>
-    </section>
-
-    <section id="career">
-        <h2 class="section-title">🎯 Career Guide</h2>
-
-        <div class="grid">
-
-            <article class="card searchable">
-                <div class="icon">🎒</div>
-                <h3>After 10th</h3>
-                <p>11वीं-12वीं, ITI, डिप्लोमा और अन्य विकल्पों की जानकारी।</p>
-                <a href="#student" class="button button-blue">जानकारी देखें</a>
-            </article>
-
-            <article class="card searchable">
-                <div class="icon">🎓</div>
-                <h3>After 12th</h3>
-                <p>Arts, Science, Commerce, प्रतियोगी परीक्षा और कौशल कोर्स।</p>
-                <a href="#student" class="button button-blue">जानकारी देखें</a>
-            </article>
-
-            <article class="card searchable">
-                <div class="icon">💻</div>
-                <h3>Skills & Career</h3>
-                <p>कंप्यूटर, डिजिटल कौशल, करियर और रोजगार के विकल्प।</p>
-                <a href="#student" class="button button-blue">जानकारी देखें</a>
-            </article>
-
-        </div>
-    </section>
-
-    <section id="student">
-        <h2 class="section-title">👨‍🎓 Student Dashboard</h2>
-
-        <div class="card">
-            <h3>विद्यार्थी सुविधाएँ</h3>
-            <p>यह डेमो डैशबोर्ड है। अभी इसमें वास्तविक लॉगिन या निजी विद्यार्थी डेटा नहीं है।</p>
-
-            <div class="grid" style="margin-top:18px">
-
-                <article class="card searchable">
-                    <h3>📚 My Study</h3>
-                    <p>अपने अध्ययन संसाधन व्यवस्थित करें।</p>
-                </article>
-
-                <article class="card searchable">
-                    <h3>📝 My Tests</h3>
-                    <p>इस ब्राउज़र में दिए गए डेमो क्विज का अभ्यास करें।</p>
-                </article>
-
-                <article class="card searchable">
-                    <h3>🏆 My Progress</h3>
-                    <p>वास्तविक प्रगति रिपोर्ट के लिए डेटाबेस की आवश्यकता होगी।</p>
-                </article>
-
+            <!-- BILL SUMMARY & SHARE -->
+            <div class="card share-box">
+                <div class="flex-row">
+                    <div class="total-box">
+                        <i class="fas fa-calculator"></i> Total: <span id="displayTotal">₹0</span>
+                    </div>
+                    <div class="payment-status">
+                        <span>Paid: <span class="paid" id="displayPaid">₹0</span></span>
+                        <span>Due: <span class="due" id="displayDue">₹0</span></span>
+                    </div>
+                </div>
+                <div class="flex-row mt-2">
+                    <button class="btn" id="sharePdfBtn"><i class="fas fa-file-pdf"></i> Share Bill as PDF</button>
+                    <button class="btn btn-outline" id="refreshBillBtn"><i class="fas fa-sync-alt"></i> Refresh summary</button>
+                </div>
+                <div class="text-small mt-1" id="reminderText"><i class="fas fa-bell"></i> No active reminders</div>
             </div>
         </div>
-    </section>
 
-    <section id="contact">
-        <h2 class="section-title">📩 Contact Dream Josh</h2>
+        <!-- RIGHT COLUMN: WORK LOG + PAYMENT LOG + ADMIN -->
+        <div>
+            <!-- WORK LOG TABLE -->
+            <div class="card">
+                <div class="flex-row">
+                    <h2><i class="fas fa-list-ul"></i> Work log (what & where)</h2>
+                    <span class="badge" id="workCount">0 entries</span>
+                </div>
+                <div class="worklog-list mt-1" style="max-height:260px; overflow-y:auto;">
+                    <table id="workTable">
+                        <thead>
+                            <tr><th>Work / Location</th><th>Price</th><th>Photo</th><th></th></tr>
+                        </thead>
+                        <tbody id="workTableBody">
+                            <!-- dynamic rows -->
+                        </tbody>
+                    </table>
+                </div>
+                <p class="text-small mt-1"><i class="fas fa-camera"></i> Photo attached shows the work spot / condition.</p>
+            </div>
 
-        <div class="card">
-            <p>सुझाव, अध्ययन सामग्री और सहयोग के लिए संपर्क करें।</p>
-            <a href="mailto:Technicaldamor@gmail.com"
-               class="button button-blue">Email करें</a>
+            <!-- PAYMENT LOG -->
+            <div class="card">
+                <h2><i class="fas fa-history"></i> Payment history</h2>
+                <div style="max-height:140px; overflow-y:auto;" class="mt-1">
+                    <table>
+                        <thead><tr><th>Date</th><th>Amount</th><th>Note</th></tr></thead>
+                        <tbody id="paymentTableBody">
+                            <!-- dynamic -->
+                        </tbody>
+                    </table>
+                </div>
+                <div class="reminder-tag mt-1" id="reminderBadge"><i class="fas fa-clock"></i> Reminder: none</div>
+            </div>
+
+            <!-- ADMIN PANEL (extra controls) -->
+            <div class="card admin-panel">
+                <h3><i class="fas fa-user-cog"></i> Admin panel · manage bill</h3>
+                <div class="grid-3 mt-1">
+                    <button class="btn btn-small btn-outline" id="clearWorkLogBtn"><i class="fas fa-trash-alt"></i> Clear work log</button>
+                    <button class="btn btn-small btn-outline" id="clearPaymentsBtn"><i class="fas fa-eraser"></i> Clear payments</button>
+                    <button class="btn btn-small btn-danger" id="resetAllBtn"><i class="fas fa-undo-alt"></i> Reset all data</button>
+                </div>
+                <div class="mt-2">
+                    <label>Set bill no. manually</label>
+                    <div class="flex-row">
+                        <input type="text" id="adminBillNo" placeholder="TS-101" style="max-width:200px;">
+                        <button class="btn btn-small btn-warning" id="setBillNoBtn"><i class="fas fa-save"></i> Update</button>
+                    </div>
+                </div>
+                <p class="text-small mt-1"><i class="fas fa-info-circle"></i> Admin can reset or update bill number. All changes saved locally.</p>
+            </div>
         </div>
-    </section>
-
-</main>
-
-<footer>
-    <h2>DREAM JOSH</h2>
-    <p>पढ़ेंगे यहाँ, बढ़ेंगे जहाँ</p>
-    <p>Study • Motivation • Government Jobs • Career Guide</p>
-    <p>© <span id="year"></span> Dream Josh. All rights reserved.</p>
-</footer>
+    </div>
+    <div class="site-footer">Tractor Service · Trecter Book · All data stored in your browser</div>
+</div>
 
 <script>
-document.getElementById("year").textContent =
-    new Date().getFullYear();
+    (function() {
+        // ---------- STORAGE KEYS ----------
+        const STORAGE_KEY = 'tractorServiceData_v1';
 
-/* Live Meeting Demo */
-function joinLiveClass() {
-    const input = document.getElementById("roomName");
-    const name = input.value.trim();
+        // Default initial data
+        const defaultData = {
+            customerName: 'Ramesh Patel',
+            customerMobile: '9876543210',
+            billNo: 'TS-101',
+            billDate: new Date().toISOString().split('T')[0],
+            tractorModel: 'Mahindra 575 DI / GJ-01-AB-1234',
+            works: [
+                { id: 'w1', desc: 'Engine oil change', price: 1200, photo: null },
+                { id: 'w2', desc: 'Air filter cleaning', price: 350, photo: null }
+            ],
+            payments: [
+                { id: 'p1', amount: 800, date: new Date().toISOString().split('T')[0], note: 'Advance' }
+            ],
+            reminder: 'Next service due 15 Nov'
+        };
 
-    if (!name) {
-        alert("कृपया पहले क्लास का नाम लिखें।");
-        input.focus();
-        return;
-    }
+        // ---------- GLOBAL STATE ----------
+        let state = {
+            customerName: '',
+            customerMobile: '',
+            billNo: '',
+            billDate: '',
+            tractorModel: '',
+            works: [],        // { id, desc, price, photo (base64 or null) }
+            payments: [],     // { id, amount, date, note }
+            reminder: ''
+        };
 
-    // हर बार अलग रूम नाम; यह पासवर्ड या एक्सेस कंट्रोल नहीं है।
-    const safeName = name
-        .replace(/[^a-zA-Z0-9_-]/g, "-")
-        .replace(/-+/g, "-")
-        .slice(0, 35);
-
-    const room = "DreamJosh-" + safeName + "-" +
-        Math.random().toString(36).slice(2, 10);
-
-    window.open(
-        "https://meet.jit.si/" + encodeURIComponent(room),
-        "_blank",
-        "noopener,noreferrer"
-    );
-}
-
-/* Website Card Search */
-function searchCards() {
-    const query = document.getElementById("siteSearch")
-        .value.trim().toLowerCase();
-
-    const cards = document.querySelectorAll(".searchable");
-    let found = 0;
-
-    cards.forEach(card => {
-        const matches = card.textContent.toLowerCase()
-            .includes(query);
-
-        card.classList.toggle("hidden", query !== "" && !matches);
-
-        if (query === "" || matches) found++;
-    });
-
-    document.getElementById("searchMessage").textContent =
-        query === "" ? "" :
-        found + " संबंधित सेक्शन मिले।";
-}
-
-document.getElementById("siteSearch").addEventListener(
-    "keydown",
-    function(event) {
-        if (event.key === "Enter") searchCards();
-    }
-);
-
-/* Demo Quiz */
-const questions = [
-    {
-        question: "भारत की राजधानी क्या है?",
-        options: ["जयपुर", "नई दिल्ली", "मुंबई", "भोपाल"],
-        answer: 1
-    },
-    {
-        question: "राजस्थान की राजधानी क्या है?",
-        options: ["उदयपुर", "जोधपुर", "जयपुर", "कोटा"],
-        answer: 2
-    },
-    {
-        question: "भारत का संविधान कब लागू हुआ?",
-        options: ["15 अगस्त 1947", "26 जनवरी 1950",
-                  "2 अक्टूबर 1950", "26 नवंबर 1949"],
-        answer: 1
-    }
-];
-
-let currentQuestion = 0;
-let score = 0;
-let answered = false;
-
-function startQuiz() {
-    currentQuestion = 0;
-    score = 0;
-
-    document.getElementById("quizArea")
-        .classList.remove("hidden");
-
-    document.getElementById("quizArea")
-        .scrollIntoView({ behavior: "smooth" });
-
-    renderQuestion();
-}
-
-function renderQuestion() {
-    const q = questions[currentQuestion];
-    answered = false;
-
-    document.getElementById("questionNumber").textContent =
-        "प्रश्न " + (currentQuestion + 1) +
-        " / " + questions.length;
-
-    document.getElementById("questionText").textContent =
-        q.question;
-
-    document.getElementById("quizResult").textContent = "";
-
-    const options = document.getElementById("answerOptions");
-    options.replaceChildren();
-
-    q.options.forEach((option, index) => {
-        const button = document.createElement("button");
-        button.className = "button button-blue";
-        button.style.display = "block";
-        button.style.width = "100%";
-        button.style.margin = "8px 0";
-        button.textContent = option;
-
-        button.addEventListener("click", () => checkAnswer(index));
-        options.appendChild(button);
-    });
-
-    const next = document.getElementById("nextQuestion");
-    next.classList.add("hidden");
-    next.textContent = currentQuestion === questions.length - 1
-        ? "परिणाम देखें"
-        : "अगला सवाल";
-}
-
-function checkAnswer(selected) {
-    if (answered) return;
-    answered = true;
-
-    const correct = questions[currentQuestion].answer;
-    const buttons = document.querySelectorAll("#answerOptions button");
-
-    buttons.forEach((button, index) => {
-        button.disabled = true;
-
-        if (index === correct) {
-            button.style.background = "#138a45";
-        } else if (index === selected) {
-            button.style.background = "#c62828";
+        // ---------- HELPER FUNCTIONS ----------
+        function generateId() {
+            return Date.now() + '-' + Math.random().toString(36).substr(2, 9);
         }
-    });
 
-    if (selected === correct) {
-        score++;
-        document.getElementById("quizResult").textContent =
-            "सही जवाब! बहुत बढ़िया।";
-    } else {
-        document.getElementById("quizResult").textContent =
-            "सही जवाब: " + questions[currentQuestion].options[correct];
-    }
+        function formatCurrency(num) {
+            return '₹' + Number(num).toFixed(0);
+        }
 
-    document.getElementById("nextQuestion")
-        .classList.remove("hidden");
-}
+        // Save to localStorage
+        function persistState() {
+            try {
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+            } catch (e) {
+                console.warn('Could not save to localStorage', e);
+            }
+        }
 
-function nextQuizQuestion() {
-    if (!answered) return;
+        // Load from localStorage
+        function loadState() {
+            const saved = localStorage.getItem(STORAGE_KEY);
+            if (saved) {
+                try {
+                    const parsed = JSON.parse(saved);
+                    state = { ...state, ...parsed };
+                } catch (e) {
+                    console.warn('Corrupted data, using default');
+                    state = JSON.parse(JSON.stringify(defaultData));
+                }
+            } else {
+                state = JSON.parse(JSON.stringify(defaultData));
+            }
+            // ensure billDate and payment dates are set if missing
+            if (!state.billDate) state.billDate = new Date().toISOString().split('T')[0];
+        }
 
-    if (currentQuestion < questions.length - 1) {
-        currentQuestion++;
-        renderQuestion();
-    } else {
-        document.getElementById("questionNumber").textContent =
-            "टेस्ट पूरा हुआ";
+        // ---------- RENDER FUNCTIONS ----------
+        function renderAll() {
+            // sync inputs
+            document.getElementById('customerName').value = state.customerName || '';
+            document.getElementById('customerMobile').value = state.customerMobile || '';
+            document.getElementById('billNo').value = state.billNo || '';
+            document.getElementById('billDate').value = state.billDate || new Date().toISOString().split('T')[0];
+            document.getElementById('tractorModel').value = state.tractorModel || '';
+            document.getElementById('adminBillNo').value = state.billNo || '';
 
-        document.getElementById("questionText").textContent =
-            "आपका स्कोर: " + score + " / " + questions.length;
+            renderWorkTable();
+            renderPaymentTable();
+            updateSummary();
+            updateReminderDisplay();
+        }
 
-        document.getElementById("answerOptions").replaceChildren();
+        function renderWorkTable() {
+            const tbody = document.getElementById('workTableBody');
+            tbody.innerHTML = '';
+            if (!state.works || state.works.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="4" style="text-align:center; color:#7d917f;">No work entries yet.</td></tr>';
+                document.getElementById('workCount').innerText = '0 entries';
+                return;
+            }
+            state.works.forEach((work, index) => {
+                const row = document.createElement('tr');
+                // work desc + location
+                const descCell = document.createElement('td');
+                descCell.innerText = work.desc || '—';
+                // price
+                const priceCell = document.createElement('td');
+                priceCell.innerText = formatCurrency(work.price || 0);
+                // photo
+                const photoCell = document.createElement('td');
+                if (work.photo) {
+                    const img = document.createElement('img');
+                    img.src = work.photo;
+                    img.className = 'worklog-img';
+                    img.alt = 'work photo';
+                    photoCell.appendChild(img);
+                } else {
+                    photoCell.innerText = '📷';
+                }
+                // delete button (admin)
+                const actionCell = document.createElement('td');
+                const delBtn = document.createElement('button');
+                delBtn.className = 'btn-small btn-danger';
+                delBtn.style.padding = '0.2rem 0.6rem';
+                delBtn.innerHTML = '<i class="fas fa-trash"></i>';
+                delBtn.addEventListener('click', () => {
+                    state.works.splice(index, 1);
+                    persistState();
+                    renderAll();
+                });
+                actionCell.appendChild(delBtn);
 
-        doc
+                row.appendChild(descCell);
+                row.appendChild(priceCell);
+                row.appendChild(photoCell);
+                row.appendChild(actionCell);
+                tbody.appendChild(row);
+            });
+            document.getElementById('workCount').innerText = state.works.length + ' entries';
+        }
+
+        function renderPaymentTable() {
+            const tbody = document.getElementById('paymentTableBody');
+            tbody.innerHTML = '';
+            if (!state.payments || state.payments.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="3" style="text-align:center; color:#7d917f;">No payments recorded.</td></tr>';
+                return;
+            }
+            // Show newest first
+            const sorted = [...state.payments].sort((a,b) => new Date(b.date) - new Date(a.date));
+            sorted.forEach((p) => {
+                const row = document.createElement('tr');
+                row.innerHTML = `<td>${p.date || '—'}</td><td>${formatCurrency(p.amount || 0)}</td><td>${p.note || '—'}</td>`;
+                tbody.appendChild(row);
+            });
+        }
+
+        function calculateTotals() {
+            const total = state.works.reduce((sum, w) => sum + (Number(w.price) || 0), 0);
+            const paid = state.payments.reduce((sum, p) => sum + (Number(p.amount) || 0), 0);
+            const due = Math.max(0, total - paid);
+            return { total, paid, due };
+        }
+
+        function updateSummary() {
+            const { total, paid, due } = calculateTotals();
+            document.getElementById('displayTotal').innerText = formatCurrency(total);
+            document.getElementById('displayPaid').innerText = formatCurrency(paid);
+            document.getElementById('displayDue').innerText = formatCurrency(due);
+
+            // reminder text
+            const reminderEl = document.getElementById('reminderText');
+            const reminderBadge = document.getElementById('reminderBadge');
+            let reminderMsg = state.reminder || 'No active reminders';
+            if (due > 0) {
+                reminderMsg += ` · Due: ${formatCurrency(due)}`;
+                reminderEl.innerHTML = `<i class="fas fa-bell"></i> ${reminderMsg}`;
+                reminderBadge.innerHTML = `<i class="fas fa-clock"></i> Reminder: ${reminderMsg}`;
+            } else {
+                reminderEl.innerHTML = `<i class="fas fa-check-circle" style="color:#1e7a3a;"></i> All clear · ${reminderMsg}`;
+                reminderBadge.innerHTML = `<i class="fas fa-check-circle"></i> ${reminderMsg}`;
+            }
+            // update badge class
+            reminderBadge.className = due > 0 ? 'reminder-tag' : 'reminder-tag';
+            if (due > 0) reminderBadge.style.background = '#fff1d6';
+            else reminderBadge.style.background = '#e3f0de';
+        }
+
+        function updateReminderDisplay() {
+            // handled inside updateSummary
+        }
+
+        // ---------- READ INPUTS & UPDATE STATE ----------
+        function syncStateFromInputs() {
+            state.customerName = document.getElementById('customerName').value.trim();
+            state.customerMobile = document.getElementById('customerMobile').value.trim();
+            state.billNo = document.getElementById('billNo').value.trim();
+            state.billDate = document.getElementById('billDate').value;
+            state.tractorModel = document.getElementById('tractorModel').value.trim();
+            persistState();
+        }
+
+        // ---------- ADD WORK ----------
+        function addWorkEntry() {
+            const desc = document.getElementById('workDesc').value.trim();
+            const price = parseFloat(document.getElementById('workPrice').value) || 0;
+            const photoInput = document.getElementById('workPhoto');
+
+            if (!desc) {
+                alert('Please enter work description');
+                return;
+            }
+
+            const newWork = {
+                id: generateId(),
+                desc: desc,
+                price: price,
+                photo: null
+            };
+
+            if (photoInput.files && photoInput.files[0]) {
+                const file = photoInput.files[0];
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    newWork.photo = e.target.result;
+                    state.works.push(newWork);
+                    persistState();
+                    renderAll();
+                    // clear inputs
+                    document.getElementById('workDesc').value = '';
+                    document.getElementById('workPrice').value = '0';
+                    document.getElementById('workPhoto').value = '';
+                    document.getElementById('photoNamePreview').innerText = '';
+                };
+                reader.readAsDataURL(file);
+            } else {
+                state.works.push(newWork);
+                persistState();
+                renderAll();
+                document.getElementById('workDesc').value = '';
+                document.getElementById('workPrice').value = '0';
+                document.getElementById('workPhoto').value = '';
+                document.getElementById('photoNamePreview').innerText = '';
+            }
+        }
+
+        // ---------- ADD PAYMENT ----------
+        function addPaymentEntry() {
+            const amount = parseFloat(document.getElementById('paymentAmount').value) || 0;
+            const date = document.getElementById('paymentDate').value || new Date().toISOString().split('T')[0];
+            const note = document.getElementById('paymentNote').value.trim() || 'Payment';
+
+            if (amount <= 0) {
+                alert('Please enter a valid amount');
+                return;
+            }
+
+            state.payments.push({
+                id: generateId(),
+                amount: amount,
+                date: date,
+                note: note
+            });
+
+            // update reminder if note contains "reminder" or set reminder
+            if (note.toLowerCase().includes('remind') || note.toLowerCase().includes('due')) {
+                state.reminder = note;
+            } else {
+                // optionally keep previous reminder
+            }
+
+            persistState();
+            renderAll();
+            document.getElementById('paymentAmount').value = '0';
+            document.getElementById('paymentNote').value = '';
+        }
+
+        // ---------- PDF SHARE ----------
+        function generateAndSharePDF() {
+            // first sync all visible info to state
+            syncStateFromInputs();
+
+            const { total, paid, due } = calculateTotals();
+            const customer = state.customerName || 'Customer';
+            const billNo = state.billNo || 'N/A';
+            const date = state.billDate || new Date().toISOString().split('T')[0];
+            const tractor = state.tractorModel || '—';
+
+            // Build work rows html
+            let workRowsHtml = '';
+            if (state.works.length === 0) {
+                workRowsHtml = '<tr><td colspan="2">No work entries</td></tr>';
+            } else {
+                state.works.forEach(w => {
+                    workRowsHtml += `<tr><td>${w.desc}</td><td>${formatCurrency(w.price)}</td></tr>`;
+                });
+            }
+
+            let paymentRowsHtml = '';
+            if (state.payments.length === 0) {
+                paymentRowsHtml = '<tr><td colspan="3">No payments</td></tr>';
+            } else {
+                [...state.payments].sort((a,b)=>new Date(b.date)-new Date(a.date)).forEach(p => {
+                    paymentRowsHtml += `<tr><td>${p.date}</td><td>${formatCurrency(p.amount)}</td><td>${p.note || ''}</td></tr>`;
+                });
+            }
+
+            // Build photo images (only if any work has photo) but we will not embed all images to keep pdf small; but we can show a note.
+            // However the task requires "photo select" and share bill as PDF. We can add photos as tiny thumbnails in the bill.
+            // We'll create a separate section with thumbnails (base64) but optional for PDF. Let's include small 40px images.
+            let photoSection = '';
+            const worksWithPhotos = state.works.filter(w => w.photo);
+            if (worksWithPhotos.length > 0) {
+                photoSection = '<h4 style="margin: 12px 0 6px; font-size:14px;">📸 Work photos</h4><div style="display:flex; flex-wrap:wrap; gap:8px;">';
+                worksWithPhotos.forEach(w => {
+                    photoSection += `<div style="text-align:center; font-size:10px;"><img src="${w.photo}" style="width:50px;height:50px;object-fit:cover;border-radius:8px;border:1px solid #ccc;" /><br>${w.desc.substring(0,20)}</div>`;
+                });
+                photoSection += '</div>';
+            }
+
+            const htmlContent = `
+                <div style="font-family: 'Inter', Arial, sans-serif; padding: 20px; max-width: 800px; background: #fff; color: #1e2f23;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #2a5c36; padding-bottom: 12px;">
+                        <div>
+                            <h1 style="margin:0; font-size: 26px; color:#2a5c36;"><i>🚜</i> Tractor Service</h1>
+                            <p style="margin:4px 0 0; color:#4d6552;">Trecter Book · Bill Receipt</p>
+                        </div>
+                        <div style="text-align:right;">
+                            <div style="font-weight:700;">Bill No: ${billNo}</div>
+                            <div>Date: ${date}</div>
+                        </div>
+                    </div>
+                    <div style="display:flex; justify-content:space-between; margin:16px 0; background:#f7fcf5; padding:12px; border-radius:16px;">
+                        <div><strong>Customer:</strong> ${customer}<br><strong>Mobile:</strong> ${state.customerMobile || '—'}</div>
+                        <div><strong>Tractor:</strong> ${tractor}</div>
+                    </div>
+                    <h3 style="margin-bottom:6px;">📋 Work & Service</h3>
+                    <table style="width:100%; border-collapse:collapse; font-size:14px;">
+                        <thead><tr style="background:#eef3ea;"><th style="text-align:left; padding:8px;">Description</th><th style="text-align:left; padding:8px;">Price</th></tr></thead>
+                        <tbody>${workRowsHtml}</tbody>
+                    </table>
+                    ${photoSection}
+                    <div style="margin-top:20px; display:flex; justify-content:space-between; background:#f7fcf5; padding:12px; border-radius:16px;">
+                        <div><strong>Total:</strong> ${formatCurrency(total)}</div>
+                        <div><strong>Paid:</strong> ${formatCurrency(paid)}</div>
+                        <div><strong>Due:</strong> <span style="color:#b13b3b;">${formatCurrency(due)}</span></div>
+                    </div>
+                    <h3 style="margin:16px 0 6px;">💰 Payment history</h3>
+                    <table style="width:100%; border-collapse:collapse; font-size:13px;">
+                        <thead><tr style="background:#eef3ea;"><th style="text-align:left; padding:6px;">Date</th><th style="text-align:left; padding:6px;">Amount</th><th style="text-align:left; padding:6px;">Note</th></tr></thead>
+                        <tbody>${paymentRowsHtml}</tbody>
+                    </table>
+                    <div style="margin-top:16px; font-size:12px; color:#7d917f; border-top:1px dashed #cbdcc7; padding-top:12px;">
+                        Reminder: ${state.reminder || '—'}
+                    </div>
+                    <div style="margin-top:24px; text-align:center; font-size:11px; color:#8fa894;">Generated via Tractor Service · Trecter Book</div>
+                </div>
+            `;
+
+            // Use html2pdf to generate and download/share
+            const element = document.createElement('div');
+            element.innerHTML = htmlContent;
+            const opt = {
+                margin: [0.5, 0.5, 0.5, 0.5],
+                filename: `Tractor_Bill_${billNo}_${date}.pdf`,
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2, useCORS: true },
+                jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
+            };
+            html2pdf().set(opt).from(element).save();
+        }
+
+        // ---------- RESET / CLEAR ----------
+        function clearWorkLog() {
+            if (confirm('Delete all work entries?')) {
+                state.works = [];
+                persistState();
+                renderAll();
+            }
+        }
+
+        function clearPayments() {
+            if (confirm('Delete all payment records?')) {
+                state.payments = [];
+                persistState();
+                renderAll();
+            }
+        }
+
+        function resetAll() {
+            if (confirm('Reset everything to default? All data will be lost.')) {
+                state = JSON.parse(JSON.stringify(defaultData));
+                persistState();
+                renderAll();
+                // also reset file input
+                document.getElementById('workPhoto').value = '';
+                document.getElementById('photoNamePreview').innerText = '';
+            }
+        }
+
+        // ---------- INITIAL SETUP ----------
+        document.addEventListener('DOMContentLoaded', () => {
+            loadState();
+            // set default date fields
+            if (!state.billDate) state.billDate = new Date().toISOString().split('T')[0];
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('paymentDate').value = today;
+            document.getElementById('billDate').value = state.billDate || today;
+            // set reminder
+            if (!state.reminder) state.reminder = 'Next service due in 15 days';
+            renderAll();
+
+            // event listeners
+            document.getElementById('addWorkBtn').addEventListener('click', addWorkEntry);
+            document.getElementById('addPaymentBtn').addEventListener('click', addPaymentEntry);
+            document.getElementById('sharePdfBtn').addEventListener('click', generateAndSharePDF);
+            document.getElementById('refreshBillBtn').addEventListener('click', () => {
+                syncStateFromInputs();
+                renderAll();
+            });
+            // admin clear buttons
+            document.getElementById('clearWorkLogBtn').addEventListener('click', clearWorkLog);
+            document.getElementById('clearPaymentsBtn').addEventListener('click', clearPayments);
+            document.getElementById('resetAllBtn').addEventListener('click', resetAll);
+            document.getElementById('setBillNoBtn').addEventListener('click', () => {
+                const newBill = document.getElementById('adminBillNo').value.trim();
+                if (newBill) {
+                    state.billNo = newBill;
+                    document.getElementById('billNo').value = newBill;
+                    persistState();
+                    renderAll();
+                }
+            });
+
+            // photo preview name
+            document.getElementById('workPhoto').addEventListener('change', (e) => {
+                const file = e.target.files[0];
+                document.getElementById('photoNamePreview').innerText = file ? file.name : '';
+            });
+
+            // sync when leaving input fields (for safety)
+            ['customerName','customerMobile','billNo','billDate','tractorModel'].forEach(id => {
+                document.getElementById(id).addEventListener('change', () => {
+                    syncStateFromInputs();
+                });
+            });
+
+            // set initial bill no readonly but updated by admin
+            // Add work via enter? not necessary
+        });
+
+        // also save state on beforeunload
+        window.addEventListener('beforeunload', () => {
+            try {
+                syncStateFromInputs();
+            } catch (e) {}
+        });
+
+    })();
+</script>
+</body>
+</html>

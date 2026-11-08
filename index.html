@@ -500,6 +500,9 @@
         }
         .login-box .btn { width: 100%; }
         .login-error { color: var(--danger); font-size: 0.85rem; margin-top: 0.5rem; display: none; }
+        .login-tabs { display: flex; border-bottom: 1.5px solid var(--border); margin-bottom: 1.5rem; }
+        .login-tab { flex: 1; padding: 0.8rem; cursor: pointer; font-weight: 600; font-size: 0.9rem; color: var(--text-light); border-bottom: 3px solid transparent; transition: 0.2s; }
+        .login-tab.active { color: var(--primary); border-bottom-color: var(--primary); }
 
         /* ---------- SUMMARY ---------- */
         .summary-grid {
@@ -886,17 +889,43 @@
                 <div class="login-box">
                     <i class="fas fa-user-shield login-icon"></i>
                     <h2 data-lang="login_title">Login</h2>
-                    <p data-lang="login_desc">Enter your Username and Password to access the Tractor Book</p>
+                    <p data-lang="login_desc">Enter your details to access the Tractor Book</p>
                     
-                    <label>Username</label>
-                    <input type="text" id="adminUsernameInput" placeholder="Enter Username" value="admin" autocomplete="off">
-                    
-                    <label>Password</label>
-                    <input type="password" id="adminPasswordInput" placeholder="Enter Password" value="damor123" autocomplete="off">
-                    
-                    <button class="btn" id="adminLoginBtn"><i class="fas fa-sign-in-alt"></i> <span data-lang="login_btn">Login</span></button>
-                    <div class="login-error" id="loginError">Wrong Username or Password. Try again.</div>
-                    <p class="text-small mt-2" style="color:var(--text-light);">Default: <strong>admin</strong> / <strong>damor123</strong></p>
+                    <!-- Login Tabs -->
+                    <div class="login-tabs">
+                        <div class="login-tab active" id="tabPassLogin" onclick="switchLoginTab('pass')">Password</div>
+                        <div class="login-tab" id="tabOtpLogin" onclick="switchLoginTab('otp')">Mobile OTP</div>
+                    </div>
+
+                    <!-- Password Login Form -->
+                    <div id="passLoginForm">
+                        <label data-lang="set_user">Username</label>
+                        <input type="text" id="adminUsernameInput" placeholder="Enter Username / Mobile" value="admin" autocomplete="off">
+                        
+                        <label data-lang="set_pass">Password</label>
+                        <input type="password" id="adminPasswordInput" placeholder="Enter Password" value="damor123" autocomplete="off">
+                        
+                        <button class="btn mt-1" id="adminLoginBtn"><i class="fas fa-sign-in-alt"></i> <span data-lang="login_btn">Login</span></button>
+                    </div>
+
+                    <!-- OTP Login Form -->
+                    <div id="otpLoginForm" class="hidden">
+                        <label>Mobile Number</label>
+                        <input type="text" id="loginMobileInput" placeholder="Enter 10-digit Mobile No" maxlength="10">
+                        
+                        <div id="otpStep1">
+                            <button class="btn mt-1" id="sendOtpBtn"><i class="fas fa-paper-plane"></i> Send OTP</button>
+                        </div>
+                        
+                        <div id="otpStep2" class="hidden">
+                            <label>Enter OTP</label>
+                            <input type="text" id="loginOtpInput" placeholder="Enter 4-digit OTP" maxlength="4">
+                            <button class="btn mt-1" id="verifyOtpBtn"><i class="fas fa-check-circle"></i> Verify & Login</button>
+                        </div>
+                    </div>
+
+                    <div class="login-error" id="loginError">Invalid credentials or OTP. Try again.</div>
+                    <p class="text-small mt-2" style="color:var(--text-light);">Default Admin: <strong>admin</strong> / <strong>damor123</strong></p>
                 </div>
             </div>
 
@@ -1213,7 +1242,7 @@
                     </div>
                 </div>
 
-                <!-- ===== TAB: SETTINGS (NEW) ===== -->
+                <!-- ===== TAB: SETTINGS ===== -->
                 <div class="tab-panel hidden" id="tabSettings">
                     <div class="grid-2">
                         <!-- Left Side: Preferences -->
@@ -1259,7 +1288,7 @@
                         <div>
                             <div class="card">
                                 <h2><i class="fas fa-users-cog"></i> <span data-lang="set_power">Staff Power & Permissions</span></h2>
-                                <p class="text-small mt-1" data-lang="set_power_desc">Assign login access (mobile no) to supervisors and drivers. They can add data using their mobile number.</p>
+                                <p class="text-small mt-1" data-lang="set_power_desc">Assign login access (mobile no) to supervisors and drivers. They can log in using Mobile OTP.</p>
                                 
                                 <div class="mt-2">
                                     <label data-lang="set_sup">Supervisor Mobile Number</label>
@@ -1387,11 +1416,9 @@
             currentLang = lang;
             localStorage.setItem('damor_lang', lang);
             
-            // Update simple text nodes
             document.querySelectorAll('[data-lang]').forEach(el => {
                 const key = el.getAttribute('data-lang');
                 if (translations[lang] && translations[lang][key]) {
-                    // If element is an input/select, just set placeholder or text
                     if (el.tagName === 'OPTION') {
                         el.innerText = translations[lang][key];
                     } else {
@@ -1400,11 +1427,9 @@
                 }
             });
             
-            // Update placeholders specifically if needed
             document.getElementById('adminUsernameInput').placeholder = lang === 'hi' ? 'यूजरनेम दर्ज करें' : 'Enter Username';
             document.getElementById('adminPasswordInput').placeholder = lang === 'hi' ? 'पासवर्ड दर्ज करें' : 'Enter Password';
             
-            // Update dynamic tables
             refreshDashboard();
             if(activeCustomerId) {
                 const customers = loadCustomers();
@@ -1416,6 +1441,99 @@
                 }
             }
         }
+
+        // ================= LOGIN TAB SWITCHING =================
+        function switchLoginTab(tab) {
+            document.getElementById('tabPassLogin').classList.remove('active');
+            document.getElementById('tabOtpLogin').classList.remove('active');
+            document.getElementById('passLoginForm').classList.add('hidden');
+            document.getElementById('otpLoginForm').classList.add('hidden');
+
+            if (tab === 'pass') {
+                document.getElementById('tabPassLogin').classList.add('active');
+                document.getElementById('passLoginForm').classList.remove('hidden');
+            } else {
+                document.getElementById('tabOtpLogin').classList.add('active');
+                document.getElementById('otpLoginForm').classList.remove('hidden');
+            }
+            document.getElementById('loginError').style.display = 'none';
+        }
+
+        // ================= OTP LOGIC =================
+        let generatedOtp = null;
+        let otpMobileNumber = null;
+
+        document.getElementById('sendOtpBtn').addEventListener('click', () => {
+            const mobile = document.getElementById('loginMobileInput').value.trim();
+            if (mobile.length !== 10 || isNaN(mobile)) {
+                alert('Please enter a valid 10-digit mobile number.');
+                return;
+            }
+
+            // Check if this mobile belongs to a supervisor or driver with power ON
+            const supPhone = localStorage.getItem('damor_supervisor_phone');
+            const supPower = localStorage.getItem('damor_supervisor_power') === 'true';
+            const drvPhone = localStorage.getItem('damor_driver_phone');
+            const drvPower = localStorage.getItem('damor_driver_power') === 'true';
+
+            let isValid = false;
+            if (supPower && supPhone === mobile) isValid = true;
+            if (drvPower && drvPhone === mobile) isValid = true;
+
+            if (!isValid) {
+                document.getElementById('loginError').style.display = 'block';
+                document.getElementById('loginError').innerText = 'This mobile number does not have power/access. Please contact admin.';
+                return;
+            }
+
+            document.getElementById('loginError').style.display = 'none';
+
+            // Generate 4-digit OTP
+            generatedOtp = Math.floor(1000 + Math.random() * 9000).toString();
+            otpMobileNumber = mobile;
+
+            // For demo purposes, we show the OTP in an alert (No actual SMS API integrated)
+            alert(`Demo OTP for ${mobile} is: ${generatedOtp}\n\n(In a real app, this would be sent via SMS)`);
+
+            document.getElementById('otpStep1').classList.add('hidden');
+            document.getElementById('otpStep2').classList.remove('hidden');
+        });
+
+        document.getElementById('verifyOtpBtn').addEventListener('click', () => {
+            const enteredOtp = document.getElementById('loginOtpInput').value.trim();
+            
+            if (enteredOtp === generatedOtp && otpMobileNumber) {
+                // Determine user type
+                const supPhone = localStorage.getItem('damor_supervisor_phone');
+                const supPower = localStorage.getItem('damor_supervisor_power') === 'true';
+                const drvPhone = localStorage.getItem('damor_driver_phone');
+                const drvPower = localStorage.getItem('damor_driver_power') === 'true';
+
+                let type = null;
+                let name = null;
+
+                if (supPower && supPhone === otpMobileNumber) { type = 'supervisor'; name = 'Supervisor'; }
+                else if (drvPower && drvPhone === otpMobileNumber) { type = 'driver'; name = 'Driver'; }
+
+                if (type) {
+                    setAdminLoggedIn(true, type, name);
+                    document.getElementById('loginError').style.display = 'none';
+                    updateAdminUI();
+                    // Reset OTP forms
+                    document.getElementById('otpStep1').classList.remove('hidden');
+                    document.getElementById('otpStep2').classList.add('hidden');
+                    document.getElementById('loginOtpInput').value = '';
+                    generatedOtp = null;
+                } else {
+                    document.getElementById('loginError').style.display = 'block';
+                    document.getElementById('loginError').innerText = 'Access revoked or invalid.';
+                }
+            } else {
+                document.getElementById('loginError').style.display = 'block';
+                document.getElementById('loginError').innerText = 'Invalid OTP. Please try again.';
+            }
+        });
+
 
         // ================= GLOBAL TRACTOR IMAGE =================
         const TRACTOR_IMG_KEY = 'damor_tractor_img';
@@ -1474,7 +1592,7 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // ================= ADMIN LOGIN & PERMISSIONS =================
+        // ================= ADMIN LOGIN (PASSWORD) =================
         const ADMIN_USER_KEY = 'damor_admin_user';
         const ADMIN_PASSWORD_KEY = 'damor_admin_password';
         const DEFAULT_USER = 'admin';
@@ -1483,7 +1601,7 @@
         function getAdminUser() { return localStorage.getItem(ADMIN_USER_KEY) || DEFAULT_USER; }
         function getAdminPassword() { return localStorage.getItem(ADMIN_PASSWORD_KEY) || DEFAULT_PASSWORD; }
 
-        let loggedInUserType = sessionStorage.getItem('damor_logged_in_type') || null; // 'admin', 'supervisor', 'driver'
+        let loggedInUserType = sessionStorage.getItem('damor_logged_in_type') || null;
         let loggedInUserName = sessionStorage.getItem('damor_logged_in_name') || null;
 
         function isAdminLoggedIn() { return sessionStorage.getItem('damor_logged_in') === 'true'; }
@@ -1513,7 +1631,6 @@
                 refreshDashboard();
                 switchDashTab('farmers');
                 
-                // Hide certain settings for non-admins
                 if(loggedInUserType !== 'admin') {
                     document.getElementById('goToSettingsBtn').style.display = 'none';
                     document.querySelector('.dash-tabs [data-tab="settings"]').style.display = 'none';
@@ -1532,7 +1649,6 @@
             const pwd = document.getElementById('adminPasswordInput').value;
             const errorEl = document.getElementById('loginError');
             
-            // Check Admin
             if (user === getAdminUser() && pwd === getAdminPassword()) {
                 setAdminLoggedIn(true, 'admin', user);
                 errorEl.style.display = 'none';
@@ -1540,27 +1656,8 @@
                 return;
             }
             
-            // Check Supervisor
-            const supPhone = localStorage.getItem('damor_supervisor_phone');
-            const supPower = localStorage.getItem('damor_supervisor_power') === 'true';
-            if (supPower && supPhone && user === supPhone && pwd === supPhone) {
-                setAdminLoggedIn(true, 'supervisor', 'Supervisor');
-                errorEl.style.display = 'none';
-                updateAdminUI();
-                return;
-            }
-            
-            // Check Driver
-            const drvPhone = localStorage.getItem('damor_driver_phone');
-            const drvPower = localStorage.getItem('damor_driver_power') === 'true';
-            if (drvPower && drvPhone && user === drvPhone && pwd === drvPhone) {
-                setAdminLoggedIn(true, 'driver', 'Driver');
-                errorEl.style.display = 'none';
-                updateAdminUI();
-                return;
-            }
-            
             errorEl.style.display = 'block';
+            errorEl.innerText = 'Wrong Username or Password.';
         });
 
         document.getElementById('adminLogoutBtn').addEventListener('click', () => {
@@ -1583,7 +1680,6 @@
             if (panel) panel.classList.remove('hidden');
             document.getElementById('toolPanel').classList.add('hidden');
             
-            // Load settings values
             if (tabName === 'settings') {
                 document.getElementById('settingsLanguage').value = localStorage.getItem('damor_lang') || 'en';
                 document.getElementById('settingsTheme').value = localStorage.getItem('damor_theme') || 'default';
@@ -1595,26 +1691,16 @@
                 document.getElementById('settingsSupervisorPhone').value = supPhone;
                 const supBtn = document.getElementById('toggleSupervisorBtn');
                 const supTxt = document.getElementById('supervisorStatusText');
-                if(supPower) {
-                    supBtn.className = 'btn btn-small btn-success';
-                    supTxt.innerText = 'ON';
-                } else {
-                    supBtn.className = 'btn btn-small btn-danger';
-                    supTxt.innerText = 'OFF';
-                }
+                if(supPower) { supBtn.className = 'btn btn-small btn-success'; supTxt.innerText = 'ON'; }
+                else { supBtn.className = 'btn btn-small btn-danger'; supTxt.innerText = 'OFF'; }
                 
                 const drvPhone = localStorage.getItem('damor_driver_phone') || '';
                 const drvPower = localStorage.getItem('damor_driver_power') === 'true';
                 document.getElementById('settingsDriverPhone').value = drvPhone;
                 const drvBtn = document.getElementById('toggleDriverBtn');
                 const drvTxt = document.getElementById('driverStatusText');
-                if(drvPower) {
-                    drvBtn.className = 'btn btn-small btn-success';
-                    drvTxt.innerText = 'ON';
-                } else {
-                    drvBtn.className = 'btn btn-small btn-danger';
-                    drvTxt.innerText = 'OFF';
-                }
+                if(drvPower) { drvBtn.className = 'btn btn-small btn-success'; drvTxt.innerText = 'ON'; }
+                else { drvBtn.className = 'btn btn-small btn-danger'; drvTxt.innerText = 'OFF'; }
             }
         }
 
@@ -1623,7 +1709,6 @@
         });
 
         // ================= SETTINGS LOGIC =================
-        // Appearance
         document.getElementById('saveAppearanceBtn').addEventListener('click', () => {
             const lang = document.getElementById('settingsLanguage').value;
             const theme = document.getElementById('settingsTheme').value;
@@ -1643,7 +1728,6 @@
             else if (theme === 'dark') document.body.classList.add('theme-dark');
         }
 
-        // Security
         document.getElementById('saveSecurityBtn').addEventListener('click', () => {
             const newUser = document.getElementById('settingsUsername').value.trim();
             const newPass = document.getElementById('settingsPassword').value;
@@ -1660,19 +1744,13 @@
             }
         });
 
-        // Power Management
         let tempSupPower = localStorage.getItem('damor_supervisor_power') === 'true';
         document.getElementById('toggleSupervisorBtn').addEventListener('click', () => {
             tempSupPower = !tempSupPower;
             const btn = document.getElementById('toggleSupervisorBtn');
             const txt = document.getElementById('supervisorStatusText');
-            if(tempSupPower) {
-                btn.className = 'btn btn-small btn-success';
-                txt.innerText = 'ON';
-            } else {
-                btn.className = 'btn btn-small btn-danger';
-                txt.innerText = 'OFF';
-            }
+            if(tempSupPower) { btn.className = 'btn btn-small btn-success'; txt.innerText = 'ON'; }
+            else { btn.className = 'btn btn-small btn-danger'; txt.innerText = 'OFF'; }
         });
 
         let tempDrvPower = localStorage.getItem('damor_driver_power') === 'true';
@@ -1680,13 +1758,8 @@
             tempDrvPower = !tempDrvPower;
             const btn = document.getElementById('toggleDriverBtn');
             const txt = document.getElementById('driverStatusText');
-            if(tempDrvPower) {
-                btn.className = 'btn btn-small btn-success';
-                txt.innerText = 'ON';
-            } else {
-                btn.className = 'btn btn-small btn-danger';
-                txt.innerText = 'OFF';
-            }
+            if(tempDrvPower) { btn.className = 'btn btn-small btn-success'; txt.innerText = 'ON'; }
+            else { btn.className = 'btn btn-small btn-danger'; txt.innerText = 'OFF'; }
         });
 
         document.getElementById('savePowerBtn').addEventListener('click', () => {
@@ -1723,12 +1796,9 @@
             
             // Filter based on who is logged in
             if (loggedInUserType === 'supervisor' || loggedInUserType === 'driver') {
-                const myPhone = loggedInUserName === 'Supervisor' ? localStorage.getItem('damor_supervisor_phone') : localStorage.getItem('damor_driver_phone');
-                // For demo, they only see customers created by them (we tag customers with creatorPhone)
-                // But since we don't have a creator field yet, let's just show all for now or filter if they have matching mobile
-                // Let's implement a simple filter: only show if bill belongs to them.
-                // Actually, to make it work properly, let's tag customers with a 'createdBy' field.
-                // For now, return all.
+                // Here we filter data specific to the logged-in staff
+                // Since we don't have a strict assignment yet, we can return all data for now.
+                // In a real app, you would filter: return customers.filter(c => c.createdBy === loggedInUserName);
                 return customers; 
             }
             return customers;
@@ -2269,7 +2339,7 @@
             html2pdf().set(opt).from(element).save();
         });
 
-        // ================= MORE TOOLS (Simplified for space) =================
+        // ================= MORE TOOLS =================
         function openTool(toolName) {
             const panel = document.getElementById('toolPanel');
             panel.classList.remove('hidden');

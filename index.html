@@ -151,7 +151,6 @@ td{padding:0.7rem 0.3rem;border-bottom:1px solid var(--border);vertical-align:mi
 .img-settings-panel{background:var(--bg);border-radius:20px;padding:1.2rem;border:1px solid var(--border);margin-bottom:1.5rem;}
 .site-footer{text-align:center;padding:1.5rem;font-size:0.8rem;color:var(--text-light);border-top:1px solid var(--border);margin-top:2rem;}
 
-/* Staff row */
 .staff-row{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:0.8rem 1rem;background:var(--bg);border-radius:16px;margin-bottom:0.6rem;border:1px solid var(--border);flex-wrap:wrap;}
 .staff-row .staff-info{flex:1;min-width:180px;}
 .staff-row .staff-name{font-weight:700;color:var(--primary);font-size:0.95rem;}
@@ -162,7 +161,6 @@ td{padding:0.7rem 0.3rem;border-bottom:1px solid var(--border);vertical-align:mi
 .toggle-switch::after{content:'';position:absolute;top:3px;left:3px;width:20px;height:20px;background:white;border-radius:50%;transition:0.2s;}
 .toggle-switch.active::after{left:27px;}
 
-/* PDF language modal */
 .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.5);display:none;align-items:center;justify-content:center;z-index:1000;padding:1rem;}
 .modal-overlay.active{display:flex;}
 .modal-box{background:var(--card-bg);border-radius:24px;padding:1.8rem;max-width:400px;width:100%;border:1px solid var(--border);box-shadow:0 20px 60px rgba(0,0,0,0.2);}
@@ -198,7 +196,6 @@ td{padding:0.7rem 0.3rem;border-bottom:1px solid var(--border);vertical-align:mi
 
 <div class="page-container">
 
-<!-- ===================== HOME ===================== -->
 <div class="page active" id="homePage">
   <div class="hero">
     <div class="hero-content">
@@ -219,7 +216,6 @@ td{padding:0.7rem 0.3rem;border-bottom:1px solid var(--border);vertical-align:mi
       <i class="fas fa-tractor" id="heroPlaceholderIcon" style="font-size:6rem;color:var(--primary);opacity:0.5;"></i>
     </div>
   </div>
-
   <div class="feature-grid">
     <div class="feature-card"><i class="fas fa-file-invoice"></i><h3 data-lang="feat_bill">Bill Management</h3><p data-lang="feat_bill_desc">Create and share professional bills with PDF export.</p></div>
     <div class="feature-card"><i class="fas fa-camera"></i><h3 data-lang="feat_photo">Photo Attachments</h3><p data-lang="feat_photo_desc">Attach photos of work spots and conditions.</p></div>
@@ -228,7 +224,6 @@ td{padding:0.7rem 0.3rem;border-bottom:1px solid var(--border);vertical-align:mi
   </div>
 </div>
 
-<!-- ===================== SERVICES ===================== -->
 <div class="page" id="servicesPage">
   <h1><i class="fas fa-tools"></i> <span data-lang="services_title">Our Services</span></h1>
   <p class="text-small" style="margin-bottom:1.5rem;" data-lang="services_desc">Expert tractor maintenance and repair services.</p>
@@ -242,7 +237,6 @@ td{padding:0.7rem 0.3rem;border-bottom:1px solid var(--border);vertical-align:mi
   </div>
 </div>
 
-<!-- ===================== ABOUT ===================== -->
 <div class="page" id="aboutPage">
   <h1><i class="fas fa-info-circle"></i> <span data-lang="about_title">About Damor Tractore Service</span></h1>
   <div class="about-flex">
@@ -263,10 +257,8 @@ td{padding:0.7rem 0.3rem;border-bottom:1px solid var(--border);vertical-align:mi
   </div>
 </div>
 
-<!-- ===================== ADMIN ===================== -->
 <div class="page" id="adminPage">
 
-  <!-- LOGIN -->
   <div id="adminLoginScreen">
     <div class="login-box">
       <i class="fas fa-user-shield login-icon"></i>
@@ -278,7 +270,6 @@ td{padding:0.7rem 0.3rem;border-bottom:1px solid var(--border);vertical-align:mi
         <div class="login-tab" id="tabStaffLogin" onclick="switchLoginTab('staff')">Staff Login</div>
       </div>
 
-      <!-- Admin login -->
       <div id="adminLoginForm">
         <label>Username</label>
         <input type="text" id="adminUsernameInput" placeholder="Enter Username" value="admin" autocomplete="off">
@@ -287,12 +278,11 @@ td{padding:0.7rem 0.3rem;border-bottom:1px solid var(--border);vertical-align:mi
         <button class="btn mt-1" id="adminLoginBtn"><i class="fas fa-sign-in-alt"></i> Login</button>
       </div>
 
-      <!-- Staff login -->
       <div id="staffLoginForm" class="hidden">
         <label>Mobile Number</label>
-        <input type="text" id="staffMobileInput" placeholder="Enter 10-digit Mobile No" maxlength="10">
+        <input type="text" id="loginStaffMobile" placeholder="Enter 10-digit Mobile No" maxlength="10">
         <label>Password</label>
-        <input type="password" id="staffPasswordInput" placeholder="Enter Password">
+        <input type="password" id="loginStaffPassword" placeholder="Enter Password">
         <button class="btn mt-1" id="staffLoginBtn"><i class="fas fa-sign-in-alt"></i> Login</button>
       </div>
 
@@ -300,7 +290,6 @@ td{padding:0.7rem 0.3rem;border-bottom:1px solid var(--border);vertical-align:mi
     </div>
   </div>
 
-  <!-- DASHBOARD -->
   <div id="adminDashboard" class="hidden">
     <div class="flex-row mb-1">
       <h1 style="margin-bottom:0;">
@@ -320,20 +309,17 @@ td{padding:0.7rem 0.3rem;border-bottom:1px solid var(--border);vertical-align:mi
       <button class="tab-btn" data-tab="settings"><i class="fas fa-cog"></i> <span data-lang="tab_settings">Settings</span></button>
     </div>
 
-    <!-- FARMERS -->
     <div class="tab-panel" id="tabFarmers">
       <div class="card">
         <div class="flex-row">
           <h2><i class="fas fa-users"></i> <span data-lang="farmers_title">Farmers / Customers</span></h2>
           <button class="btn btn-small" id="addFarmerBtn"><i class="fas fa-user-plus"></i> Add Farmer</button>
         </div>
-
         <div class="summary-grid mt-2">
           <div class="summary-item"><i class="fas fa-users"></i><div class="info"><div class="value" id="totalFarmersCount">0</div><div class="label">Total Farmers</div></div></div>
           <div class="summary-item"><i class="fas fa-rupee-sign"></i><div class="info"><div class="value" id="totalRevenueFarmers">₹0</div><div class="label">Total Revenue</div></div></div>
           <div class="summary-item"><i class="fas fa-exclamation-triangle"></i><div class="info"><div class="value" id="totalDueFarmers">₹0</div><div class="label">Total Due</div></div></div>
         </div>
-
         <div style="overflow-x:auto;margin-top:1rem;">
           <table>
             <thead><tr><th>Farmer</th><th>Mobile</th><th>Tractor</th><th>Added By</th><th>Bills</th><th>Total</th><th>Due</th><th>Actions</th></tr></thead>
@@ -343,7 +329,6 @@ td{padding:0.7rem 0.3rem;border-bottom:1px solid var(--border);vertical-align:mi
       </div>
     </div>
 
-    <!-- BILLS -->
     <div class="tab-panel hidden" id="tabBills">
       <div class="grid-2">
         <div>
@@ -456,18 +441,17 @@ td{padding:0.7rem 0.3rem;border-bottom:1px solid var(--border);vertical-align:mi
       </div>
     </div>
 
-    <!-- MORE -->
     <div class="tab-panel hidden" id="tabMore">
       <div class="card">
         <h2><i class="fas fa-ellipsis-h"></i> More Tools</h2>
         <div class="more-grid">
-          <div class="more-card" data-tool="bookings"><i class="fas fa-calendar-check"></i><h4>Bookings</h4></div>
-          <div class="more-card" data-tool="jobs"><i class="fas fa-briefcase"></i><h4>Jobs</h4></div>
-          <div class="more-card" data-tool="calculator"><i class="fas fa-calculator"></i><h4>Calculator</h4></div>
-          <div class="more-card" data-tool="passbook"><i class="fas fa-book"></i><h4>Passbook</h4></div>
-          <div class="more-card" data-tool="drivers"><i class="fas fa-user-tie"></i><h4>Drivers</h4></div>
-          <div class="more-card" data-tool="tools"><i class="fas fa-tools"></i><h4>Tools</h4></div>
-          <div class="more-card" data-tool="vehicles"><i class="fas fa-tractor"></i><h4>Vehicles</h4></div>
+          <div class="more-card" data-tool="Bookings"><i class="fas fa-calendar-check"></i><h4>Bookings</h4></div>
+          <div class="more-card" data-tool="Jobs"><i class="fas fa-briefcase"></i><h4>Jobs</h4></div>
+          <div class="more-card" data-tool="Calculator"><i class="fas fa-calculator"></i><h4>Calculator</h4></div>
+          <div class="more-card" data-tool="Passbook"><i class="fas fa-book"></i><h4>Passbook</h4></div>
+          <div class="more-card" data-tool="Drivers"><i class="fas fa-user-tie"></i><h4>Drivers</h4></div>
+          <div class="more-card" data-tool="Tools"><i class="fas fa-tools"></i><h4>Tools</h4></div>
+          <div class="more-card" data-tool="Vehicles"><i class="fas fa-tractor"></i><h4>Vehicles</h4></div>
         </div>
       </div>
       <div class="card hidden" id="toolPanel">
@@ -476,11 +460,9 @@ td{padding:0.7rem 0.3rem;border-bottom:1px solid var(--border);vertical-align:mi
       </div>
     </div>
 
-    <!-- SETTINGS -->
     <div class="tab-panel hidden" id="tabSettings">
       <div class="grid-2">
         <div>
-          <!-- ADMIN SECURITY -->
           <div class="card" id="adminSecurityCard">
             <h2><i class="fas fa-key"></i> Admin Security</h2>
             <div class="mt-2"><label>Admin Username</label><input type="text" id="settingsUsername" value="admin"></div>
@@ -488,7 +470,6 @@ td{padding:0.7rem 0.3rem;border-bottom:1px solid var(--border);vertical-align:mi
             <button class="btn mt-1" id="saveSecurityBtn"><i class="fas fa-save"></i> Update Admin</button>
           </div>
 
-          <!-- STAFF MANAGEMENT -->
           <div class="card" id="staffManagementCard">
             <h2><i class="fas fa-users-cog"></i> Staff Management</h2>
             <p class="text-small mt-1">Add supervisors and drivers. They can log in with mobile + password.</p>
@@ -523,7 +504,6 @@ td{padding:0.7rem 0.3rem;border-bottom:1px solid var(--border);vertical-align:mi
             </div>
           </div>
 
-          <!-- MY PASSWORD (staff only) -->
           <div class="card hidden" id="myPasswordCard">
             <h2><i class="fas fa-lock"></i> My Password</h2>
             <div class="mt-2"><label>New Password</label><input type="password" id="myNewPassword" placeholder="New Password"></div>
@@ -533,7 +513,6 @@ td{padding:0.7rem 0.3rem;border-bottom:1px solid var(--border);vertical-align:mi
         </div>
 
         <div>
-          <!-- APPEARANCE -->
           <div class="card">
             <h2><i class="fas fa-palette"></i> Appearance</h2>
             <div class="mt-2">
@@ -547,10 +526,8 @@ td{padding:0.7rem 0.3rem;border-bottom:1px solid var(--border);vertical-align:mi
             <button class="btn mt-1" id="saveAppearanceBtn"><i class="fas fa-save"></i> Save</button>
           </div>
 
-          <!-- BRANDING -->
           <div class="card" id="brandingCard">
             <h2><i class="fas fa-image"></i> Branding (Logo & Slides)</h2>
-
             <div class="mt-2">
               <label>Website Logo</label>
               <div class="flex-row">
@@ -560,7 +537,6 @@ td{padding:0.7rem 0.3rem;border-bottom:1px solid var(--border);vertical-align:mi
               <button class="btn btn-small btn-outline mt-1" id="applyLogoBtn"><i class="fas fa-check"></i> Apply Logo</button>
               <button class="btn btn-small btn-danger mt-1" id="removeLogoBtn"><i class="fas fa-trash"></i> Remove</button>
             </div>
-
             <div class="mt-2" style="border-top:1px dashed var(--border); padding-top:1rem;">
               <label>Home Hero Slide Image(s)</label>
               <div class="flex-row">
@@ -581,7 +557,6 @@ td{padding:0.7rem 0.3rem;border-bottom:1px solid var(--border);vertical-align:mi
 
 <div class="site-footer"><span data-lang="footer_text">Damor Tractore Service · Tractor Book · All data stored in your browser</span></div>
 
-<!-- PDF Language Modal -->
 <div class="modal-overlay" id="pdfLangModal">
   <div class="modal-box">
     <h3><i class="fas fa-file-pdf"></i> Choose Bill Language</h3>
@@ -654,28 +629,7 @@ function applyLanguage(lang){
       el.innerHTML = translations[lang][key];
     }
   });
-  refreshDashboard();
-  if(activeCustomerId){
-    const customers = loadCustomers();
-    const c = customers.find(x=>x.id===activeCustomerId);
-    if(c){ renderWorkTableForCustomer(c.works||[]); renderPaymentTableForCustomer(c.payments||[]); updateSummaryForCustomer(c); }
-  }
-}
-
-// ================= LOGIN TABS =================
-function switchLoginTab(tab){
-  document.getElementById('tabAdminLogin').classList.remove('active');
-  document.getElementById('tabStaffLogin').classList.remove('active');
-  document.getElementById('adminLoginForm').classList.add('hidden');
-  document.getElementById('staffLoginForm').classList.add('hidden');
-  document.getElementById('loginError').style.display='none';
-  if(tab==='admin'){
-    document.getElementById('tabAdminLogin').classList.add('active');
-    document.getElementById('adminLoginForm').classList.remove('hidden');
-  } else {
-    document.getElementById('tabStaffLogin').classList.add('active');
-    document.getElementById('staffLoginForm').classList.remove('hidden');
-  }
+  if(typeof refreshDashboard === 'function') refreshDashboard();
 }
 
 // ================= STORAGE KEYS =================
@@ -714,13 +668,33 @@ function setLoggedIn(val, type, name, mobile, id){
     sessionStorage.setItem('damor_logged_in_id', id || '');
     loggedInUserType=type; loggedInUserName=name; loggedInUserMobile=mobile||''; loggedInUserId=id||'';
   } else {
-    sessionStorage.clear();
+    sessionStorage.removeItem('damor_logged_in');
+    sessionStorage.removeItem('damor_logged_in_type');
+    sessionStorage.removeItem('damor_logged_in_name');
+    sessionStorage.removeItem('damor_logged_in_mobile');
+    sessionStorage.removeItem('damor_logged_in_id');
     loggedInUserType=null; loggedInUserName=null; loggedInUserMobile=null; loggedInUserId=null;
   }
 }
 
-// ================= LOGIN =================
-document.getElementById('adminLoginBtn').addEventListener('click', ()=>{
+// ================= LOGIN TABS =================
+function switchLoginTab(tab){
+  document.getElementById('tabAdminLogin').classList.remove('active');
+  document.getElementById('tabStaffLogin').classList.remove('active');
+  document.getElementById('adminLoginForm').classList.add('hidden');
+  document.getElementById('staffLoginForm').classList.add('hidden');
+  document.getElementById('loginError').style.display='none';
+  if(tab==='admin'){
+    document.getElementById('tabAdminLogin').classList.add('active');
+    document.getElementById('adminLoginForm').classList.remove('hidden');
+  } else {
+    document.getElementById('tabStaffLogin').classList.add('active');
+    document.getElementById('staffLoginForm').classList.remove('hidden');
+  }
+}
+
+// ================= LOGIN HANDLERS =================
+function handleAdminLogin(){
   const user = document.getElementById('adminUsernameInput').value.trim();
   const pwd = document.getElementById('adminPasswordInput').value;
   const err = document.getElementById('loginError');
@@ -732,11 +706,11 @@ document.getElementById('adminLoginBtn').addEventListener('click', ()=>{
     err.style.display='block';
     err.innerText='Wrong Username or Password.';
   }
-});
+}
 
-document.getElementById('staffLoginBtn').addEventListener('click', ()=>{
-  const mobile = document.getElementById('staffMobileInput').value.trim();
-  const pwd = document.getElementById('staffPasswordInput').value;
+function handleStaffLogin(){
+  const mobile = document.getElementById('loginStaffMobile').value.trim();
+  const pwd = document.getElementById('loginStaffPassword').value;
   const err = document.getElementById('loginError');
   if(mobile.length!==10 || isNaN(mobile)){
     err.style.display='block'; err.innerText='Enter a valid 10-digit mobile number.'; return;
@@ -755,16 +729,7 @@ document.getElementById('staffLoginBtn').addEventListener('click', ()=>{
   setLoggedIn(true, found.role, found.name, found.mobile, found.id);
   err.style.display='none';
   updateAdminUI();
-});
-
-document.getElementById('staffPasswordInput').addEventListener('keypress', e=>{ if(e.key==='Enter') document.getElementById('staffLoginBtn').click(); });
-
-document.getElementById('adminLogoutBtn').addEventListener('click', ()=>{
-  setLoggedIn(false);
-  updateAdminUI();
-});
-
-document.getElementById('goToSettingsBtn').addEventListener('click', ()=> switchDashTab('settings'));
+}
 
 // ================= UPDATE UI =================
 function updateAdminUI(){
@@ -777,7 +742,6 @@ function updateAdminUI(){
     dashboard.classList.remove('hidden');
     document.getElementById('loggedInUserName').innerText = loggedInUserName || 'Admin';
 
-    // Hide/Show settings sections based on role
     document.getElementById('adminSecurityCard').classList.toggle('hidden', !isAdmin);
     document.getElementById('staffManagementCard').classList.toggle('hidden', !isAdmin);
     document.getElementById('brandingCard').classList.toggle('hidden', !isAdmin);
@@ -800,7 +764,8 @@ function switchDashTab(tab){
   document.querySelectorAll('.dash-tabs .tab-btn').forEach(b=>{ if(b.dataset.tab===tab) b.classList.add('active'); });
   const panel = document.getElementById('tab'+tab.charAt(0).toUpperCase()+tab.slice(1));
   if(panel) panel.classList.remove('hidden');
-  document.getElementById('toolPanel').classList.add('hidden');
+  const toolPanel = document.getElementById('toolPanel');
+  if(toolPanel) toolPanel.classList.add('hidden');
   if(tab==='settings'){
     document.getElementById('settingsLanguage').value = localStorage.getItem('damor_lang') || 'en';
     document.getElementById('settingsTheme').value = localStorage.getItem('damor_theme') || 'default';
@@ -809,245 +774,6 @@ function switchDashTab(tab){
     renderStaffList();
     renderSlideList();
     loadLogoPreview();
-  }
-}
-document.querySelectorAll('.dash-tabs .tab-btn').forEach(btn=> btn.addEventListener('click', ()=> switchDashTab(btn.dataset.tab)));
-
-// ================= SETTINGS: APPEARANCE =================
-document.getElementById('saveAppearanceBtn').addEventListener('click', ()=>{
-  const lang = document.getElementById('settingsLanguage').value;
-  const theme = document.getElementById('settingsTheme').value;
-  localStorage.setItem('damor_lang', lang);
-  localStorage.setItem('damor_theme', theme);
-  applyTheme(theme); applyLanguage(lang);
-  alert('Settings saved!');
-});
-
-function applyTheme(theme){
-  document.body.className='';
-  if(theme==='blue') document.body.classList.add('theme-blue');
-  else if(theme==='dark') document.body.classList.add('theme-dark');
-}
-
-// ================= SETTINGS: ADMIN SECURITY =================
-document.getElementById('saveSecurityBtn').addEventListener('click', ()=>{
-  if(loggedInUserType!=='admin'){ alert('Only admin can do this.'); return; }
-  const newUser = document.getElementById('settingsUsername').value.trim();
-  const newPass = document.getElementById('settingsPassword').value;
-  if(!newUser){ alert('Username cannot be empty'); return; }
-  localStorage.setItem(ADMIN_USER_KEY, newUser);
-  if(newPass){ localStorage.setItem(ADMIN_PASSWORD_KEY, newPass); }
-  document.getElementById('settingsPassword').value='';
-  if(newUser) { loggedInUserName = newUser; sessionStorage.setItem('damor_logged_in_name', newUser); }
-  alert('Admin credentials updated!');
-});
-
-// ================= SETTINGS: MY PASSWORD (STAFF) =================
-document.getElementById('saveMyPasswordBtn').addEventListener('click', ()=>{
-  if(loggedInUserType==='admin') return;
-  const p1 = document.getElementById('myNewPassword').value;
-  const p2 = document.getElementById('myConfirmPassword').value;
-  if(!p1){ alert('Enter new password'); return; }
-  if(p1!==p2){ alert('Passwords do not match'); return; }
-  const staff = loadStaff();
-  const me = staff.find(s=>s.id===loggedInUserId);
-  if(me){ me.password = p1; saveStaff(staff); alert('Password updated!'); }
-  else alert('Staff not found');
-  document.getElementById('myNewPassword').value='';
-  document.getElementById('myConfirmPassword').value='';
-});
-
-// ================= STAFF MANAGEMENT =================
-document.getElementById('addStaffBtn').addEventListener('click', ()=>{
-  if(loggedInUserType!=='admin'){ alert('Only admin can do this.'); return; }
-  const role = document.getElementById('staffRoleInput').value;
-  const name = document.getElementById('staffNameInput').value.trim();
-  const mobile = document.getElementById('staffMobileInputAdd').value.trim();
-  const password = document.getElementById('staffPasswordInputAdd').value.trim();
-  const editId = document.getElementById('staffEditId').value;
-
-  if(!name){ alert('Enter staff name'); return; }
-  if(mobile.length!==10 || isNaN(mobile)){ alert('Enter valid 10-digit mobile'); return; }
-  if(!password){ alert('Enter password'); return; }
-
-  const staff = loadStaff();
-  const existing = staff.find(s=>s.mobile===mobile && s.id !== editId);
-  if(existing){ alert('This mobile is already registered'); return; }
-
-  if(editId){
-    const idx = staff.findIndex(s=>s.id===editId);
-    if(idx>=0){
-      staff[idx].role = role;
-      staff[idx].name = name;
-      staff[idx].mobile = mobile;
-      staff[idx].password = password;
-    }
-  } else {
-    staff.push({ id: Date.now()+''+Math.random().toString(36).substr(2,6), role, name, mobile, password, power:true });
-  }
-  saveStaff(staff);
-  clearStaffForm();
-  renderStaffList();
-  alert('Staff saved!');
-});
-
-document.getElementById('clearStaffFormBtn').addEventListener('click', clearStaffForm);
-
-function clearStaffForm(){
-  document.getElementById('staffRoleInput').value='supervisor';
-  document.getElementById('staffNameInput').value='';
-  document.getElementById('staffMobileInputAdd').value='';
-  document.getElementById('staffPasswordInputAdd').value='';
-  document.getElementById('staffEditId').value='';
-}
-
-function renderStaffList(){
-  const container = document.getElementById('staffListContainer');
-  if(!container) return;
-  const staff = loadStaff();
-  container.innerHTML = '';
-  if(staff.length===0){
-    container.innerHTML = '<p class="text-small">No staff added yet.</p>';
-    return;
-  }
-  staff.forEach(s=>{
-    const row = document.createElement('div');
-    row.className='staff-row';
-    row.innerHTML = `
-      <div class="staff-info">
-        <div class="staff-name">${s.name} <span class="badge" style="font-size:0.65rem;">${s.role}</span></div>
-        <div class="staff-meta"><i class="fas fa-mobile-alt"></i> ${s.mobile}</div>
-      </div>
-      <div class="staff-actions">
-        <button class="toggle-switch ${s.power?'active':''}" data-id="${s.id}" title="Power ON/OFF"></button>
-        <button class="btn btn-small btn-outline" data-edit="${s.id}"><i class="fas fa-edit"></i></button>
-        <button class="btn btn-small btn-danger" data-del="${s.id}"><i class="fas fa-trash"></i></button>
-      </div>
-    `;
-    // Toggle
-    row.querySelector('.toggle-switch').addEventListener('click', ()=>{
-      const arr = loadStaff();
-      const item = arr.find(x=>x.id===s.id);
-      if(item){ item.power = !item.power; saveStaff(arr); renderStaffList(); }
-    });
-    // Edit
-    row.querySelector('[data-edit]').addEventListener('click', ()=>{
-      document.getElementById('staffRoleInput').value = s.role;
-      document.getElementById('staffNameInput').value = s.name;
-      document.getElementById('staffMobileInputAdd').value = s.mobile;
-      document.getElementById('staffPasswordInputAdd').value = s.password;
-      document.getElementById('staffEditId').value = s.id;
-      window.scrollTo({top:0,behavior:'smooth'});
-    });
-    // Delete
-    row.querySelector('[data-del]').addEventListener('click', ()=>{
-      if(!confirm('Delete this staff?')) return;
-      const arr = loadStaff().filter(x=>x.id!==s.id);
-      saveStaff(arr);
-      renderStaffList();
-    });
-    container.appendChild(row);
-  });
-}
-
-// ================= BRANDING: LOGO =================
-function applyLogo(){
-  const logoData = localStorage.getItem(LOGO_KEY);
-  const navImg = document.getElementById('navLogoImg');
-  const navIcon = document.getElementById('navLogoIcon');
-  if(logoData){
-    navImg.src = logoData; navImg.style.display='block';
-    navIcon.style.display='none';
-  } else {
-    navImg.style.display='none';
-    navIcon.style.display='inline-block';
-  }
-}
-
-function loadLogoPreview(){
-  const logoData = localStorage.getItem(LOGO_KEY);
-  const prev = document.getElementById('logoPreview');
-  if(logoData){ prev.src = logoData; prev.style.display='block'; }
-  else prev.style.display='none';
-}
-
-document.getElementById('applyLogoBtn').addEventListener('click', ()=>{
-  const fileInput = document.getElementById('logoUpload');
-  if(!fileInput.files || !fileInput.files[0]){ alert('Choose a logo file'); return; }
-  const reader = new FileReader();
-  reader.onload = (e)=>{
-    localStorage.setItem(LOGO_KEY, e.target.result);
-    applyLogo(); loadLogoPreview();
-    alert('Logo applied!');
-  };
-  reader.readAsDataURL(fileInput.files[0]);
-});
-
-document.getElementById('removeLogoBtn').addEventListener('click', ()=>{
-  localStorage.removeItem(LOGO_KEY);
-  applyLogo(); loadLogoPreview();
-  alert('Logo removed');
-});
-
-// ================= BRANDING: SLIDES =================
-let heroSlideIndex = 0;
-let heroSlideTimer = null;
-
-function loadSlides(){ try { return JSON.parse(localStorage.getItem(SLIDES_KEY)) || []; } catch(e){ return []; } }
-function saveSlides(arr){ localStorage.setItem(SLIDES_KEY, JSON.stringify(arr)); }
-
-function renderSlideList(){
-  const container = document.getElementById('slideListContainer');
-  if(!container) return;
-  const slides = loadSlides();
-  container.innerHTML='';
-  if(slides.length===0){ container.innerHTML='<p class="text-small">No slides added.</p>'; return; }
-  slides.forEach((s, idx)=>{
-    const div = document.createElement('div');
-    div.style.cssText='position:relative;display:inline-block;';
-    div.innerHTML = `<img src="${s}" style="width:70px;height:70px;object-fit:cover;border-radius:10px;border:1px solid var(--border);">
-      <button data-idx="${idx}" style="position:absolute;top:-6px;right:-6px;background:var(--danger);color:white;border:none;border-radius:50%;width:22px;height:22px;cursor:pointer;font-size:0.7rem;"><i class="fas fa-times"></i></button>`;
-    div.querySelector('button').addEventListener('click', ()=>{
-      const arr = loadSlides(); arr.splice(idx,1); saveSlides(arr);
-      renderSlideList(); startHeroSlideshow();
-    });
-    container.appendChild(div);
-  });
-}
-
-document.getElementById('addSlideBtn').addEventListener('click', ()=>{
-  const fileInput = document.getElementById('slideUpload');
-  if(!fileInput.files || !fileInput.files[0]){ alert('Choose an image'); return; }
-  const reader = new FileReader();
-  reader.onload = (e)=>{
-    const arr = loadSlides();
-    arr.push(e.target.result);
-    saveSlides(arr);
-    renderSlideList();
-    startHeroSlideshow();
-    fileInput.value='';
-    alert('Slide added!');
-  };
-  reader.readAsDataURL(fileInput.files[0]);
-});
-
-function startHeroSlideshow(){
-  const slides = loadSlides();
-  const img = document.getElementById('heroSlideImg');
-  const placeholder = document.getElementById('heroPlaceholderIcon');
-  if(heroSlideTimer){ clearInterval(heroSlideTimer); heroSlideTimer=null; }
-  if(slides.length===0){
-    img.style.display='none'; placeholder.style.display='block'; return;
-  }
-  placeholder.style.display='none';
-  img.style.display='block';
-  heroSlideIndex = 0;
-  img.src = slides[0];
-  if(slides.length>1){
-    heroSlideTimer = setInterval(()=>{
-      heroSlideIndex = (heroSlideIndex+1) % slides.length;
-      img.src = slides[heroSlideIndex];
-    }, 3000);
   }
 }
 
@@ -1063,16 +789,13 @@ function loadAllCustomers(){
 }
 function saveAllCustomers(arr){ localStorage.setItem(CUSTOMERS_KEY, JSON.stringify(arr)); }
 
-// Filter by logged-in user — DATA ISOLATION
 function loadCustomers(){
   const all = loadAllCustomers();
   if(loggedInUserType==='admin') return all;
-  // staff — only their own customers
   return all.filter(c => c.createdByMobile === loggedInUserMobile);
 }
 
 function saveCustomers(filteredList){
-  // Merge: keep all others, replace only this user's customers
   if(loggedInUserType==='admin'){
     saveAllCustomers(filteredList);
     return;
@@ -1088,17 +811,14 @@ function formatCurrency(num){ return '₹'+Number(num).toFixed(0); }
 // ================= REFRESH DASHBOARD =================
 function refreshDashboard(){
   const customers = loadCustomers();
-  const totalCustomers = customers.length;
   let totalRevenue=0, totalDue=0;
-
   customers.forEach(c=>{
     const total = (c.works||[]).reduce((s,w)=>s+(Number(w.price)||0),0);
     const paid = (c.payments||[]).reduce((s,p)=>s+(Number(p.amount)||0),0);
     totalRevenue += total;
     totalDue += Math.max(0, total-paid);
   });
-
-  document.getElementById('totalFarmersCount').innerText = totalCustomers;
+  document.getElementById('totalFarmersCount').innerText = customers.length;
   document.getElementById('totalRevenueFarmers').innerText = formatCurrency(totalRevenue);
   document.getElementById('totalDueFarmers').innerText = formatCurrency(totalDue);
 
@@ -1206,7 +926,6 @@ function renderPaymentTableForCustomer(payments){
   });
 }
 
-// ================= SUMMARY =================
 function calculateTotalsForCustomer(c){
   const total = (c.works||[]).reduce((s,w)=>s+(Number(w.price)||0),0);
   const paid = (c.payments||[]).reduce((s,p)=>s+(Number(p.amount)||0),0);
@@ -1232,7 +951,6 @@ function updateSummaryForCustomer(c){
   }
 }
 
-// ================= SYNC =================
 function syncActiveCustomerFromInputs(){
   if(!activeCustomerId) return;
   const customers = loadCustomers();
@@ -1248,241 +966,128 @@ function syncActiveCustomerFromInputs(){
   updateSummaryForCustomer(c);
 }
 
-// ================= HOURLY RATE =================
-document.getElementById('setHourlyRateBtn').addEventListener('click', ()=>{
-  const rate = parseFloat(document.getElementById('hourlyRateInput').value)||0;
-  if(rate<=0){ alert('Enter valid rate'); return; }
-  setHourlyRate(rate);
-  document.getElementById('displayHourlyRate').innerText = formatCurrency(rate);
-  if(activeCustomerId){
-    const customers = loadCustomers();
-    const c = customers.find(x=>x.id===activeCustomerId);
-    if(c){ c.hourlyRate = rate; saveCustomers(customers); }
+// ================= STAFF RENDER =================
+function renderStaffList(){
+  const container = document.getElementById('staffListContainer');
+  if(!container) return;
+  const staff = loadStaff();
+  container.innerHTML = '';
+  if(staff.length===0){
+    container.innerHTML = '<p class="text-small">No staff added yet.</p>';
+    return;
   }
-  alert('Hourly rate set!');
-});
-
-document.getElementById('workType').addEventListener('change', e=>{
-  const type = e.target.value;
-  const priceInput = document.getElementById('workPrice');
-  const hoursInput = document.getElementById('workHours');
-  const priceLabel = document.getElementById('priceLabel');
-  const calcPreview = document.getElementById('calcPreview');
-  if(type==='hourly'){
-    priceLabel.innerText = 'Rate (₹/hr)';
-    priceInput.value = getHourlyRate();
-    hoursInput.disabled = false;
-    hoursInput.style.background = 'var(--card-bg)';
-    calcPreview.innerText = '';
-  } else {
-    priceLabel.innerText = 'Price (₹)';
-    priceInput.value = '0';
-    hoursInput.disabled = true;
-    hoursInput.style.background = 'var(--bg)';
-    hoursInput.value = '0';
-    calcPreview.innerText = '';
-  }
-});
-
-function updateHourlyPreview(){
-  const type = document.getElementById('workType').value;
-  const rate = parseFloat(document.getElementById('workPrice').value)||0;
-  const hours = parseFloat(document.getElementById('workHours').value)||0;
-  const calcPreview = document.getElementById('calcPreview');
-  if(type==='hourly' && hours>0 && rate>0){
-    calcPreview.innerText = `= ${hours} hrs × ${formatCurrency(rate)} = ${formatCurrency(hours*rate)}`;
-  } else calcPreview.innerText = '';
-}
-document.getElementById('workPrice').addEventListener('input', updateHourlyPreview);
-document.getElementById('workHours').addEventListener('input', updateHourlyPreview);
-
-// ================= ADD WORK =================
-document.getElementById('addWorkBtn').addEventListener('click', ()=>{
-  if(!activeCustomerId){ alert('Select a customer first.'); return; }
-  const desc = document.getElementById('workDesc').value.trim();
-  const type = document.getElementById('workType').value;
-  const priceInput = parseFloat(document.getElementById('workPrice').value)||0;
-  const hours = parseFloat(document.getElementById('workHours').value)||0;
-  const photoInput = document.getElementById('workPhoto');
-  if(!desc){ alert('Enter work description'); return; }
-  let finalPrice = 0;
-  if(type==='hourly'){
-    if(hours<=0){ alert('Enter hours worked'); return; }
-    if(priceInput<=0){ alert('Set hourly rate'); return; }
-    finalPrice = hours * priceInput;
-  } else {
-    if(priceInput<=0){ alert('Enter price'); return; }
-    finalPrice = priceInput;
-  }
-  const newWork = { id:generateId(), desc, type, hours: type==='hourly'?hours:0, rate: type==='hourly'?priceInput:0, price:finalPrice, photo:null };
-  const customers = loadCustomers();
-  const c = customers.find(x=>x.id===activeCustomerId);
-  if(!c) return;
-  if(!c.works) c.works = [];
-  if(photoInput.files && photoInput.files[0]){
-    const reader = new FileReader();
-    reader.onload = (e)=>{
-      newWork.photo = e.target.result;
-      c.works.push(newWork);
-      saveCustomers(customers);
-      renderWorkTableForCustomer(c.works);
-      updateSummaryForCustomer(c);
-      refreshDashboard();
-      clearWorkInputs();
-    };
-    reader.readAsDataURL(photoInput.files[0]);
-  } else {
-    c.works.push(newWork);
-    saveCustomers(customers);
-    renderWorkTableForCustomer(c.works);
-    updateSummaryForCustomer(c);
-    refreshDashboard();
-    clearWorkInputs();
-  }
-});
-
-function clearWorkInputs(){
-  document.getElementById('workDesc').value='';
-  document.getElementById('workType').value='fixed';
-  document.getElementById('workPrice').value='0';
-  document.getElementById('workHours').value='0';
-  document.getElementById('workHours').disabled=true;
-  document.getElementById('workHours').style.background='var(--bg)';
-  document.getElementById('priceLabel').innerText='Price (₹)';
-  document.getElementById('workPhoto').value='';
-  document.getElementById('calcPreview').innerText='';
+  staff.forEach(s=>{
+    const row = document.createElement('div');
+    row.className='staff-row';
+    row.innerHTML = `
+      <div class="staff-info">
+        <div class="staff-name">${s.name} <span class="badge" style="font-size:0.65rem;">${s.role}</span></div>
+        <div class="staff-meta"><i class="fas fa-mobile-alt"></i> ${s.mobile}</div>
+      </div>
+      <div class="staff-actions">
+        <button class="toggle-switch ${s.power?'active':''}" data-id="${s.id}" title="Power ON/OFF"></button>
+        <button class="btn btn-small btn-outline" data-edit="${s.id}"><i class="fas fa-edit"></i></button>
+        <button class="btn btn-small btn-danger" data-del="${s.id}"><i class="fas fa-trash"></i></button>
+      </div>
+    `;
+    row.querySelector('.toggle-switch').addEventListener('click', ()=>{
+      const arr = loadStaff();
+      const item = arr.find(x=>x.id===s.id);
+      if(item){ item.power = !item.power; saveStaff(arr); renderStaffList(); }
+    });
+    row.querySelector('[data-edit]').addEventListener('click', ()=>{
+      document.getElementById('staffRoleInput').value = s.role;
+      document.getElementById('staffNameInput').value = s.name;
+      document.getElementById('staffMobileInputAdd').value = s.mobile;
+      document.getElementById('staffPasswordInputAdd').value = s.password;
+      document.getElementById('staffEditId').value = s.id;
+    });
+    row.querySelector('[data-del]').addEventListener('click', ()=>{
+      if(!confirm('Delete this staff?')) return;
+      const arr = loadStaff().filter(x=>x.id!==s.id);
+      saveStaff(arr);
+      renderStaffList();
+    });
+    container.appendChild(row);
+  });
 }
 
-// ================= ADD PAYMENT =================
-document.getElementById('addPaymentBtn').addEventListener('click', ()=>{
-  if(!activeCustomerId){ alert('Select a customer first.'); return; }
-  const amount = parseFloat(document.getElementById('paymentAmount').value)||0;
-  const date = document.getElementById('paymentDate').value || new Date().toISOString().split('T')[0];
-  const note = document.getElementById('paymentNote').value.trim() || 'Payment';
-  if(amount<=0){ alert('Enter amount'); return; }
-  const customers = loadCustomers();
-  const c = customers.find(x=>x.id===activeCustomerId);
-  if(!c) return;
-  if(!c.payments) c.payments = [];
-  c.payments.push({ id:generateId(), amount, date, note });
-  if(note.toLowerCase().includes('remind') || note.toLowerCase().includes('due')) c.reminder = note;
-  saveCustomers(customers);
-  renderPaymentTableForCustomer(c.payments);
-  updateSummaryForCustomer(c);
-  refreshDashboard();
-  document.getElementById('paymentAmount').value='0';
-  document.getElementById('paymentNote').value='';
-});
+function clearStaffForm(){
+  document.getElementById('staffRoleInput').value='supervisor';
+  document.getElementById('staffNameInput').value='';
+  document.getElementById('staffMobileInputAdd').value='';
+  document.getElementById('staffPasswordInputAdd').value='';
+  document.getElementById('staffEditId').value='';
+}
 
-// ================= SAVE / NEW CUSTOMER =================
-document.getElementById('saveCustomerBtn').addEventListener('click', ()=>{
-  if(activeCustomerId){
-    syncActiveCustomerFromInputs();
-    alert('Customer data saved.');
+// ================= LOGO =================
+function applyLogo(){
+  const logoData = localStorage.getItem(LOGO_KEY);
+  const navImg = document.getElementById('navLogoImg');
+  const navIcon = document.getElementById('navLogoIcon');
+  if(logoData){
+    navImg.src = logoData; navImg.style.display='block';
+    navIcon.style.display='none';
   } else {
-    const customers = loadCustomers();
-    const newId = generateId();
-    const newCustomer = {
-      id:newId,
-      customerName: document.getElementById('customerName').value.trim() || 'Unnamed',
-      customerMobile: document.getElementById('customerMobile').value.trim(),
-      billNo: document.getElementById('billNo').value.trim() || 'TS-'+(customers.length+101),
-      billDate: document.getElementById('billDate').value || new Date().toISOString().split('T')[0],
-      tractorModel: document.getElementById('tractorModel').value.trim(),
-      hourlyRate: getHourlyRate(),
-      works: [], payments: [], reminder:'',
-      createdByMobile: loggedInUserMobile || 'admin',
-      createdByName: loggedInUserName || 'Admin',
-      createdByRole: loggedInUserType || 'admin'
-    };
-    customers.push(newCustomer);
-    saveCustomers(customers);
-    activeCustomerId = newId;
-    loadCustomerIntoEditor(newId);
-    refreshDashboard();
-    alert('New customer created.');
+    navImg.style.display='none';
+    navIcon.style.display='inline-block';
   }
-});
+}
 
-document.getElementById('newCustomerBtn').addEventListener('click', ()=>{
-  activeCustomerId = null;
-  const customers = loadCustomers();
-  const nextNum = customers.length + 101;
-  document.getElementById('customerName').value='';
-  document.getElementById('customerMobile').value='';
-  document.getElementById('billNo').value='TS-'+nextNum;
-  document.getElementById('billDate').value=new Date().toISOString().split('T')[0];
-  document.getElementById('tractorModel').value='';
-  document.getElementById('adminBillNo').value='TS-'+nextNum;
-  const rate = getHourlyRate();
-  document.getElementById('displayHourlyRate').innerText = formatCurrency(rate);
-  document.getElementById('hourlyRateInput').value = rate;
-  renderWorkTableForCustomer([]);
-  renderPaymentTableForCustomer([]);
-  document.getElementById('displayTotal').innerText='₹0';
-  document.getElementById('displayPaid').innerText='₹0';
-  document.getElementById('displayDue').innerText='₹0';
-  document.getElementById('reminderText').innerHTML='<i class="fas fa-bell"></i> No active reminders';
-  document.getElementById('reminderBadge').innerHTML='<i class="fas fa-clock"></i> Reminder: none';
-  clearWorkInputs();
-});
+function loadLogoPreview(){
+  const logoData = localStorage.getItem(LOGO_KEY);
+  const prev = document.getElementById('logoPreview');
+  if(logoData){ prev.src = logoData; prev.style.display='block'; }
+  else prev.style.display='none';
+}
 
-document.getElementById('addFarmerBtn').addEventListener('click', ()=>{
-  switchDashTab('bills');
-  document.getElementById('newCustomerBtn').click();
-});
+// ================= SLIDES =================
+let heroSlideIndex = 0;
+let heroSlideTimer = null;
 
-// ================= DELETE / CLEAR =================
-document.getElementById('deleteCustomerBtn').addEventListener('click', ()=>{
-  if(!activeCustomerId){ alert('No customer selected.'); return; }
-  if(!confirm('Delete this customer and all data?')) return;
-  let customers = loadCustomers();
-  customers = customers.filter(x=>x.id!==activeCustomerId);
-  saveCustomers(customers);
-  activeCustomerId = null;
-  refreshDashboard();
-  document.getElementById('newCustomerBtn').click();
-});
+function loadSlides(){ try { return JSON.parse(localStorage.getItem(SLIDES_KEY)) || []; } catch(e){ return []; } }
+function saveSlides(arr){ localStorage.setItem(SLIDES_KEY, JSON.stringify(arr)); }
 
-document.getElementById('clearWorkLogBtn').addEventListener('click', ()=>{
-  if(!activeCustomerId) return;
-  if(!confirm('Delete all work entries?')) return;
-  const customers = loadCustomers();
-  const c = customers.find(x=>x.id===activeCustomerId);
-  if(c){ c.works=[]; saveCustomers(customers); renderWorkTableForCustomer([]); updateSummaryForCustomer(c); refreshDashboard(); }
-});
+function renderSlideList(){
+  const container = document.getElementById('slideListContainer');
+  if(!container) return;
+  const slides = loadSlides();
+  container.innerHTML='';
+  if(slides.length===0){ container.innerHTML='<p class="text-small">No slides added.</p>'; return; }
+  slides.forEach((s, idx)=>{
+    const div = document.createElement('div');
+    div.style.cssText='position:relative;display:inline-block;';
+    div.innerHTML = `<img src="${s}" style="width:70px;height:70px;object-fit:cover;border-radius:10px;border:1px solid var(--border);">
+      <button data-idx="${idx}" style="position:absolute;top:-6px;right:-6px;background:var(--danger);color:white;border:none;border-radius:50%;width:22px;height:22px;cursor:pointer;font-size:0.7rem;"><i class="fas fa-times"></i></button>`;
+    div.querySelector('button').addEventListener('click', ()=>{
+      const arr = loadSlides(); arr.splice(idx,1); saveSlides(arr);
+      renderSlideList(); startHeroSlideshow();
+    });
+    container.appendChild(div);
+  });
+}
 
-document.getElementById('clearPaymentsBtn').addEventListener('click', ()=>{
-  if(!activeCustomerId) return;
-  if(!confirm('Delete all payment records?')) return;
-  const customers = loadCustomers();
-  const c = customers.find(x=>x.id===activeCustomerId);
-  if(c){ c.payments=[]; saveCustomers(customers); renderPaymentTableForCustomer([]); updateSummaryForCustomer(c); refreshDashboard(); }
-});
+function startHeroSlideshow(){
+  const slides = loadSlides();
+  const img = document.getElementById('heroSlideImg');
+  const placeholder = document.getElementById('heroPlaceholderIcon');
+  if(heroSlideTimer){ clearInterval(heroSlideTimer); heroSlideTimer=null; }
+  if(slides.length===0){
+    img.style.display='none'; placeholder.style.display='block'; return;
+  }
+  placeholder.style.display='none';
+  img.style.display='block';
+  heroSlideIndex = 0;
+  img.src = slides[0];
+  if(slides.length>1){
+    heroSlideTimer = setInterval(()=>{
+      heroSlideIndex = (heroSlideIndex+1) % slides.length;
+      img.src = slides[heroSlideIndex];
+    }, 3000);
+  }
+}
 
-document.getElementById('setBillNoBtn').addEventListener('click', ()=>{
-  if(!activeCustomerId) return;
-  const newBill = document.getElementById('adminBillNo').value.trim();
-  if(!newBill) return;
-  const customers = loadCustomers();
-  const c = customers.find(x=>x.id===activeCustomerId);
-  if(c){ c.billNo = newBill; saveCustomers(customers); document.getElementById('billNo').value = newBill; refreshDashboard(); }
-});
-
-// ================= PDF SHARE =================
-document.getElementById('sharePdfBtn').addEventListener('click', ()=>{
-  if(!activeCustomerId){ alert('Select a customer first.'); return; }
-  syncActiveCustomerFromInputs();
-  document.getElementById('pdfLangModal').classList.add('active');
-});
-
-document.getElementById('closePdfModalBtn').addEventListener('click', ()=>{
-  document.getElementById('pdfLangModal').classList.remove('active');
-});
-
-document.getElementById('pdfLangEnBtn').addEventListener('click', ()=>{ generatePdf('en'); document.getElementById('pdfLangModal').classList.remove('active'); });
-document.getElementById('pdfLangHiBtn').addEventListener('click', ()=>{ generatePdf('hi'); document.getElementById('pdfLangModal').classList.remove('active'); });
-
+// ================= PDF =================
 function generatePdf(lang){
   const customers = loadCustomers();
   const c = customers.find(x=>x.id===activeCustomerId);
@@ -1567,27 +1172,440 @@ function generatePdf(lang){
   html2pdf().set(opt).from(element).save();
 }
 
-// ================= MORE TOOLS =================
-document.querySelectorAll('.more-card').forEach(card=>{
-  card.addEventListener('click', ()=>{
-    const toolName = card.dataset.tool;
-    document.getElementById('toolPanel').classList.remove('hidden');
-    document.getElementById('toolPanelTitle').innerHTML = `<i class="fas fa-toolbox"></i> ${toolName}`;
-    document.getElementById('toolPanelContent').innerHTML = `<p class="text-small">The ${toolName} module is coming soon!</p>`;
-  });
-});
-document.getElementById('closeToolBtn').addEventListener('click', ()=>{
-  document.getElementById('toolPanel').classList.add('hidden');
-});
-
-// ================= INIT =================
+// ================= EVENT BINDINGS (after DOM ready) =================
 document.addEventListener('DOMContentLoaded', ()=>{
+
+  // Theme & Language
   applyTheme(localStorage.getItem('damor_theme')||'default');
   applyLanguage(currentLang);
   applyLogo();
   startHeroSlideshow();
+
+  // Login
+  document.getElementById('adminLoginBtn').addEventListener('click', handleAdminLogin);
+  document.getElementById('staffLoginBtn').addEventListener('click', handleStaffLogin);
+  document.getElementById('loginStaffPassword').addEventListener('keypress', e=>{ if(e.key==='Enter') handleStaffLogin(); });
+  document.getElementById('adminPasswordInput').addEventListener('keypress', e=>{ if(e.key==='Enter') handleAdminLogin(); });
+
+  // Logout
+  document.getElementById('adminLogoutBtn').addEventListener('click', ()=>{
+    setLoggedIn(false);
+    updateAdminUI();
+    document.getElementById('adminUsernameInput').value='admin';
+    document.getElementById('adminPasswordInput').value='damor123';
+    document.getElementById('loginStaffMobile').value='';
+    document.getElementById('loginStaffPassword').value='';
+  });
+
+  document.getElementById('goToSettingsBtn').addEventListener('click', ()=> switchDashTab('settings'));
+
+  // Dash tabs
+  document.querySelectorAll('.dash-tabs .tab-btn').forEach(btn=> btn.addEventListener('click', ()=> switchDashTab(btn.dataset.tab)));
+
+  // Appearance
+  document.getElementById('saveAppearanceBtn').addEventListener('click', ()=>{
+    const lang = document.getElementById('settingsLanguage').value;
+    const theme = document.getElementById('settingsTheme').value;
+    localStorage.setItem('damor_lang', lang);
+    localStorage.setItem('damor_theme', theme);
+    applyTheme(theme); applyLanguage(lang);
+    alert('Settings saved!');
+  });
+
+  // Admin security
+  document.getElementById('saveSecurityBtn').addEventListener('click', ()=>{
+    if(loggedInUserType!=='admin'){ alert('Only admin can do this.'); return; }
+    const newUser = document.getElementById('settingsUsername').value.trim();
+    const newPass = document.getElementById('settingsPassword').value;
+    if(!newUser){ alert('Username cannot be empty'); return; }
+    localStorage.setItem(ADMIN_USER_KEY, newUser);
+    if(newPass){ localStorage.setItem(ADMIN_PASSWORD_KEY, newPass); }
+    document.getElementById('settingsPassword').value='';
+    loggedInUserName = newUser;
+    sessionStorage.setItem('damor_logged_in_name', newUser);
+    document.getElementById('loggedInUserName').innerText = newUser;
+    alert('Admin credentials updated!');
+  });
+
+  // My password (staff)
+  document.getElementById('saveMyPasswordBtn').addEventListener('click', ()=>{
+    if(loggedInUserType==='admin') return;
+    const p1 = document.getElementById('myNewPassword').value;
+    const p2 = document.getElementById('myConfirmPassword').value;
+    if(!p1){ alert('Enter new password'); return; }
+    if(p1!==p2){ alert('Passwords do not match'); return; }
+    const staff = loadStaff();
+    const me = staff.find(s=>s.id===loggedInUserId);
+    if(me){ me.password = p1; saveStaff(staff); alert('Password updated!'); }
+    else alert('Staff not found');
+    document.getElementById('myNewPassword').value='';
+    document.getElementById('myConfirmPassword').value='';
+  });
+
+  // Staff add
+  document.getElementById('addStaffBtn').addEventListener('click', ()=>{
+    if(loggedInUserType!=='admin'){ alert('Only admin can do this.'); return; }
+    const role = document.getElementById('staffRoleInput').value;
+    const name = document.getElementById('staffNameInput').value.trim();
+    const mobile = document.getElementById('staffMobileInputAdd').value.trim();
+    const password = document.getElementById('staffPasswordInputAdd').value.trim();
+    const editId = document.getElementById('staffEditId').value;
+
+    if(!name){ alert('Enter staff name'); return; }
+    if(mobile.length!==10 || isNaN(mobile)){ alert('Enter valid 10-digit mobile'); return; }
+    if(!password){ alert('Enter password'); return; }
+
+    const staff = loadStaff();
+    const existing = staff.find(s=>s.mobile===mobile && s.id !== editId);
+    if(existing){ alert('This mobile is already registered'); return; }
+
+    if(editId){
+      const idx = staff.findIndex(s=>s.id===editId);
+      if(idx>=0){
+        staff[idx].role = role;
+        staff[idx].name = name;
+        staff[idx].mobile = mobile;
+        staff[idx].password = password;
+      }
+    } else {
+      staff.push({ id: 'S'+Date.now()+Math.random().toString(36).substr(2,4), role, name, mobile, password, power:true });
+    }
+    saveStaff(staff);
+    clearStaffForm();
+    renderStaffList();
+    alert('Staff saved!');
+  });
+
+  document.getElementById('clearStaffFormBtn').addEventListener('click', clearStaffForm);
+
+  // Logo
+  document.getElementById('applyLogoBtn').addEventListener('click', ()=>{
+    const fileInput = document.getElementById('logoUpload');
+    if(!fileInput.files || !fileInput.files[0]){ alert('Choose a logo file'); return; }
+    const reader = new FileReader();
+    reader.onload = (e)=>{
+      localStorage.setItem(LOGO_KEY, e.target.result);
+      applyLogo(); loadLogoPreview();
+      alert('Logo applied!');
+    };
+    reader.readAsDataURL(fileInput.files[0]);
+  });
+
+  document.getElementById('removeLogoBtn').addEventListener('click', ()=>{
+    localStorage.removeItem(LOGO_KEY);
+    applyLogo(); loadLogoPreview();
+    alert('Logo removed');
+  });
+
+  // Slides
+  document.getElementById('addSlideBtn').addEventListener('click', ()=>{
+    const fileInput = document.getElementById('slideUpload');
+    if(!fileInput.files || !fileInput.files[0]){ alert('Choose an image'); return; }
+    const reader = new FileReader();
+    reader.onload = (e)=>{
+      const arr = loadSlides();
+      arr.push(e.target.result);
+      saveSlides(arr);
+      renderSlideList();
+      startHeroSlideshow();
+      fileInput.value='';
+      alert('Slide added!');
+    };
+    reader.readAsDataURL(fileInput.files[0]);
+  });
+
+  // Hourly rate
+  document.getElementById('setHourlyRateBtn').addEventListener('click', ()=>{
+    const rate = parseFloat(document.getElementById('hourlyRateInput').value)||0;
+    if(rate<=0){ alert('Enter valid rate'); return; }
+    setHourlyRate(rate);
+    document.getElementById('displayHourlyRate').innerText = formatCurrency(rate);
+    if(activeCustomerId){
+      const customers = loadCustomers();
+      const c = customers.find(x=>x.id===activeCustomerId);
+      if(c){ c.hourlyRate = rate; saveCustomers(customers); }
+    }
+    alert('Hourly rate set!');
+  });
+
+  document.getElementById('workType').addEventListener('change', e=>{
+    const type = e.target.value;
+    const priceInput = document.getElementById('workPrice');
+    const hoursInput = document.getElementById('workHours');
+    const priceLabel = document.getElementById('priceLabel');
+    const calcPreview = document.getElementById('calcPreview');
+    if(type==='hourly'){
+      priceLabel.innerText = 'Rate (₹/hr)';
+      priceInput.value = getHourlyRate();
+      hoursInput.disabled = false;
+      hoursInput.style.background = 'var(--card-bg)';
+      calcPreview.innerText = '';
+    } else {
+      priceLabel.innerText = 'Price (₹)';
+      priceInput.value = '0';
+      hoursInput.disabled = true;
+      hoursInput.style.background = 'var(--bg)';
+      hoursInput.value = '0';
+      calcPreview.innerText = '';
+    }
+  });
+
+  function updateHourlyPreview(){
+    const type = document.getElementById('workType').value;
+    const rate = parseFloat(document.getElementById('workPrice').value)||0;
+    const hours = parseFloat(document.getElementById('workHours').value)||0;
+    const calcPreview = document.getElementById('calcPreview');
+    if(type==='hourly' && hours>0 && rate>0){
+      calcPreview.innerText = `= ${hours} hrs × ${formatCurrency(rate)} = ${formatCurrency(hours*rate)}`;
+    } else calcPreview.innerText = '';
+  }
+  document.getElementById('workPrice').addEventListener('input', updateHourlyPreview);
+  document.getElementById('workHours').addEventListener('input', updateHourlyPreview);
+
+  // Add work
+  document.getElementById('addWorkBtn').addEventListener('click', ()=>{
+    if(!activeCustomerId){ alert('Select a customer first.'); return; }
+    const desc = document.getElementById('workDesc').value.trim();
+    const type = document.getElementById('workType').value;
+    const priceInput = parseFloat(document.getElementById('workPrice').value)||0;
+    const hours = parseFloat(document.getElementById('workHours').value)||0;
+    const photoInput = document.getElementById('workPhoto');
+    if(!desc){ alert('Enter work description'); return; }
+    let finalPrice = 0;
+    if(type==='hourly'){
+      if(hours<=0){ alert('Enter hours worked'); return; }
+      if(priceInput<=0){ alert('Set hourly rate'); return; }
+      finalPrice = hours * priceInput;
+    } else {
+      if(priceInput<=0){ alert('Enter price'); return; }
+      finalPrice = priceInput;
+    }
+    const newWork = { id:generateId(), desc, type, hours: type==='hourly'?hours:0, rate: type==='hourly'?priceInput:0, price:finalPrice, photo:null };
+    const customers = loadCustomers();
+    const c = customers.find(x=>x.id===activeCustomerId);
+    if(!c) return;
+    if(!c.works) c.works = [];
+    if(photoInput.files && photoInput.files[0]){
+      const reader = new FileReader();
+      reader.onload = (e)=>{
+        newWork.photo = e.target.result;
+        c.works.push(newWork);
+        saveCustomers(customers);
+        renderWorkTableForCustomer(c.works);
+        updateSummaryForCustomer(c);
+        refreshDashboard();
+        clearWorkInputs();
+      };
+      reader.readAsDataURL(photoInput.files[0]);
+    } else {
+      c.works.push(newWork);
+      saveCustomers(customers);
+      renderWorkTableForCustomer(c.works);
+      updateSummaryForCustomer(c);
+      refreshDashboard();
+      clearWorkInputs();
+    }
+  });
+
+  function clearWorkInputs(){
+    document.getElementById('workDesc').value='';
+    document.getElementById('workType').value='fixed';
+    document.getElementById('workPrice').value='0';
+    document.getElementById('workHours').value='0';
+    document.getElementById('workHours').disabled=true;
+    document.getElementById('workHours').style.background='var(--bg)';
+    document.getElementById('priceLabel').innerText='Price (₹)';
+    document.getElementById('workPhoto').value='';
+    document.getElementById('calcPreview').innerText='';
+  }
+
+  // Add payment
+  document.getElementById('addPaymentBtn').addEventListener('click', ()=>{
+    if(!activeCustomerId){ alert('Select a customer first.'); return; }
+    const amount = parseFloat(document.getElementById('paymentAmount').value)||0;
+    const date = document.getElementById('paymentDate').value || new Date().toISOString().split('T')[0];
+    const note = document.getElementById('paymentNote').value.trim() || 'Payment';
+    if(amount<=0){ alert('Enter amount'); return; }
+    const customers = loadCustomers();
+    const c = customers.find(x=>x.id===activeCustomerId);
+    if(!c) return;
+    if(!c.payments) c.payments = [];
+    c.payments.push({ id:generateId(), amount, date, note });
+    if(note.toLowerCase().includes('remind') || note.toLowerCase().includes('due')) c.reminder = note;
+    saveCustomers(customers);
+    renderPaymentTableForCustomer(c.payments);
+    updateSummaryForCustomer(c);
+    refreshDashboard();
+    document.getElementById('paymentAmount').value='0';
+    document.getElementById('paymentNote').value='';
+  });
+
+  // Save/new customer
+  document.getElementById('saveCustomerBtn').addEventListener('click', ()=>{
+    if(activeCustomerId){
+      syncActiveCustomerFromInputs();
+      alert('Customer data saved.');
+    } else {
+      const customers = loadCustomers();
+      const newId = generateId();
+      const newCustomer = {
+        id:newId,
+        customerName: document.getElementById('customerName').value.trim() || 'Unnamed',
+        customerMobile: document.getElementById('customerMobile').value.trim(),
+        billNo: document.getElementById('billNo').value.trim() || 'TS-'+(customers.length+101),
+        billDate: document.getElementById('billDate').value || new Date().toISOString().split('T')[0],
+        tractorModel: document.getElementById('tractorModel').value.trim(),
+        hourlyRate: getHourlyRate(),
+        works: [], payments: [], reminder:'',
+        createdByMobile: loggedInUserMobile || 'admin',
+        createdByName: loggedInUserName || 'Admin',
+        createdByRole: loggedInUserType || 'admin'
+      };
+      customers.push(newCustomer);
+      saveCustomers(customers);
+      activeCustomerId = newId;
+      loadCustomerIntoEditor(newId);
+      refreshDashboard();
+      alert('New customer created.');
+    }
+  });
+
+  document.getElementById('newCustomerBtn').addEventListener('click', ()=>{
+    activeCustomerId = null;
+    const customers = loadCustomers();
+    const nextNum = customers.length + 101;
+    document.getElementById('customerName').value='';
+    document.getElementById('customerMobile').value='';
+    document.getElementById('billNo').value='TS-'+nextNum;
+    document.getElementById('billDate').value=new Date().toISOString().split('T')[0];
+    document.getElementById('tractorModel').value='';
+    document.getElementById('adminBillNo').value='TS-'+nextNum;
+    const rate = getHourlyRate();
+    document.getElementById('displayHourlyRate').innerText = formatCurrency(rate);
+    document.getElementById('hourlyRateInput').value = rate;
+    renderWorkTableForCustomer([]);
+    renderPaymentTableForCustomer([]);
+    document.getElementById('displayTotal').innerText='₹0';
+    document.getElementById('displayPaid').innerText='₹0';
+    document.getElementById('displayDue').innerText='₹0';
+    document.getElementById('reminderText').innerHTML='<i class="fas fa-bell"></i> No active reminders';
+    document.getElementById('reminderBadge').innerHTML='<i class="fas fa-clock"></i> Reminder: none';
+    clearWorkInputs();
+  });
+
+  document.getElementById('addFarmerBtn').addEventListener('click', ()=>{
+    switchDashTab('bills');
+    setTimeout(()=> document.getElementById('newCustomerBtn').click(), 50);
+  });
+
+  // Delete/clear
+  document.getElementById('deleteCustomerBtn').addEventListener('click', ()=>{
+    if(!activeCustomerId){ alert('No customer selected.'); return; }
+    if(!confirm('Delete this customer and all data?')) return;
+    let customers = loadCustomers();
+    customers = customers.filter(x=>x.id!==activeCustomerId);
+    saveCustomers(customers);
+    activeCustomerId = null;
+    refreshDashboard();
+    document.getElementById('newCustomerBtn').click();
+  });
+
+  document.getElementById('clearWorkLogBtn').addEventListener('click', ()=>{
+    if(!activeCustomerId) return;
+    if(!confirm('Delete all work entries?')) return;
+    const customers = loadCustomers();
+    const c = customers.find(x=>x.id===activeCustomerId);
+    if(c){ c.works=[]; saveCustomers(customers); renderWorkTableForCustomer([]); updateSummaryForCustomer(c); refreshDashboard(); }
+  });
+
+  document.getElementById('clearPaymentsBtn').addEventListener('click', ()=>{
+    if(!activeCustomerId) return;
+    if(!confirm('Delete all payment records?')) return;
+    const customers = loadCustomers();
+    const c = customers.find(x=>x.id===activeCustomerId);
+    if(c){ c.payments=[]; saveCustomers(customers); renderPaymentTableForCustomer([]); updateSummaryForCustomer(c); refreshDashboard(); }
+  });
+
+  document.getElementById('setBillNoBtn').addEventListener('click', ()=>{
+    if(!activeCustomerId) return;
+    const newBill = document.getElementById('adminBillNo').value.trim();
+    if(!newBill) return;
+    const customers = loadCustomers();
+    const c = customers.find(x=>x.id===activeCustomerId);
+    if(c){ c.billNo = newBill; saveCustomers(customers); document.getElementById('billNo').value = newBill; refreshDashboard(); }
+  });
+
+  // PDF
+  document.getElementById('sharePdfBtn').addEventListener('click', ()=>{
+    if(!activeCustomerId){ alert('Select a customer first.'); return; }
+    syncActiveCustomerFromInputs();
+    document.getElementById('pdfLangModal').classList.add('active');
+  });
+  document.getElementById('closePdfModalBtn').addEventListener('click', ()=> document.getElementById('pdfLangModal').classList.remove('active'));
+  document.getElementById('pdfLangEnBtn').addEventListener('click', ()=>{ generatePdf('en'); document.getElementById('pdfLangModal').classList.remove('active'); });
+  document.getElementById('pdfLangHiBtn').addEventListener('click', ()=>{ generatePdf('hi'); document.getElementById('pdfLangModal').classList.remove('active'); });
+
+  // More tools
+  document.querySelectorAll('.more-card').forEach(card=>{
+    card.addEventListener('click', ()=>{
+      const toolName = card.dataset.tool;
+      document.getElementById('toolPanel').classList.remove('hidden');
+      document.getElementById('toolPanelTitle').innerHTML = `<i class="fas fa-toolbox"></i> ${toolName}`;
+      document.getElementById('toolPanelContent').innerHTML = `<p class="text-small">The ${toolName} module is coming soon!</p>`;
+    });
+  });
+  document.getElementById('closeToolBtn').addEventListener('click', ()=>{
+    document.getElementById('toolPanel').classList.add('hidden');
+  });
+
+  // Initialize UI
   updateAdminUI();
+
+  // Demo customer only once
+  if(loadAllCustomers().length === 0){
+    const demoCustomer = {
+      id: generateId(),
+      customerName: 'Ramesh Patel',
+      customerMobile: '9876543210',
+      billNo: 'TS-101',
+      billDate: new Date().toISOString().split('T')[0],
+      tractorModel: 'Sonalika DI-745 III',
+      hourlyRate: 500,
+      works: [
+        { id: generateId(), desc: 'Engine oil change', type: 'fixed', hours: 0, rate: 0, price: 1200, photo: null },
+        { id: generateId(), desc: 'Tractor servicing', type: 'hourly', hours: 2, rate: 500, price: 1000, photo: null }
+      ],
+      payments: [
+        { id: generateId(), amount: 800, date: new Date().toISOString().split('T')[0], note: 'Advance' }
+      ],
+      reminder: 'Next service due 15 Nov',
+      createdByMobile: 'admin',
+      createdByName: 'Admin',
+      createdByRole: 'admin'
+    };
+    saveAllCustomers([demoCustomer]);
+    refreshDashboard();
+  }
 });
+
+// ================= PAGE NAV =================
+function switchPage(pageName){
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  const pageMap = { home:'homePage', services:'servicesPage', about:'aboutPage', admin:'adminPage' };
+  const pageId = pageMap[pageName];
+  if(pageId) document.getElementById(pageId).classList.add('active');
+  document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+  document.querySelectorAll('.nav-links a').forEach(a => {
+    if(a.dataset.page === pageName) a.classList.add('active');
+  });
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function applyTheme(theme){
+  document.body.className='';
+  if(theme==='blue') document.body.classList.add('theme-blue');
+  else if(theme==='dark') document.body.classList.add('theme-dark');
+}
 </script>
 </body>
 </html>

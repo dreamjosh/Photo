@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Damor Tractore Service · Tractor Book</title>
+    <title>Damor Tractore Service · Dashboard</title>
     <!-- Font Awesome & Google Fonts -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
@@ -66,7 +66,7 @@
         .nav-links a.active i { color: #f5b042; }
         /* ---------- PAGE CONTAINER ---------- */
         .page-container {
-            max-width: 1300px;
+            max-width: 1400px;
             margin: 0 auto;
             padding: 2rem 1.5rem 3rem;
         }
@@ -103,6 +103,7 @@
         }
         .grid-2 { display: grid; grid-template-columns: 1fr 1.2fr; gap: 1.5rem; }
         .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+        .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
         label {
             font-size: 0.8rem;
             font-weight: 600;
@@ -159,6 +160,8 @@
         .btn-warning:hover { background: #e09e2e; }
         .btn-success { background: #1e7a3a; }
         .btn-success:hover { background: #16612e; }
+        .btn-info { background: #2a6b8f; }
+        .btn-info:hover { background: #1f5470; }
         table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
         th {
             text-align: left;
@@ -472,20 +475,159 @@
             text-transform: uppercase;
             letter-spacing: 0.03em;
         }
-        /* customer list table */
         .customer-list-table td { font-size: 0.85rem; }
-        .call-sms-btns {
-            display: flex;
-            gap: 0.4rem;
-        }
-        .call-sms-btns .btn-small {
-            padding: 0.3rem 0.7rem;
-            font-size: 0.7rem;
-        }
+        .call-sms-btns { display: flex; gap: 0.4rem; }
+        .call-sms-btns .btn-small { padding: 0.3rem 0.7rem; font-size: 0.7rem; }
         .btn-call { background: #1e7a3a; }
         .btn-call:hover { background: #16612e; }
         .btn-sms { background: #2a5c36; }
         .btn-sms:hover { background: #1e4429; }
+        /* ---------- DASHBOARD TABS ---------- */
+        .dash-tabs {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-bottom: 1.5rem;
+            background: white;
+            padding: 0.5rem;
+            border-radius: 40px;
+            border: 1px solid #dfeadb;
+        }
+        .dash-tabs .tab-btn {
+            padding: 0.7rem 1.5rem;
+            border-radius: 40px;
+            border: none;
+            background: transparent;
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: #4d6552;
+            cursor: pointer;
+            transition: 0.15s;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+        .dash-tabs .tab-btn:hover { background: #eef6ea; color: #2a5c36; }
+        .dash-tabs .tab-btn.active { background: #2a5c36; color: white; }
+        .dash-tabs .tab-btn.active i { color: #f5b042; }
+        /* ---------- MORE GRID ---------- */
+        .more-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 1.2rem;
+            margin-top: 1rem;
+        }
+        .more-card {
+            background: white;
+            border-radius: 24px;
+            padding: 1.5rem 1rem;
+            border: 1px solid #dfeadb;
+            text-align: center;
+            cursor: pointer;
+            transition: 0.15s;
+        }
+        .more-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px rgba(0,0,0,0.04);
+            border-color: #2a5c36;
+        }
+        .more-card i {
+            font-size: 2rem;
+            color: #2a5c36;
+            background: #eef3ea;
+            padding: 0.9rem;
+            border-radius: 20px;
+            margin-bottom: 0.8rem;
+        }
+        .more-card h4 { font-size: 0.95rem; color: #1e4a2b; }
+        .more-card p { font-size: 0.75rem; color: #7d917f; margin-top: 0.2rem; }
+        /* ---------- DRIVER CARD ---------- */
+        .driver-card {
+            background: white;
+            border-radius: 20px;
+            padding: 1.2rem;
+            border: 1px solid #dfeadb;
+            margin-bottom: 1rem;
+        }
+        .driver-card .flex-row { margin-bottom: 0.5rem; }
+        .driver-card .driver-name { font-weight: 700; font-size: 1rem; color: #1e4a2b; }
+        .driver-card .driver-phone { font-size: 0.85rem; color: #4d6552; }
+        .toggle-switch {
+            position: relative;
+            width: 50px;
+            height: 26px;
+            background: #ccc;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: 0.2s;
+            border: none;
+            flex-shrink: 0;
+        }
+        .toggle-switch.active { background: #1e7a3a; }
+        .toggle-switch::after {
+            content: '';
+            position: absolute;
+            top: 3px;
+            left: 3px;
+            width: 20px;
+            height: 20px;
+            background: white;
+            border-radius: 50%;
+            transition: 0.2s;
+        }
+        .toggle-switch.active::after { left: 27px; }
+        .attendance-status { font-size: 0.75rem; font-weight: 600; }
+        .attendance-status.on { color: #1e7a3a; }
+        .attendance-status.off { color: #b13b3b; }
+        /* ---------- CALCULATOR ---------- */
+        .calc-display {
+            background: #1e2f23;
+            color: #f5b042;
+            padding: 1.2rem;
+            border-radius: 20px;
+            font-size: 2rem;
+            text-align: right;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            overflow-x: auto;
+            font-family: monospace;
+            letter-spacing: 0.05em;
+        }
+        .calc-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0.6rem;
+        }
+        .calc-grid button {
+            padding: 1rem;
+            border-radius: 16px;
+            border: none;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            background: #f0f5ed;
+            color: #1e2f23;
+            transition: 0.1s;
+            font-family: 'Inter', sans-serif;
+        }
+        .calc-grid button:hover { background: #e0ebe0; }
+        .calc-grid button.op { background: #2a5c36; color: white; }
+        .calc-grid button.op:hover { background: #1e4429; }
+        .calc-grid button.eq { background: #f5b042; color: #1e2f23; }
+        .calc-grid button.eq:hover { background: #e09e2e; }
+        /* ---------- PASSBOOK ---------- */
+        .passbook-entry {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.8rem 1rem;
+            border-bottom: 1px solid #edf3ea;
+            font-size: 0.9rem;
+        }
+        .passbook-entry:last-child { border-bottom: none; }
+        .passbook-entry .amount-credit { color: #1e7a3a; font-weight: 700; }
+        .passbook-entry .amount-debit { color: #b13b3b; font-weight: 700; }
         /* ---------- FOOTER ---------- */
         .site-footer {
             text-align: center;
@@ -496,13 +638,17 @@
             margin-top: 2rem;
         }
         /* ---------- RESPONSIVE ---------- */
-        @media (max-width: 800px) {
+        @media (max-width: 900px) {
             .grid-2 { grid-template-columns: 1fr; }
             .grid-3 { grid-template-columns: 1fr; }
+            .grid-4 { grid-template-columns: repeat(2, 1fr); }
             .hero { grid-template-columns: 1fr; }
             .navbar { flex-direction: column; align-items: stretch; }
             .nav-links { justify-content: center; }
             .page-container { padding: 1rem; }
+        }
+        @media (max-width: 500px) {
+            .grid-4 { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -661,7 +807,7 @@
             </div>
         </div>
 
-        <!-- ========== ADMIN PAGE (LOGIN + DASHBOARD) ========== -->
+        <!-- ========== ADMIN PAGE ========== -->
         <div class="page" id="adminPage">
             <!-- Login Screen -->
             <div id="adminLoginScreen">
@@ -680,225 +826,271 @@
             <div id="adminDashboard" class="hidden">
                 <div class="flex-row mb-1">
                     <h1 style="margin-bottom:0;">
-                        <i class="fas fa-tractor"></i> Tractor Book · Admin
+                        <i class="fas fa-tractor"></i> Tractor Book · Dashboard
                         <span class="badge"><i class="fas fa-lock-open"></i> Logged in</span>
                     </h1>
                     <button class="btn btn-small btn-outline" id="adminLogoutBtn"><i class="fas fa-sign-out-alt"></i> Logout</button>
                 </div>
 
-                <!-- ===== ADMIN SUMMARY (all customers overview) ===== -->
-                <div class="card">
-                    <h2><i class="fas fa-chart-pie"></i> All Customers Summary</h2>
-                    <div class="summary-grid mt-1">
-                        <div class="summary-item">
-                            <i class="fas fa-users"></i>
-                            <div class="info">
-                                <div class="value" id="totalCustomersCount">0</div>
-                                <div class="label">Total Customers</div>
-                            </div>
-                        </div>
-                        <div class="summary-item">
-                            <i class="fas fa-file-invoice"></i>
-                            <div class="info">
-                                <div class="value" id="totalBillsCount">0</div>
-                                <div class="label">Total Bills</div>
-                            </div>
-                        </div>
-                        <div class="summary-item">
-                            <i class="fas fa-rupee-sign"></i>
-                            <div class="info">
-                                <div class="value" id="totalRevenueAll">₹0</div>
-                                <div class="label">Total Revenue</div>
-                            </div>
-                        </div>
-                        <div class="summary-item">
-                            <i class="fas fa-exclamation-triangle"></i>
-                            <div class="info">
-                                <div class="value" id="totalDueAll">₹0</div>
-                                <div class="label">Total Pending Due</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Customer list with call / sms -->
-                    <h3 class="mt-2"><i class="fas fa-address-book"></i> Customer Directory</h3>
-                    <div style="overflow-x:auto; margin-top:0.8rem;">
-                        <table class="customer-list-table">
-                            <thead>
-                                <tr>
-                                    <th>Customer</th>
-                                    <th>Mobile</th>
-                                    <th>Tractor</th>
-                                    <th>Bill No</th>
-                                    <th>Total</th>
-                                    <th>Paid</th>
-                                    <th>Due</th>
-                                    <th>Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody id="customerListBody">
-                                <!-- dynamic -->
-                            </tbody>
-                        </table>
-                    </div>
-                    <p class="text-small mt-1"><i class="fas fa-info-circle"></i> Click a customer row to load their bill into the editor below.</p>
+                <!-- Dashboard Tabs -->
+                <div class="dash-tabs" id="dashTabs">
+                    <button class="tab-btn active" data-tab="farmers"><i class="fas fa-users"></i> Farmers</button>
+                    <button class="tab-btn" data-tab="bills"><i class="fas fa-file-invoice"></i> Bills</button>
+                    <button class="tab-btn" data-tab="more"><i class="fas fa-ellipsis-h"></i> More</button>
                 </div>
 
-                <!-- ===== TRACTOR BOOK EDITOR (same as before) ===== -->
-                <div class="grid-2">
-                    <!-- LEFT COLUMN -->
-                    <div>
-                        <!-- CUSTOMER & BILL CARD -->
-                        <div class="card">
-                            <h2><i class="fas fa-user-plus" style="color:#f5b042;"></i> Customer & Bill</h2>
-                            <div class="mt-1">
-                                <label>Customer name</label>
-                                <input type="text" id="customerName" placeholder="e.g. Ramesh Patel">
-                            </div>
-                            <div class="grid-3 mt-1">
-                                <div>
-                                    <label>Mobile</label>
-                                    <input type="text" id="customerMobile" placeholder="9876543210">
-                                </div>
-                                <div>
-                                    <label>Bill No.</label>
-                                    <input type="text" id="billNo" placeholder="Auto" readonly style="background:#f0f5ed;">
-                                </div>
-                                <div>
-                                    <label>Date</label>
-                                    <input type="date" id="billDate">
-                                </div>
-                            </div>
+                <!-- ===== TAB: FARMERS ===== -->
+                <div class="tab-panel" id="tabFarmers">
+                    <div class="card">
+                        <div class="flex-row">
+                            <h2><i class="fas fa-users"></i> Farmers / Customers</h2>
+                            <button class="btn btn-small" id="addFarmerBtn"><i class="fas fa-user-plus"></i> Add Farmer</button>
+                        </div>
 
-                            <div class="mt-2">
-                                <label>Tractor model / Reg No.</label>
-                                <input type="text" id="tractorModel" placeholder="e.g. Mahindra 575 DI / GJ-01-AB-1234">
-                            </div>
-
-                            <!-- Work log add row -->
-                            <div class="tractor-card mt-2">
-                                <h3 style="font-size:1rem; margin-bottom:0.8rem;"><i class="fas fa-wrench"></i> Add work / service</h3>
-                                <div class="grid-3">
-                                    <div>
-                                        <label>Work description</label>
-                                        <input type="text" id="workDesc" placeholder="e.g. Engine oil change">
-                                    </div>
-                                    <div>
-                                        <label>Price (₹)</label>
-                                        <input type="number" id="workPrice" placeholder="0" value="0" min="0" step="1">
-                                    </div>
-                                    <div>
-                                        <label>Photo (optional)</label>
-                                        <input type="file" id="workPhoto" accept="image/*" style="padding:0.4rem;">
-                                    </div>
-                                </div>
-                                <div class="flex-row mt-1">
-                                    <button class="btn btn-small" id="addWorkBtn"><i class="fas fa-plus-circle"></i> Add work entry</button>
-                                    <span class="text-small" id="photoNamePreview"></span>
+                        <!-- Summary stats -->
+                        <div class="summary-grid mt-2">
+                            <div class="summary-item">
+                                <i class="fas fa-users"></i>
+                                <div class="info">
+                                    <div class="value" id="totalFarmersCount">0</div>
+                                    <div class="label">Total Farmers</div>
                                 </div>
                             </div>
-
-                            <!-- Payment recording -->
-                            <div class="tractor-card mt-2">
-                                <h3 style="font-size:1rem; margin-bottom:0.8rem;"><i class="fas fa-money-bill-wave"></i> Payment / Reminder</h3>
-                                <div class="grid-3">
-                                    <div>
-                                        <label>Amount paid (₹)</label>
-                                        <input type="number" id="paymentAmount" placeholder="0" value="0" min="0">
-                                    </div>
-                                    <div>
-                                        <label>Payment date</label>
-                                        <input type="date" id="paymentDate">
-                                    </div>
-                                    <div>
-                                        <label>Reminder note</label>
-                                        <input type="text" id="paymentNote" placeholder="e.g. next due 10 Nov">
-                                    </div>
+                            <div class="summary-item">
+                                <i class="fas fa-rupee-sign"></i>
+                                <div class="info">
+                                    <div class="value" id="totalRevenueFarmers">₹0</div>
+                                    <div class="label">Total Revenue</div>
                                 </div>
-                                <button class="btn btn-outline btn-small mt-1" id="addPaymentBtn"><i class="fas fa-rupee-sign"></i> Record payment</button>
+                            </div>
+                            <div class="summary-item">
+                                <i class="fas fa-exclamation-triangle"></i>
+                                <div class="info">
+                                    <div class="value" id="totalDueFarmers">₹0</div>
+                                    <div class="label">Total Due</div>
+                                </div>
                             </div>
                         </div>
 
-                        <!-- BILL SUMMARY & SHARE -->
-                        <div class="card share-box">
-                            <div class="flex-row">
-                                <div class="total-box">
-                                    <i class="fas fa-calculator"></i> Total: <span id="displayTotal">₹0</span>
-                                </div>
-                                <div class="payment-status">
-                                    <span>Paid: <span class="paid" id="displayPaid">₹0</span></span>
-                                    <span>Due: <span class="due" id="displayDue">₹0</span></span>
-                                </div>
-                            </div>
-                            <div class="flex-row mt-2">
-                                <button class="btn" id="sharePdfBtn"><i class="fas fa-file-pdf"></i> Share Bill as PDF</button>
-                                <button class="btn btn-outline" id="saveCustomerBtn"><i class="fas fa-save"></i> Save Customer</button>
-                                <button class="btn btn-outline" id="newCustomerBtn"><i class="fas fa-user-plus"></i> New Customer</button>
-                            </div>
-                            <div class="text-small mt-1" id="reminderText"><i class="fas fa-bell"></i> No active reminders</div>
+                        <!-- Farmer list table -->
+                        <div style="overflow-x:auto; margin-top:1rem;">
+                            <table class="customer-list-table">
+                                <thead>
+                                    <tr>
+                                        <th>Farmer</th>
+                                        <th>Mobile</th>
+                                        <th>Tractor</th>
+                                        <th>Bills</th>
+                                        <th>Total</th>
+                                        <th>Due</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="farmerListBody"></tbody>
+                            </table>
                         </div>
+                        <p class="text-small mt-1"><i class="fas fa-info-circle"></i> Click a farmer row to view/edit their bill in the Bills tab.</p>
                     </div>
+                </div>
 
-                    <!-- RIGHT COLUMN: WORK LOG + PAYMENT LOG + ADMIN -->
-                    <div>
-                        <!-- WORK LOG TABLE -->
-                        <div class="card">
-                            <div class="flex-row">
-                                <h2><i class="fas fa-list-ul"></i> Work log (what & where)</h2>
-                                <span class="badge" id="workCount">0 entries</span>
-                            </div>
-                            <div class="worklog-list mt-1" style="max-height:260px; overflow-y:auto;">
-                                <table id="workTable">
-                                    <thead>
-                                        <tr><th>Work / Location</th><th>Price</th><th>Photo</th><th></th></tr>
-                                    </thead>
-                                    <tbody id="workTableBody"></tbody>
-                                </table>
-                            </div>
-                            <p class="text-small mt-1"><i class="fas fa-camera"></i> Photo attached shows the work spot / condition.</p>
-                        </div>
+                <!-- ===== TAB: BILLS ===== -->
+                <div class="tab-panel hidden" id="tabBills">
+                    <div class="grid-2">
+                        <!-- LEFT COLUMN: Customer & Bill + Summary -->
+                        <div>
+                            <div class="card">
+                                <h2><i class="fas fa-user-plus" style="color:#f5b042;"></i> Customer & Bill</h2>
+                                <div class="mt-1">
+                                    <label>Customer name</label>
+                                    <input type="text" id="customerName" placeholder="e.g. Ramesh Patel">
+                                </div>
+                                <div class="grid-3 mt-1">
+                                    <div>
+                                        <label>Mobile</label>
+                                        <input type="text" id="customerMobile" placeholder="9876543210">
+                                    </div>
+                                    <div>
+                                        <label>Bill No.</label>
+                                        <input type="text" id="billNo" placeholder="Auto" readonly style="background:#f0f5ed;">
+                                    </div>
+                                    <div>
+                                        <label>Date</label>
+                                        <input type="date" id="billDate">
+                                    </div>
+                                </div>
 
-                        <!-- PAYMENT LOG -->
-                        <div class="card">
-                            <h2><i class="fas fa-history"></i> Payment history</h2>
-                            <div style="max-height:140px; overflow-y:auto;" class="mt-1">
-                                <table>
-                                    <thead><tr><th>Date</th><th>Amount</th><th>Note</th></tr></thead>
-                                    <tbody id="paymentTableBody"></tbody>
-                                </table>
-                            </div>
-                            <div class="reminder-tag mt-1" id="reminderBadge"><i class="fas fa-clock"></i> Reminder: none</div>
-                        </div>
+                                <div class="mt-2">
+                                    <label>Tractor model / Reg No.</label>
+                                    <input type="text" id="tractorModel" placeholder="e.g. Mahindra 575 DI / GJ-01-AB-1234">
+                                </div>
 
-                        <!-- ADMIN CONTROLS -->
-                        <div class="card admin-panel">
-                            <h3><i class="fas fa-user-cog"></i> Admin controls</h3>
-                            <div class="grid-3 mt-1">
-                                <button class="btn btn-small btn-outline" id="clearWorkLogBtn"><i class="fas fa-trash-alt"></i> Clear work log</button>
-                                <button class="btn btn-small btn-outline" id="clearPaymentsBtn"><i class="fas fa-eraser"></i> Clear payments</button>
-                                <button class="btn btn-small btn-danger" id="deleteCustomerBtn"><i class="fas fa-user-minus"></i> Delete Customer</button>
-                            </div>
-                            <div class="mt-2">
-                                <label>Set bill no. manually</label>
-                                <div class="flex-row">
-                                    <input type="text" id="adminBillNo" placeholder="TS-101" style="max-width:200px;">
-                                    <button class="btn btn-small btn-warning" id="setBillNoBtn"><i class="fas fa-save"></i> Update</button>
+                                <!-- Work log add row -->
+                                <div class="tractor-card mt-2">
+                                    <h3 style="font-size:1rem; margin-bottom:0.8rem;"><i class="fas fa-wrench"></i> Add work / service</h3>
+                                    <div class="grid-3">
+                                        <div>
+                                            <label>Work description</label>
+                                            <input type="text" id="workDesc" placeholder="e.g. Engine oil change">
+                                        </div>
+                                        <div>
+                                            <label>Price (₹)</label>
+                                            <input type="number" id="workPrice" placeholder="0" value="0" min="0" step="1">
+                                        </div>
+                                        <div>
+                                            <label>Photo (optional)</label>
+                                            <input type="file" id="workPhoto" accept="image/*" style="padding:0.4rem;">
+                                        </div>
+                                    </div>
+                                    <div class="flex-row mt-1">
+                                        <button class="btn btn-small" id="addWorkBtn"><i class="fas fa-plus-circle"></i> Add work entry</button>
+                                        <span class="text-small" id="photoNamePreview"></span>
+                                    </div>
+                                </div>
+
+                                <!-- Payment recording -->
+                                <div class="tractor-card mt-2">
+                                    <h3 style="font-size:1rem; margin-bottom:0.8rem;"><i class="fas fa-money-bill-wave"></i> Payment / Reminder</h3>
+                                    <div class="grid-3">
+                                        <div>
+                                            <label>Amount paid (₹)</label>
+                                            <input type="number" id="paymentAmount" placeholder="0" value="0" min="0">
+                                        </div>
+                                        <div>
+                                            <label>Payment date</label>
+                                            <input type="date" id="paymentDate">
+                                        </div>
+                                        <div>
+                                            <label>Reminder note</label>
+                                            <input type="text" id="paymentNote" placeholder="e.g. next due 10 Nov">
+                                        </div>
+                                    </div>
+                                    <button class="btn btn-outline btn-small mt-1" id="addPaymentBtn"><i class="fas fa-rupee-sign"></i> Record payment</button>
                                 </div>
                             </div>
-                            <p class="text-small mt-1"><i class="fas fa-info-circle"></i> Changes saved automatically. Password can be changed below.</p>
-                            <div class="mt-2">
-                                <label>Change admin password</label>
+
+                            <!-- BILL SUMMARY & SHARE -->
+                            <div class="card share-box">
                                 <div class="flex-row">
-                                    <input type="password" id="newAdminPassword" placeholder="New password" style="max-width:200px;">
-                                    <button class="btn btn-small btn-warning" id="changePasswordBtn"><i class="fas fa-key"></i> Update</button>
+                                    <div class="total-box">
+                                        <i class="fas fa-calculator"></i> Total: <span id="displayTotal">₹0</span>
+                                    </div>
+                                    <div class="payment-status">
+                                        <span>Paid: <span class="paid" id="displayPaid">₹0</span></span>
+                                        <span>Due: <span class="due" id="displayDue">₹0</span></span>
+                                    </div>
+                                </div>
+                                <div class="flex-row mt-2">
+                                    <button class="btn" id="sharePdfBtn"><i class="fas fa-file-pdf"></i> Share Bill as PDF</button>
+                                    <button class="btn btn-outline" id="saveCustomerBtn"><i class="fas fa-save"></i> Save Customer</button>
+                                    <button class="btn btn-outline" id="newCustomerBtn"><i class="fas fa-user-plus"></i> New Customer</button>
+                                </div>
+                                <div class="text-small mt-1" id="reminderText"><i class="fas fa-bell"></i> No active reminders</div>
+                            </div>
+                        </div>
+
+                        <!-- RIGHT COLUMN: Work log + Payment log + Admin controls -->
+                        <div>
+                            <div class="card">
+                                <div class="flex-row">
+                                    <h2><i class="fas fa-list-ul"></i> Work log</h2>
+                                    <span class="badge" id="workCount">0 entries</span>
+                                </div>
+                                <div class="worklog-list mt-1" style="max-height:260px; overflow-y:auto;">
+                                    <table id="workTable">
+                                        <thead>
+                                            <tr><th>Work</th><th>Price</th><th>Photo</th><th></th></tr>
+                                        </thead>
+                                        <tbody id="workTableBody"></tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <div class="card">
+                                <h2><i class="fas fa-history"></i> Payment history</h2>
+                                <div style="max-height:140px; overflow-y:auto;" class="mt-1">
+                                    <table>
+                                        <thead><tr><th>Date</th><th>Amount</th><th>Note</th></tr></thead>
+                                        <tbody id="paymentTableBody"></tbody>
+                                    </table>
+                                </div>
+                                <div class="reminder-tag mt-1" id="reminderBadge"><i class="fas fa-clock"></i> Reminder: none</div>
+                            </div>
+
+                            <div class="card admin-panel">
+                                <h3><i class="fas fa-user-cog"></i> Admin controls</h3>
+                                <div class="grid-3 mt-1">
+                                    <button class="btn btn-small btn-outline" id="clearWorkLogBtn"><i class="fas fa-trash-alt"></i> Clear work</button>
+                                    <button class="btn btn-small btn-outline" id="clearPaymentsBtn"><i class="fas fa-eraser"></i> Clear payments</button>
+                                    <button class="btn btn-small btn-danger" id="deleteCustomerBtn"><i class="fas fa-user-minus"></i> Delete Customer</button>
+                                </div>
+                                <div class="mt-2">
+                                    <label>Set bill no. manually</label>
+                                    <div class="flex-row">
+                                        <input type="text" id="adminBillNo" placeholder="TS-101" style="max-width:200px;">
+                                        <button class="btn btn-small btn-warning" id="setBillNoBtn"><i class="fas fa-save"></i> Update</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+
+                <!-- ===== TAB: MORE ===== -->
+                <div class="tab-panel hidden" id="tabMore">
+                    <div class="card">
+                        <h2><i class="fas fa-ellipsis-h"></i> More Tools</h2>
+                        <p class="text-small">Quick access to bookings, jobs, calculator, passbook, drivers, tools, and vehicles.</p>
+                        <div class="more-grid" id="moreGrid">
+                            <div class="more-card" data-tool="bookings">
+                                <i class="fas fa-calendar-check"></i>
+                                <h4>Bookings</h4>
+                                <p>Manage service bookings</p>
+                            </div>
+                            <div class="more-card" data-tool="jobs">
+                                <i class="fas fa-briefcase"></i>
+                                <h4>Jobs</h4>
+                                <p>Track job assignments</p>
+                            </div>
+                            <div class="more-card" data-tool="calculator">
+                                <i class="fas fa-calculator"></i>
+                                <h4>Calculator</h4>
+                                <p>Quick calculations</p>
+                            </div>
+                            <div class="more-card" data-tool="passbook">
+                                <i class="fas fa-book"></i>
+                                <h4>Passbook</h4>
+                                <p>Income & expense log</p>
+                            </div>
+                            <div class="more-card" data-tool="drivers">
+                                <i class="fas fa-user-tie"></i>
+                                <h4>Drivers</h4>
+                                <p>Manage drivers & attendance</p>
+                            </div>
+                            <div class="more-card" data-tool="tools">
+                                <i class="fas fa-tools"></i>
+                                <h4>Tools</h4>
+                                <p>Tool inventory</p>
+                            </div>
+                            <div class="more-card" data-tool="vehicles">
+                                <i class="fas fa-tractor"></i>
+                                <h4>Vehicles</h4>
+                                <p>Tractor & vehicle list</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Dynamic tool panel -->
+                    <div class="card hidden" id="toolPanel">
+                        <div class="flex-row">
+                            <h2 id="toolPanelTitle"><i class="fas fa-calculator"></i> Calculator</h2>
+                            <button class="btn btn-small btn-outline" id="closeToolBtn"><i class="fas fa-times"></i> Close</button>
+                        </div>
+                        <div id="toolPanelContent" class="mt-1"></div>
+                    </div>
+                </div>
+
             </div>
         </div>
-
     </div>
 
     <!-- ================= FOOTER ================= -->
@@ -953,6 +1145,7 @@
                 loginScreen.classList.add('hidden');
                 dashboard.classList.remove('hidden');
                 refreshDashboard();
+                switchDashTab('farmers');
             } else {
                 loginScreen.classList.remove('hidden');
                 dashboard.classList.add('hidden');
@@ -976,25 +1169,35 @@
             updateAdminUI();
         });
 
-        // allow enter key to login
         document.getElementById('adminPasswordInput').addEventListener('keydown', (e) => {
             if (e.key === 'Enter') document.getElementById('adminLoginBtn').click();
         });
 
+        // ================= DASHBOARD TABS =================
+        function switchDashTab(tabName) {
+            document.querySelectorAll('.dash-tabs .tab-btn').forEach(b => b.classList.remove('active'));
+            document.querySelectorAll('.tab-panel').forEach(p => p.classList.add('hidden'));
+            document.querySelectorAll('.dash-tabs .tab-btn').forEach(b => {
+                if (b.dataset.tab === tabName) b.classList.add('active');
+            });
+            const panel = document.getElementById('tab' + tabName.charAt(0).toUpperCase() + tabName.slice(1));
+            if (panel) panel.classList.remove('hidden');
+            // Close tool panel when switching tabs
+            document.getElementById('toolPanel').classList.add('hidden');
+        }
+
+        document.querySelectorAll('.dash-tabs .tab-btn').forEach(btn => {
+            btn.addEventListener('click', () => switchDashTab(btn.dataset.tab));
+        });
+
         // ================= CUSTOMER DATA STORAGE =================
-        // We store an array of customer objects. Each customer has:
-        // { id, customerName, customerMobile, billNo, billDate, tractorModel, works[], payments[], reminder }
-        const CUSTOMERS_KEY = 'damor_customers_v1';
+        const CUSTOMERS_KEY = 'damor_customers_v2';
+        let activeCustomerId = null;
 
         function loadCustomers() {
             const saved = localStorage.getItem(CUSTOMERS_KEY);
             if (saved) {
-                try {
-                    return JSON.parse(saved);
-                } catch (e) {
-                    console.warn('Corrupted customer data');
-                    return [];
-                }
+                try { return JSON.parse(saved); } catch (e) { return []; }
             }
             return [];
         }
@@ -1003,10 +1206,6 @@
             localStorage.setItem(CUSTOMERS_KEY, JSON.stringify(customers));
         }
 
-        // Current active customer being edited
-        let activeCustomerId = null;
-
-        // Helper: generate unique id
         function generateId() {
             return Date.now() + '-' + Math.random().toString(36).substr(2, 9);
         }
@@ -1015,35 +1214,32 @@
             return '₹' + Number(num).toFixed(0);
         }
 
-        // ================= REFRESH DASHBOARD SUMMARY & CUSTOMER LIST =================
+        // ================= REFRESH DASHBOARD SUMMARY & FARMER LIST =================
         function refreshDashboard() {
             const customers = loadCustomers();
 
             // Summary stats
             const totalCustomers = customers.length;
-            let totalBills = 0;
             let totalRevenue = 0;
             let totalDue = 0;
 
             customers.forEach(c => {
-                totalBills++;
                 const total = (c.works || []).reduce((s, w) => s + (Number(w.price) || 0), 0);
                 const paid = (c.payments || []).reduce((s, p) => s + (Number(p.amount) || 0), 0);
                 totalRevenue += total;
                 totalDue += Math.max(0, total - paid);
             });
 
-            document.getElementById('totalCustomersCount').innerText = totalCustomers;
-            document.getElementById('totalBillsCount').innerText = totalBills;
-            document.getElementById('totalRevenueAll').innerText = formatCurrency(totalRevenue);
-            document.getElementById('totalDueAll').innerText = formatCurrency(totalDue);
+            document.getElementById('totalFarmersCount').innerText = totalCustomers;
+            document.getElementById('totalRevenueFarmers').innerText = formatCurrency(totalRevenue);
+            document.getElementById('totalDueFarmers').innerText = formatCurrency(totalDue);
 
-            // Customer list table
-            const tbody = document.getElementById('customerListBody');
+            // Farmer list table
+            const tbody = document.getElementById('farmerListBody');
             tbody.innerHTML = '';
 
             if (customers.length === 0) {
-                tbody.innerHTML = '<tr><td colspan="8" style="text-align:center; color:#7d917f;">No customers yet. Add one below.</td></tr>';
+                tbody.innerHTML = '<tr><td colspan="7" style="text-align:center; color:#7d917f;">No farmers yet. Click "Add Farmer" to start.</td></tr>';
                 return;
             }
 
@@ -1051,6 +1247,7 @@
                 const total = (c.works || []).reduce((s, w) => s + (Number(w.price) || 0), 0);
                 const paid = (c.payments || []).reduce((s, p) => s + (Number(p.amount) || 0), 0);
                 const due = Math.max(0, total - paid);
+                const billCount = c.works && c.works.length > 0 ? 1 : 0;
 
                 const row = document.createElement('tr');
                 row.style.cursor = 'pointer';
@@ -1058,9 +1255,8 @@
                     <td><strong>${c.customerName || '—'}</strong></td>
                     <td>${c.customerMobile || '—'}</td>
                     <td>${c.tractorModel || '—'}</td>
-                    <td>${c.billNo || '—'}</td>
+                    <td>${billCount}</td>
                     <td>${formatCurrency(total)}</td>
-                    <td class="paid">${formatCurrency(paid)}</td>
                     <td class="due">${formatCurrency(due)}</td>
                     <td>
                         <div class="call-sms-btns">
@@ -1071,6 +1267,7 @@
                 `;
                 row.addEventListener('click', () => {
                     loadCustomerIntoEditor(c.id);
+                    switchDashTab('bills');
                 });
                 tbody.appendChild(row);
             });
@@ -1091,18 +1288,13 @@
             document.getElementById('tractorModel').value = c.tractorModel || '';
             document.getElementById('adminBillNo').value = c.billNo || '';
 
-            // Work and payment tables
             renderWorkTableForCustomer(c.works || []);
             renderPaymentTableForCustomer(c.payments || []);
             updateSummaryForCustomer(c);
-            updateReminderForCustomer(c);
         }
 
-        // ================= RENDER WORK TABLE FOR ACTIVE CUSTOMER =================
-        let currentWorks = []; // temporary holds current works
-
+        // ================= RENDER WORK TABLE =================
         function renderWorkTableForCustomer(works) {
-            currentWorks = works;
             const tbody = document.getElementById('workTableBody');
             tbody.innerHTML = '';
             if (!works || works.length === 0) {
@@ -1134,7 +1326,6 @@
                 delBtn.addEventListener('click', (e) => {
                     e.stopPropagation();
                     works.splice(index, 1);
-                    // Update customer in storage
                     saveActiveCustomerWorks(works);
                     renderWorkTableForCustomer(works);
                     refreshDashboard();
@@ -1163,10 +1354,7 @@
         }
 
         // ================= RENDER PAYMENT TABLE =================
-        let currentPayments = [];
-
         function renderPaymentTableForCustomer(payments) {
-            currentPayments = payments;
             const tbody = document.getElementById('paymentTableBody');
             tbody.innerHTML = '';
             if (!payments || payments.length === 0) {
@@ -1179,18 +1367,6 @@
                 row.innerHTML = `<td>${p.date || '—'}</td><td>${formatCurrency(p.amount || 0)}</td><td>${p.note || '—'}</td>`;
                 tbody.appendChild(row);
             });
-        }
-
-        function saveActiveCustomerPayments(payments) {
-            if (!activeCustomerId) return;
-            const customers = loadCustomers();
-            const c = customers.find(x => x.id === activeCustomerId);
-            if (c) {
-                c.payments = payments;
-                saveCustomers(customers);
-                updateSummaryForCustomer(c);
-                refreshDashboard();
-            }
         }
 
         // ================= SUMMARY & REMINDER =================
@@ -1221,10 +1397,6 @@
             reminderBadge.className = 'reminder-tag';
             if (due > 0) reminderBadge.style.background = '#fff1d6';
             else reminderBadge.style.background = '#e3f0de';
-        }
-
-        function updateReminderForCustomer(c) {
-            // handled inside updateSummary
         }
 
         // ================= SYNC INPUTS TO ACTIVE CUSTOMER =================
@@ -1348,18 +1520,17 @@
             document.getElementById('paymentNote').value = '';
         });
 
-        // ================= SAVE CUSTOMER =================
+        // ================= SAVE / NEW CUSTOMER =================
         document.getElementById('saveCustomerBtn').addEventListener('click', () => {
             if (activeCustomerId) {
                 syncActiveCustomerFromInputs();
                 alert('Customer data saved.');
             } else {
-                // Create new customer
                 const customers = loadCustomers();
                 const newId = generateId();
                 const newCustomer = {
                     id: newId,
-                    customerName: document.getElementById('customerName').value.trim() || 'Unnamed Customer',
+                    customerName: document.getElementById('customerName').value.trim() || 'Unnamed Farmer',
                     customerMobile: document.getElementById('customerMobile').value.trim(),
                     billNo: document.getElementById('billNo').value.trim() || 'TS-' + (customers.length + 101),
                     billDate: document.getElementById('billDate').value || new Date().toISOString().split('T')[0],
@@ -1377,7 +1548,6 @@
             }
         });
 
-        // ================= NEW CUSTOMER =================
         document.getElementById('newCustomerBtn').addEventListener('click', () => {
             activeCustomerId = null;
             const customers = loadCustomers();
@@ -1397,6 +1567,12 @@
             document.getElementById('reminderBadge').innerHTML = '<i class="fas fa-clock"></i> Reminder: none';
         });
 
+        // ================= ADD FARMER (from Farmers tab) =================
+        document.getElementById('addFarmerBtn').addEventListener('click', () => {
+            switchDashTab('bills');
+            document.getElementById('newCustomerBtn').click();
+        });
+
         // ================= DELETE CUSTOMER =================
         document.getElementById('deleteCustomerBtn').addEventListener('click', () => {
             if (!activeCustomerId) {
@@ -1413,11 +1589,10 @@
             document.getElementById('newCustomerBtn').click();
         });
 
-        // ================= CLEAR WORK LOG =================
+        // ================= CLEAR WORK / PAYMENTS =================
         document.getElementById('clearWorkLogBtn').addEventListener('click', () => {
             if (!activeCustomerId) return;
             if (!confirm('Delete all work entries for this customer?')) return;
-
             const customers = loadCustomers();
             const c = customers.find(x => x.id === activeCustomerId);
             if (c) {
@@ -1429,11 +1604,9 @@
             }
         });
 
-        // ================= CLEAR PAYMENTS =================
         document.getElementById('clearPaymentsBtn').addEventListener('click', () => {
             if (!activeCustomerId) return;
             if (!confirm('Delete all payment records for this customer?')) return;
-
             const customers = loadCustomers();
             const c = customers.find(x => x.id === activeCustomerId);
             if (c) {
@@ -1459,18 +1632,6 @@
                 document.getElementById('billNo').value = newBill;
                 refreshDashboard();
             }
-        });
-
-        // ================= CHANGE ADMIN PASSWORD =================
-        document.getElementById('changePasswordBtn').addEventListener('click', () => {
-            const newPwd = document.getElementById('newAdminPassword').value.trim();
-            if (!newPwd || newPwd.length < 4) {
-                alert('Password must be at least 4 characters.');
-                return;
-            }
-            setAdminPassword(newPwd);
-            document.getElementById('newAdminPassword').value = '';
-            alert('Password updated.');
         });
 
         // ================= PDF SHARE =================
@@ -1571,30 +1732,268 @@
             html2pdf().set(opt).from(element).save();
         });
 
-        // ================= REFRESH BUTTON =================
-        document.getElementById('refreshBillBtn').addEventListener('click', () => {
-            syncActiveCustomerFromInputs();
-            if (activeCustomerId) {
-                const customers = loadCustomers();
-                const c = customers.find(x => x.id === activeCustomerId);
-                if (c) {
-                    renderWorkTableForCustomer(c.works || []);
-                    renderPaymentTableForCustomer(c.payments || []);
-                    updateSummaryForCustomer(c);
-                }
+        // ================= MORE TOOLS =================
+        const driversKey = 'damor_drivers_v1';
+        const passbookKey = 'damor_passbook_v1';
+
+        function loadDrivers() {
+            const saved = localStorage.getItem(driversKey);
+            if (saved) { try { return JSON.parse(saved); } catch(e) { return []; } }
+            return [
+                { id: generateId(), name: 'Ramesh', phone: '9876543210', workOn: true },
+                { id: generateId(), name: 'Suresh', phone: '9876543211', workOn: false },
+                { id: generateId(), name: 'Mahesh', phone: '9876543212', workOn: true }
+            ];
+        }
+
+        function saveDrivers(drivers) {
+            localStorage.setItem(driversKey, JSON.stringify(drivers));
+        }
+
+        function loadPassbook() {
+            const saved = localStorage.getItem(passbookKey);
+            if (saved) { try { return JSON.parse(saved); } catch(e) { return []; } }
+            return [
+                { id: generateId(), date: new Date().toISOString().split('T')[0], desc: 'Opening balance', amount: 5000, type: 'credit' }
+            ];
+        }
+
+        function savePassbook(entries) {
+            localStorage.setItem(passbookKey, JSON.stringify(entries));
+        }
+
+        function openTool(toolName) {
+            const panel = document.getElementById('toolPanel');
+            const title = document.getElementById('toolPanelTitle');
+            const content = document.getElementById('toolPanelContent');
+            panel.classList.remove('hidden');
+
+            if (toolName === 'calculator') {
+                title.innerHTML = '<i class="fas fa-calculator"></i> Calculator';
+                content.innerHTML = `
+                    <div class="calc-display" id="calcDisplay">0</div>
+                    <div class="calc-grid">
+                        <button data-val="C" class="op">C</button>
+                        <button data-val="⌫" class="op">⌫</button>
+                        <button data-val="%" class="op">%</button>
+                        <button data-val="/" class="op">÷</button>
+                        <button data-val="7">7</button>
+                        <button data-val="8">8</button>
+                        <button data-val="9">9</button>
+                        <button data-val="*" class="op">×</button>
+                        <button data-val="4">4</button>
+                        <button data-val="5">5</button>
+                        <button data-val="6">6</button>
+                        <button data-val="-" class="op">−</button>
+                        <button data-val="1">1</button>
+                        <button data-val="2">2</button>
+                        <button data-val="3">3</button>
+                        <button data-val="+" class="op">+</button>
+                        <button data-val="0">0</button>
+                        <button data-val=".">.</button>
+                        <button data-val="=" class="eq">=</button>
+                    </div>
+                `;
+                initCalculator();
+            } else if (toolName === 'drivers') {
+                title.innerHTML = '<i class="fas fa-user-tie"></i> Drivers & Attendance';
+                content.innerHTML = `
+                    <div class="flex-row mb-1">
+                        <button class="btn btn-small" id="addDriverBtn"><i class="fas fa-plus"></i> Add Driver</button>
+                        <span class="text-small">Toggle work on/off. Green = working.</span>
+                    </div>
+                    <div id="driverList"></div>
+                `;
+                renderDrivers();
+                document.getElementById('addDriverBtn').addEventListener('click', () => {
+                    const name = prompt('Driver name:');
+                    if (!name) return;
+                    const phone = prompt('Phone number:');
+                    if (!phone) return;
+                    const drivers = loadDrivers();
+                    drivers.push({ id: generateId(), name, phone, workOn: true });
+                    saveDrivers(drivers);
+                    renderDrivers();
+                });
+            } else if (toolName === 'passbook') {
+                title.innerHTML = '<i class="fas fa-book"></i> Passbook';
+                content.innerHTML = `
+                    <div class="grid-3 mb-1">
+                        <div><label>Date</label><input type="date" id="pbDate" value="${new Date().toISOString().split('T')[0]}"></div>
+                        <div><label>Description</label><input type="text" id="pbDesc" placeholder="e.g. Fuel"></div>
+                        <div><label>Amount (₹)</label><input type="number" id="pbAmount" placeholder="0"></div>
+                    </div>
+                    <div class="flex-row mb-1">
+                        <select id="pbType" style="max-width:150px;">
+                            <option value="credit">Credit (Income)</option>
+                            <option value="debit">Debit (Expense)</option>
+                        </select>
+                        <button class="btn btn-small" id="addPbBtn"><i class="fas fa-plus"></i> Add Entry</button>
+                        <div class="total-box" style="font-size:0.85rem; padding:0.5rem 1rem;">
+                            Balance: <span id="pbBalance">₹0</span>
+                        </div>
+                    </div>
+                    <div id="pbList"></div>
+                `;
+                renderPassbook();
+                document.getElementById('addPbBtn').addEventListener('click', () => {
+                    const date = document.getElementById('pbDate').value;
+                    const desc = document.getElementById('pbDesc').value.trim();
+                    const amount = parseFloat(document.getElementById('pbAmount').value) || 0;
+                    const type = document.getElementById('pbType').value;
+                    if (!desc || amount <= 0) { alert('Enter description and amount.'); return; }
+                    const entries = loadPassbook();
+                    entries.push({ id: generateId(), date, desc, amount, type });
+                    savePassbook(entries);
+                    renderPassbook();
+                    document.getElementById('pbDesc').value = '';
+                    document.getElementById('pbAmount').value = '';
+                });
+            } else if (toolName === 'bookings') {
+                title.innerHTML = '<i class="fas fa-calendar-check"></i> Bookings';
+                content.innerHTML = `<p class="text-small">Booking management coming soon. For now, use the Bills tab to add work entries.</p>
+                    <button class="btn btn-small" onclick="switchDashTab('bills'); document.getElementById('toolPanel').classList.add('hidden');"><i class="fas fa-file-invoice"></i> Go to Bills</button>`;
+            } else if (toolName === 'jobs') {
+                title.innerHTML = '<i class="fas fa-briefcase"></i> Jobs';
+                content.innerHTML = `<p class="text-small">Job tracking coming soon. Use the Bills tab to add work entries and assign prices.</p>
+                    <button class="btn btn-small" onclick="switchDashTab('bills'); document.getElementById('toolPanel').classList.add('hidden');"><i class="fas fa-file-invoice"></i> Go to Bills</button>`;
+            } else if (toolName === 'tools') {
+                title.innerHTML = '<i class="fas fa-tools"></i> Tools Inventory';
+                content.innerHTML = `<p class="text-small">Tool inventory coming soon.</p>`;
+            } else if (toolName === 'vehicles') {
+                title.innerHTML = '<i class="fas fa-tractor"></i> Vehicles';
+                content.innerHTML = `<p class="text-small">Vehicle list coming soon. Add tractors in the Bills tab under "Tractor model".</p>`;
             }
-            refreshDashboard();
+        }
+
+        function renderDrivers() {
+            const drivers = loadDrivers();
+            const container = document.getElementById('driverList');
+            if (!container) return;
+            container.innerHTML = '';
+            if (drivers.length === 0) {
+                container.innerHTML = '<p class="text-small">No drivers. Click "Add Driver".</p>';
+                return;
+            }
+            drivers.forEach(d => {
+                const card = document.createElement('div');
+                card.className = 'driver-card';
+                card.innerHTML = `
+                    <div class="flex-row">
+                        <div>
+                            <div class="driver-name">${d.name}</div>
+                            <div class="driver-phone"><i class="fas fa-phone"></i> ${d.phone}</div>
+                        </div>
+                        <div class="flex-row" style="gap:0.8rem;">
+                            <span class="attendance-status ${d.workOn ? 'on' : 'off'}">${d.workOn ? 'Working' : 'Off'}</span>
+                            <button class="toggle-switch ${d.workOn ? 'active' : ''}" data-id="${d.id}"></button>
+                        </div>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+            container.querySelectorAll('.toggle-switch').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const id = btn.dataset.id;
+                    const drivers = loadDrivers();
+                    const d = drivers.find(x => x.id === id);
+                    if (d) {
+                        d.workOn = !d.workOn;
+                        saveDrivers(drivers);
+                        renderDrivers();
+                    }
+                });
+            });
+        }
+
+        function renderPassbook() {
+            const entries = loadPassbook();
+            const container = document.getElementById('pbList');
+            const balanceEl = document.getElementById('pbBalance');
+            if (!container) return;
+            container.innerHTML = '';
+            let balance = 0;
+            entries.forEach(e => {
+                balance += e.type === 'credit' ? e.amount : -e.amount;
+            });
+            if (balanceEl) balanceEl.innerText = formatCurrency(balance);
+
+            if (entries.length === 0) {
+                container.innerHTML = '<p class="text-small">No entries yet.</p>';
+                return;
+            }
+            entries.slice().reverse().forEach(e => {
+                const div = document.createElement('div');
+                div.className = 'passbook-entry';
+                div.innerHTML = `
+                    <div><strong>${e.date}</strong> · ${e.desc}</div>
+                    <div class="${e.type === 'credit' ? 'amount-credit' : 'amount-debit'}">${e.type === 'credit' ? '+' : '-'} ${formatCurrency(e.amount)}</div>
+                `;
+                container.appendChild(div);
+            });
+        }
+
+        function initCalculator() {
+            const display = document.getElementById('calcDisplay');
+            if (!display) return;
+            let current = '0';
+            let previous = null;
+            let operator = null;
+            let resetNext = false;
+
+            function updateDisplay() {
+                display.innerText = current;
+            }
+
+            document.querySelectorAll('.calc-grid button').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const val = btn.dataset.val;
+                    if (val === 'C') {
+                        current = '0'; previous = null; operator = null; resetNext = false;
+                    } else if (val === '⌫') {
+                        current = current.length > 1 ? current.slice(0, -1) : '0';
+                    } else if (val === '+' || val === '-' || val === '*' || val === '/') {
+                        if (operator && !resetNext) {
+                            current = String(eval(previous + operator + current));
+                        }
+                        previous = current;
+                        operator = val;
+                        resetNext = true;
+                    } else if (val === '=') {
+                        if (operator && previous !== null) {
+                            current = String(eval(previous + operator + current));
+                            operator = null;
+                            previous = null;
+                            resetNext = true;
+                        }
+                    } else if (val === '%') {
+                        current = String(parseFloat(current) / 100);
+                    } else {
+                        if (resetNext || current === '0') {
+                            current = val;
+                            resetNext = false;
+                        } else {
+                            current += val;
+                        }
+                    }
+                    updateDisplay();
+                });
+            });
+        }
+
+        document.getElementById('closeToolBtn').addEventListener('click', () => {
+            document.getElementById('toolPanel').classList.add('hidden');
         });
 
-        // ================= PHOTO NAME PREVIEW =================
-        document.getElementById('workPhoto').addEventListener('change', (e) => {
-            const file = e.target.files[0];
-            document.getElementById('photoNamePreview').innerText = file ? file.name : '';
+        document.querySelectorAll('.more-card').forEach(card => {
+            card.addEventListener('click', () => {
+                openTool(card.dataset.tool);
+            });
         });
 
-        // ================= INITIALIZE =================
+        // ================= INIT =================
         document.addEventListener('DOMContentLoaded', () => {
-            // Seed some demo data if empty
+            // Seed demo customers if empty
             const customers = loadCustomers();
             if (customers.length === 0) {
                 const demoCustomer = {
@@ -1618,13 +2017,11 @@
             updateAdminUI();
         });
 
-        // Ensure admin UI updates when switching to admin page
+        // Override switchPage to update admin UI
         const originalSwitchPage = switchPage;
         switchPage = function(pageName) {
             originalSwitchPage(pageName);
-            if (pageName === 'admin') {
-                updateAdminUI();
-            }
+            if (pageName === 'admin') updateAdminUI();
         };
     </script>
 </body>

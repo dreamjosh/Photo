@@ -117,8 +117,8 @@ td{padding:0.7rem 0.3rem;border-bottom:1px solid var(--border);vertical-align:mi
 .login-box input{width:100%;padding:0.85rem 1rem;border-radius:18px;border:1.5px solid var(--border);margin-bottom:1rem;font-size:0.95rem;}
 .login-box .btn{width:100%;}
 .login-error{color:var(--danger);font-size:0.85rem;margin-top:0.5rem;display:none;}
-.login-tabs{display:flex;border-bottom:1.5px solid var(--border);margin-bottom:1.5rem;}
-.login-tab{flex:1;padding:0.8rem;cursor:pointer;font-weight:600;font-size:0.9rem;color:var(--text-light);border-bottom:3px solid transparent;transition:0.2s;}
+.login-tabs{display:flex;border-bottom:1.5px solid var(--border);margin-bottom:1.5rem;flex-wrap:wrap;}
+.login-tab{flex:1;min-width:90px;padding:0.8rem 0.4rem;cursor:pointer;font-weight:600;font-size:0.82rem;color:var(--text-light);border-bottom:3px solid transparent;transition:0.2s;text-align:center;}
 .login-tab.active{color:var(--primary);border-bottom-color:var(--primary);}
 
 .summary-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;margin-bottom:1.5rem;}
@@ -168,6 +168,9 @@ td{padding:0.7rem 0.3rem;border-bottom:1px solid var(--border);vertical-align:mi
 
 .logo-preview{max-height:60px;max-width:180px;object-fit:contain;border-radius:10px;border:1px dashed var(--border);padding:4px;background:var(--bg);}
 
+.bill-card-view{background:var(--bg);border-radius:20px;padding:1.5rem;border:1px solid var(--border);margin-bottom:1rem;}
+.bill-card-view h3{color:var(--primary);font-size:1.1rem;margin-bottom:0.6rem;}
+
 @media (max-width:900px){
   .grid-2{grid-template-columns:1fr;}
   .grid-3{grid-template-columns:1fr;}
@@ -175,6 +178,7 @@ td{padding:0.7rem 0.3rem;border-bottom:1px solid var(--border);vertical-align:mi
   .navbar{flex-direction:column;align-items:stretch;}
   .nav-links{justify-content:center;}
   .page-container{padding:1rem;}
+  .login-tab{font-size:0.72rem;padding:0.7rem 0.2rem;}
 }
 </style>
 </head>
@@ -259,6 +263,7 @@ td{padding:0.7rem 0.3rem;border-bottom:1px solid var(--border);vertical-align:mi
 
 <div class="page" id="adminPage">
 
+  <!-- ================= LOGIN ================= -->
   <div id="adminLoginScreen">
     <div class="login-box">
       <i class="fas fa-user-shield login-icon"></i>
@@ -266,8 +271,9 @@ td{padding:0.7rem 0.3rem;border-bottom:1px solid var(--border);vertical-align:mi
       <p data-lang="login_desc">Enter your details to access the Tractor Book</p>
 
       <div class="login-tabs">
-        <div class="login-tab active" id="tabAdminLogin" onclick="switchLoginTab('admin')">Admin Login</div>
-        <div class="login-tab" id="tabStaffLogin" onclick="switchLoginTab('staff')">Staff Login</div>
+        <div class="login-tab active" id="tabAdminLogin" onclick="switchLoginTab('admin')">Admin</div>
+        <div class="login-tab" id="tabStaffLogin" onclick="switchLoginTab('staff')">Staff</div>
+        <div class="login-tab" id="tabCustomerLogin" onclick="switchLoginTab('customer')">Customer</div>
       </div>
 
       <div id="adminLoginForm">
@@ -286,10 +292,19 @@ td{padding:0.7rem 0.3rem;border-bottom:1px solid var(--border);vertical-align:mi
         <button class="btn mt-1" id="staffLoginBtn"><i class="fas fa-sign-in-alt"></i> Login</button>
       </div>
 
+      <div id="customerLoginForm" class="hidden">
+        <label>Mobile Number</label>
+        <input type="text" id="loginCustomerMobile" placeholder="Enter 10-digit Mobile No" maxlength="10">
+        <label>Password</label>
+        <input type="password" id="loginCustomerPassword" placeholder="Enter Password">
+        <button class="btn mt-1" id="customerLoginBtn"><i class="fas fa-sign-in-alt"></i> Login</button>
+      </div>
+
       <div class="login-error" id="loginError"></div>
     </div>
   </div>
 
+  <!-- ================= DASHBOARD ================= -->
   <div id="adminDashboard" class="hidden">
     <div class="flex-row mb-1">
       <h1 style="margin-bottom:0;">
@@ -303,12 +318,14 @@ td{padding:0.7rem 0.3rem;border-bottom:1px solid var(--border);vertical-align:mi
     </div>
 
     <div class="dash-tabs" id="dashTabs">
-      <button class="tab-btn active" data-tab="farmers"><i class="fas fa-users"></i> <span data-lang="tab_farmers">Farmers</span></button>
-      <button class="tab-btn" data-tab="bills"><i class="fas fa-file-invoice"></i> <span data-lang="tab_bills">Bills</span></button>
-      <button class="tab-btn" data-tab="more"><i class="fas fa-ellipsis-h"></i> <span data-lang="tab_more">More</span></button>
-      <button class="tab-btn" data-tab="settings"><i class="fas fa-cog"></i> <span data-lang="tab_settings">Settings</span></button>
+      <button class="tab-btn active" data-tab="farmers" id="tabBtnFarmers"><i class="fas fa-users"></i> <span data-lang="tab_farmers">Farmers</span></button>
+      <button class="tab-btn" data-tab="bills" id="tabBtnBills"><i class="fas fa-file-invoice"></i> <span data-lang="tab_bills">Bills</span></button>
+      <button class="tab-btn" data-tab="more" id="tabBtnMore"><i class="fas fa-ellipsis-h"></i> <span data-lang="tab_more">More</span></button>
+      <button class="tab-btn" data-tab="settings" id="tabBtnSettings"><i class="fas fa-cog"></i> <span data-lang="tab_settings">Settings</span></button>
+      <button class="tab-btn hidden" data-tab="mybill" id="tabBtnMyBill"><i class="fas fa-file-invoice-dollar"></i> My Bill</button>
     </div>
 
+    <!-- ===== FARMERS TAB ===== -->
     <div class="tab-panel" id="tabFarmers">
       <div class="card">
         <div class="flex-row">
@@ -329,6 +346,7 @@ td{padding:0.7rem 0.3rem;border-bottom:1px solid var(--border);vertical-align:mi
       </div>
     </div>
 
+    <!-- ===== BILLS TAB ===== -->
     <div class="tab-panel hidden" id="tabBills">
       <div class="grid-2">
         <div>
@@ -441,6 +459,7 @@ td{padding:0.7rem 0.3rem;border-bottom:1px solid var(--border);vertical-align:mi
       </div>
     </div>
 
+    <!-- ===== MORE TAB ===== -->
     <div class="tab-panel hidden" id="tabMore">
       <div class="card">
         <h2><i class="fas fa-ellipsis-h"></i> More Tools</h2>
@@ -460,6 +479,7 @@ td{padding:0.7rem 0.3rem;border-bottom:1px solid var(--border);vertical-align:mi
       </div>
     </div>
 
+    <!-- ===== SETTINGS TAB ===== -->
     <div class="tab-panel hidden" id="tabSettings">
       <div class="grid-2">
         <div>
@@ -471,16 +491,17 @@ td{padding:0.7rem 0.3rem;border-bottom:1px solid var(--border);vertical-align:mi
           </div>
 
           <div class="card" id="staffManagementCard">
-            <h2><i class="fas fa-users-cog"></i> Staff Management</h2>
-            <p class="text-small mt-1">Add supervisors and drivers. They can log in with mobile + password.</p>
+            <h2><i class="fas fa-users-cog"></i> Staff & Customer Management</h2>
+            <p class="text-small mt-1">Add supervisors, drivers and customers. They can log in with mobile + password.</p>
 
             <div class="tractor-card mt-2">
-              <h3 style="font-size:0.95rem;margin-bottom:0.6rem;"><i class="fas fa-user-plus"></i> Add / Update Staff</h3>
+              <h3 style="font-size:0.95rem;margin-bottom:0.6rem;"><i class="fas fa-user-plus"></i> Add / Update User</h3>
               <div class="grid-3">
                 <div><label>Role</label>
                   <select id="staffRoleInput">
                     <option value="supervisor">Supervisor</option>
                     <option value="driver">Driver</option>
+                    <option value="customer">Customer</option>
                   </select>
                 </div>
                 <div><label>Name</label><input type="text" id="staffNameInput" placeholder="e.g. Suresh Patel"></div>
@@ -499,7 +520,7 @@ td{padding:0.7rem 0.3rem;border-bottom:1px solid var(--border);vertical-align:mi
             </div>
 
             <div class="mt-2">
-              <h3 style="font-size:0.95rem;margin-bottom:0.6rem;"><i class="fas fa-list"></i> Staff List</h3>
+              <h3 style="font-size:0.95rem;margin-bottom:0.6rem;"><i class="fas fa-list"></i> Users List</h3>
               <div id="staffListContainer"></div>
             </div>
           </div>
@@ -550,6 +571,11 @@ td{padding:0.7rem 0.3rem;border-bottom:1px solid var(--border);vertical-align:mi
       </div>
     </div>
 
+    <!-- ===== MY BILL TAB (Customer only) ===== -->
+    <div class="tab-panel hidden" id="tabMybill">
+      <div id="customerBillViewContainer"></div>
+    </div>
+
   </div>
 </div>
 
@@ -557,6 +583,7 @@ td{padding:0.7rem 0.3rem;border-bottom:1px solid var(--border);vertical-align:mi
 
 <div class="site-footer"><span data-lang="footer_text">Damor Tractore Service · Tractor Book · All data stored in your browser</span></div>
 
+<!-- PDF Language Modal -->
 <div class="modal-overlay" id="pdfLangModal">
   <div class="modal-box">
     <h3><i class="fas fa-file-pdf"></i> Choose Bill Language</h3>
@@ -580,8 +607,8 @@ const translations = {
     stat_tractors:"Tractors Serviced", stat_years:"Years Experience", stat_rating:"Customer Rating",
     feat_bill:"Bill Management", feat_bill_desc:"Create and share professional bills with PDF export.",
     feat_photo:"Photo Attachments", feat_photo_desc:"Attach photos of work spots and conditions.",
-    feat_hourly:"Hourly Work", feat_hourly_desc:"Set hourly rate and auto-calculate bill.",
-    feat_history:"Work History", feat_history_desc:"Complete log of all services.",
+    feat_hourly:"Hourly Work", feat_hourly_desc:"Set hourly rate and auto-calculate bill by hours worked.",
+    feat_history:"Work History", feat_history_desc:"Complete log of all services and parts replaced.",
     services_title:"Our Services", services_desc:"Expert tractor maintenance and repair services.",
     about_title:"About Damor Tractore Service", about_sub:"Trusted tractor care since 2010",
     about_p1:"Dedicated team of tractor mechanics and service professionals.",
@@ -632,11 +659,11 @@ function applyLanguage(lang){
   if(typeof refreshDashboard === 'function') refreshDashboard();
 }
 
-// ================= STORAGE KEYS =================
+// ================= STORAGE =================
 const ADMIN_USER_KEY='damor_admin_user';
 const ADMIN_PASSWORD_KEY='damor_admin_password';
-const STAFF_KEY='damor_staff_v1';
-const CUSTOMERS_KEY='damor_customers_v5';
+const STAFF_KEY='damor_staff_v2';
+const CUSTOMERS_KEY='damor_customers_v6';
 const HOURLY_RATE_KEY='damor_hourly_rate';
 const LOGO_KEY='damor_logo';
 const SLIDES_KEY='damor_slides';
@@ -681,15 +708,20 @@ function setLoggedIn(val, type, name, mobile, id){
 function switchLoginTab(tab){
   document.getElementById('tabAdminLogin').classList.remove('active');
   document.getElementById('tabStaffLogin').classList.remove('active');
+  document.getElementById('tabCustomerLogin').classList.remove('active');
   document.getElementById('adminLoginForm').classList.add('hidden');
   document.getElementById('staffLoginForm').classList.add('hidden');
+  document.getElementById('customerLoginForm').classList.add('hidden');
   document.getElementById('loginError').style.display='none';
   if(tab==='admin'){
     document.getElementById('tabAdminLogin').classList.add('active');
     document.getElementById('adminLoginForm').classList.remove('hidden');
-  } else {
+  } else if(tab==='staff'){
     document.getElementById('tabStaffLogin').classList.add('active');
     document.getElementById('staffLoginForm').classList.remove('hidden');
+  } else {
+    document.getElementById('tabCustomerLogin').classList.add('active');
+    document.getElementById('customerLoginForm').classList.remove('hidden');
   }
 }
 
@@ -716,9 +748,9 @@ function handleStaffLogin(){
     err.style.display='block'; err.innerText='Enter a valid 10-digit mobile number.'; return;
   }
   const staff = loadStaff();
-  const found = staff.find(s => s.mobile===mobile);
+  const found = staff.find(s => s.mobile===mobile && (s.role==='supervisor'||s.role==='driver'));
   if(!found){
-    err.style.display='block'; err.innerText='Mobile number not registered. Contact admin.'; return;
+    err.style.display='block'; err.innerText='Staff mobile not registered. Contact admin.'; return;
   }
   if(!found.power){
     err.style.display='block'; err.innerText='Your access is turned OFF. Contact admin.'; return;
@@ -731,25 +763,65 @@ function handleStaffLogin(){
   updateAdminUI();
 }
 
+function handleCustomerLogin(){
+  const mobile = document.getElementById('loginCustomerMobile').value.trim();
+  const pwd = document.getElementById('loginCustomerPassword').value;
+  const err = document.getElementById('loginError');
+  if(mobile.length!==10 || isNaN(mobile)){
+    err.style.display='block'; err.innerText='Enter a valid 10-digit mobile number.'; return;
+  }
+  const staff = loadStaff();
+  const found = staff.find(s => s.mobile===mobile && s.role==='customer');
+  if(!found){
+    err.style.display='block'; err.innerText='Customer mobile not registered. Contact admin.'; return;
+  }
+  if(!found.power){
+    err.style.display='block'; err.innerText='Your access is turned OFF. Contact admin.'; return;
+  }
+  if(found.password !== pwd){
+    err.style.display='block'; err.innerText='Wrong password.'; return;
+  }
+  setLoggedIn(true, 'customer', found.name, found.mobile, found.id);
+  err.style.display='none';
+  updateAdminUI();
+}
+
 // ================= UPDATE UI =================
 function updateAdminUI(){
   const loginScreen = document.getElementById('adminLoginScreen');
   const dashboard = document.getElementById('adminDashboard');
   const isAdmin = loggedInUserType === 'admin';
+  const isCustomer = loggedInUserType === 'customer';
 
   if(isLoggedIn()){
     loginScreen.classList.add('hidden');
     dashboard.classList.remove('hidden');
-    document.getElementById('loggedInUserName').innerText = loggedInUserName || 'Admin';
+    document.getElementById('loggedInUserName').innerText = loggedInUserName || 'User';
 
+    // Admin-only cards
     document.getElementById('adminSecurityCard').classList.toggle('hidden', !isAdmin);
     document.getElementById('staffManagementCard').classList.toggle('hidden', !isAdmin);
     document.getElementById('brandingCard').classList.toggle('hidden', !isAdmin);
+    // My password — staff and customer only
     document.getElementById('myPasswordCard').classList.toggle('hidden', isAdmin);
+
+    // Tabs visibility per role
+    document.getElementById('tabBtnFarmers').classList.toggle('hidden', isCustomer);
+    document.getElementById('tabBtnBills').classList.toggle('hidden', isCustomer);
+    document.getElementById('tabBtnMore').classList.toggle('hidden', isCustomer);
+    document.getElementById('tabBtnMyBill').classList.toggle('hidden', !isCustomer);
+
+    // Settings tab visible to all (customer gets appearance + my password only)
+    document.getElementById('tabBtnSettings').classList.remove('hidden');
 
     refreshDashboard();
     renderStaffList();
-    switchDashTab('farmers');
+    if(isCustomer){
+      switchDashTab('mybill');
+      renderCustomerBillView();
+    } else {
+      switchDashTab('farmers');
+    }
   } else {
     loginScreen.classList.remove('hidden');
     dashboard.classList.add('hidden');
@@ -775,6 +847,7 @@ function switchDashTab(tab){
     renderSlideList();
     loadLogoPreview();
   }
+  if(tab==='mybill') renderCustomerBillView();
 }
 
 // ================= CUSTOMER DATA =================
@@ -792,6 +865,7 @@ function saveAllCustomers(arr){ localStorage.setItem(CUSTOMERS_KEY, JSON.stringi
 function loadCustomers(){
   const all = loadAllCustomers();
   if(loggedInUserType==='admin') return all;
+  if(loggedInUserType==='customer') return []; // customer does not see list
   return all.filter(c => c.createdByMobile === loggedInUserMobile);
 }
 
@@ -800,6 +874,7 @@ function saveCustomers(filteredList){
     saveAllCustomers(filteredList);
     return;
   }
+  if(loggedInUserType==='customer') return; // no write
   const all = loadAllCustomers();
   const others = all.filter(c => c.createdByMobile !== loggedInUserMobile);
   saveAllCustomers([...others, ...filteredList]);
@@ -810,6 +885,7 @@ function formatCurrency(num){ return '₹'+Number(num).toFixed(0); }
 
 // ================= REFRESH DASHBOARD =================
 function refreshDashboard(){
+  if(loggedInUserType==='customer') return;
   const customers = loadCustomers();
   let totalRevenue=0, totalDue=0;
   customers.forEach(c=>{
@@ -850,6 +926,74 @@ function refreshDashboard(){
     `;
     row.addEventListener('click', ()=>{ loadCustomerIntoEditor(c.id); switchDashTab('bills'); });
     tbody.appendChild(row);
+  });
+}
+
+// ================= CUSTOMER BILL VIEW (read-only) =================
+function getMyCustomers(){
+  // Customer sees customers whose mobile matches their own registered mobile
+  const all = loadAllCustomers();
+  return all.filter(c => c.customerMobile === loggedInUserMobile);
+}
+
+function renderCustomerBillView(){
+  const container = document.getElementById('customerBillViewContainer');
+  if(!container) return;
+  const myList = getMyCustomers();
+  container.innerHTML = '';
+  if(myList.length===0){
+    container.innerHTML = `<div class="card"><p class="text-small">No bill found for your mobile number (${loggedInUserMobile}). Please contact admin.</p></div>`;
+    return;
+  }
+  myList.forEach(c=>{
+    const {total,paid,due} = calculateTotalsForCustomer(c);
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.innerHTML = `
+      <div class="flex-row">
+        <h2><i class="fas fa-file-invoice"></i> Bill ${c.billNo||'N/A'}</h2>
+        <span class="badge">${c.billDate||'—'}</span>
+      </div>
+      <div class="bill-card-view mt-1">
+        <p><strong>Customer:</strong> ${c.customerName||'—'} &nbsp; <strong>Mobile:</strong> ${c.customerMobile||'—'}</p>
+        <p><strong>Tractor:</strong> ${c.tractorModel||'—'}</p>
+      </div>
+      <h3 class="mt-1" style="font-size:1rem;">Work & Service</h3>
+      <div style="overflow-x:auto;">
+        <table>
+          <thead><tr><th>Work</th><th>Type</th><th>Hours</th><th>Price</th></tr></thead>
+          <tbody>
+            ${(c.works||[]).map(w=>{
+              const typeLabel = w.type==='hourly' ? 'Hourly' : 'Fixed';
+              const hoursLabel = w.type==='hourly' ? (w.hours||0)+' hrs' : '—';
+              return `<tr><td>${w.desc||'—'}</td><td>${typeLabel}</td><td>${hoursLabel}</td><td>${formatCurrency(w.price||0)}</td></tr>`;
+            }).join('') || '<tr><td colspan="4" style="text-align:center;color:var(--text-light);">No work entries.</td></tr>'}
+          </tbody>
+        </table>
+      </div>
+      <div class="flex-row mt-2">
+        <div class="total-box"><i class="fas fa-calculator"></i> Total: <span>${formatCurrency(total)}</span></div>
+        <div class="payment-status">
+          <span>Paid: <span class="paid">${formatCurrency(paid)}</span></span>
+          <span>Due: <span class="due">${formatCurrency(due)}</span></span>
+        </div>
+      </div>
+      <h3 class="mt-2" style="font-size:1rem;">Payment History</h3>
+      <table>
+        <thead><tr><th>Date</th><th>Amount</th><th>Note</th></tr></thead>
+        <tbody>
+          ${(c.payments||[]).length > 0 ? [...c.payments].sort((a,b)=>new Date(b.date)-new Date(a.date)).map(p=>`<tr><td>${p.date||'—'}</td><td>${formatCurrency(p.amount||0)}</td><td>${p.note||'—'}</td></tr>`).join('') : '<tr><td colspan="3" style="text-align:center;color:var(--text-light);">No payments.</td></tr>'}
+        </tbody>
+      </table>
+      <div class="flex-row mt-2">
+        <button class="btn" data-download-cust="${c.id}"><i class="fas fa-file-pdf"></i> Download Bill PDF</button>
+      </div>
+    `;
+    container.appendChild(card);
+    card.querySelector('[data-download-cust]').addEventListener('click', ()=>{
+      activeCustomerId = c.id;
+      document.getElementById('pdfLangModal').classList.add('active');
+    });
   });
 }
 
@@ -900,6 +1044,7 @@ function renderWorkTableForCustomer(works){
 }
 
 window.deleteWork = function(customerId, index){
+  if(loggedInUserType==='customer'){ alert('Not allowed'); return; }
   const customers = loadCustomers();
   const c = customers.find(x=>x.id===customerId);
   if(c && c.works){
@@ -911,7 +1056,6 @@ window.deleteWork = function(customerId, index){
   }
 };
 
-// ================= PAYMENT TABLE =================
 function renderPaymentTableForCustomer(payments){
   const tbody = document.getElementById('paymentTableBody');
   tbody.innerHTML='';
@@ -952,6 +1096,7 @@ function updateSummaryForCustomer(c){
 }
 
 function syncActiveCustomerFromInputs(){
+  if(loggedInUserType==='customer') return;
   if(!activeCustomerId) return;
   const customers = loadCustomers();
   const c = customers.find(x=>x.id===activeCustomerId);
@@ -973,15 +1118,16 @@ function renderStaffList(){
   const staff = loadStaff();
   container.innerHTML = '';
   if(staff.length===0){
-    container.innerHTML = '<p class="text-small">No staff added yet.</p>';
+    container.innerHTML = '<p class="text-small">No users added yet.</p>';
     return;
   }
   staff.forEach(s=>{
+    const roleLabel = s.role.charAt(0).toUpperCase()+s.role.slice(1);
     const row = document.createElement('div');
     row.className='staff-row';
     row.innerHTML = `
       <div class="staff-info">
-        <div class="staff-name">${s.name} <span class="badge" style="font-size:0.65rem;">${s.role}</span></div>
+        <div class="staff-name">${s.name} <span class="badge" style="font-size:0.65rem;">${roleLabel}</span></div>
         <div class="staff-meta"><i class="fas fa-mobile-alt"></i> ${s.mobile}</div>
       </div>
       <div class="staff-actions">
@@ -1003,7 +1149,7 @@ function renderStaffList(){
       document.getElementById('staffEditId').value = s.id;
     });
     row.querySelector('[data-del]').addEventListener('click', ()=>{
-      if(!confirm('Delete this staff?')) return;
+      if(!confirm('Delete this user?')) return;
       const arr = loadStaff().filter(x=>x.id!==s.id);
       saveStaff(arr);
       renderStaffList();
@@ -1087,10 +1233,16 @@ function startHeroSlideshow(){
   }
 }
 
-// ================= PDF GENERATION (FIXED) =================
+// ================= PDF =================
 function generatePdf(lang){
-  const customers = loadCustomers();
-  const c = customers.find(x=>x.id===activeCustomerId);
+  let c;
+  if(loggedInUserType==='customer'){
+    const list = getMyCustomers();
+    c = list.find(x=>x.id===activeCustomerId) || list[0];
+  } else {
+    const customers = loadCustomers();
+    c = customers.find(x=>x.id===activeCustomerId);
+  }
   if(!c){ alert('Customer not found'); return; }
 
   const {total,paid,due} = calculateTotalsForCustomer(c);
@@ -1099,7 +1251,6 @@ function generatePdf(lang){
     hi: { title:'दामोर ट्रैक्टर सर्विस', subtitle:'ट्रैक्टर बुक · बिल रसीद', billNo:'बिल नंबर', date:'तारीख', customer:'ग्राहक', mobile:'मोबाइल', tractor:'ट्रैक्टर', workTitle:'काम और सेवा', desc:'विवरण', type:'प्रकार', price:'मूल्य', total:'कुल', paid:'भुगतान', due:'बकाया', payHistory:'भुगतान इतिहास', amount:'राशि', note:'नोट', reminder:'रिमाइंडर', generated:'दामोर ट्रैक्टर सर्विस द्वारा जनरेट किया गया', noWork:'कोई काम नहीं', noPay:'कोई भुगतान नहीं', fixed:'फिक्स', hourly:'प्रति घंटा' }
   }[lang];
 
-  // Work rows
   let workRows = '';
   if(!c.works || c.works.length===0){
     workRows = `<tr><td colspan="3" style="padding:8px;border:1px solid #cbdcc7;">${L.noWork}</td></tr>`;
@@ -1114,7 +1265,6 @@ function generatePdf(lang){
     });
   }
 
-  // Payment rows
   let payRows = '';
   if(!c.payments || c.payments.length===0){
     payRows = `<tr><td colspan="3" style="padding:6px;border:1px solid #cbdcc7;">${L.noPay}</td></tr>`;
@@ -1195,7 +1345,6 @@ function generatePdf(lang){
     </div>
   `;
 
-  // CRITICAL: Attach to DOM (hidden) so html2canvas can render it
   const wrapper = document.createElement('div');
   wrapper.style.cssText = 'position:fixed; left:-9999px; top:0; width:800px; background:#ffffff; padding:0; margin:0;';
   wrapper.innerHTML = htmlContent;
@@ -1205,13 +1354,7 @@ function generatePdf(lang){
     margin: [0.4, 0.4, 0.4, 0.4],
     filename: `Damor_Bill_${(c.billNo||'N').replace(/[^a-zA-Z0-9_-]/g,'')}_${c.billDate||''}.pdf`,
     image: { type: 'jpeg', quality: 0.98 },
-    html2canvas: {
-      scale: 2,
-      useCORS: true,
-      allowTaint: true,
-      backgroundColor: '#ffffff',
-      logging: false
-    },
+    html2canvas: { scale: 2, useCORS: true, allowTaint: true, backgroundColor: '#ffffff', logging: false },
     jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
   };
 
@@ -1236,8 +1379,10 @@ document.addEventListener('DOMContentLoaded', ()=>{
 
   document.getElementById('adminLoginBtn').addEventListener('click', handleAdminLogin);
   document.getElementById('staffLoginBtn').addEventListener('click', handleStaffLogin);
-  document.getElementById('loginStaffPassword').addEventListener('keypress', e=>{ if(e.key==='Enter') handleStaffLogin(); });
+  document.getElementById('customerLoginBtn').addEventListener('click', handleCustomerLogin);
   document.getElementById('adminPasswordInput').addEventListener('keypress', e=>{ if(e.key==='Enter') handleAdminLogin(); });
+  document.getElementById('loginStaffPassword').addEventListener('keypress', e=>{ if(e.key==='Enter') handleStaffLogin(); });
+  document.getElementById('loginCustomerPassword').addEventListener('keypress', e=>{ if(e.key==='Enter') handleCustomerLogin(); });
 
   document.getElementById('adminLogoutBtn').addEventListener('click', ()=>{
     setLoggedIn(false);
@@ -1246,6 +1391,8 @@ document.addEventListener('DOMContentLoaded', ()=>{
     document.getElementById('adminPasswordInput').value='damor123';
     document.getElementById('loginStaffMobile').value='';
     document.getElementById('loginStaffPassword').value='';
+    document.getElementById('loginCustomerMobile').value='';
+    document.getElementById('loginCustomerPassword').value='';
   });
 
   document.getElementById('goToSettingsBtn').addEventListener('click', ()=> switchDashTab('settings'));
@@ -1283,7 +1430,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
     const staff = loadStaff();
     const me = staff.find(s=>s.id===loggedInUserId);
     if(me){ me.password = p1; saveStaff(staff); alert('Password updated!'); }
-    else alert('Staff not found');
+    else alert('User not found');
     document.getElementById('myNewPassword').value='';
     document.getElementById('myConfirmPassword').value='';
   });
@@ -1296,7 +1443,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
     const password = document.getElementById('staffPasswordInputAdd').value.trim();
     const editId = document.getElementById('staffEditId').value;
 
-    if(!name){ alert('Enter staff name'); return; }
+    if(!name){ alert('Enter name'); return; }
     if(mobile.length!==10 || isNaN(mobile)){ alert('Enter valid 10-digit mobile'); return; }
     if(!password){ alert('Enter password'); return; }
 
@@ -1313,12 +1460,12 @@ document.addEventListener('DOMContentLoaded', ()=>{
         staff[idx].password = password;
       }
     } else {
-      staff.push({ id: 'S'+Date.now()+Math.random().toString(36).substr(2,4), role, name, mobile, password, power:true });
+      staff.push({ id: 'U'+Date.now()+Math.random().toString(36).substr(2,4), role, name, mobile, password, power:true });
     }
     saveStaff(staff);
     clearStaffForm();
     renderStaffList();
-    alert('Staff saved!');
+    alert('User saved!');
   });
 
   document.getElementById('clearStaffFormBtn').addEventListener('click', clearStaffForm);
@@ -1358,6 +1505,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
   });
 
   document.getElementById('setHourlyRateBtn').addEventListener('click', ()=>{
+    if(loggedInUserType==='customer'){ alert('Not allowed'); return; }
     const rate = parseFloat(document.getElementById('hourlyRateInput').value)||0;
     if(rate<=0){ alert('Enter valid rate'); return; }
     setHourlyRate(rate);
@@ -1405,6 +1553,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
   document.getElementById('workHours').addEventListener('input', updateHourlyPreview);
 
   document.getElementById('addWorkBtn').addEventListener('click', ()=>{
+    if(loggedInUserType==='customer'){ alert('Not allowed'); return; }
     if(!activeCustomerId){ alert('Select a customer first.'); return; }
     const desc = document.getElementById('workDesc').value.trim();
     const type = document.getElementById('workType').value;
@@ -1461,6 +1610,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
   }
 
   document.getElementById('addPaymentBtn').addEventListener('click', ()=>{
+    if(loggedInUserType==='customer'){ alert('Not allowed'); return; }
     if(!activeCustomerId){ alert('Select a customer first.'); return; }
     const amount = parseFloat(document.getElementById('paymentAmount').value)||0;
     const date = document.getElementById('paymentDate').value || new Date().toISOString().split('T')[0];
@@ -1481,6 +1631,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
   });
 
   document.getElementById('saveCustomerBtn').addEventListener('click', ()=>{
+    if(loggedInUserType==='customer'){ alert('Not allowed'); return; }
     if(activeCustomerId){
       syncActiveCustomerFromInputs();
       alert('Customer data saved.');
@@ -1510,6 +1661,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
   });
 
   document.getElementById('newCustomerBtn').addEventListener('click', ()=>{
+    if(loggedInUserType==='customer'){ alert('Not allowed'); return; }
     activeCustomerId = null;
     const customers = loadCustomers();
     const nextNum = customers.length + 101;
@@ -1533,11 +1685,13 @@ document.addEventListener('DOMContentLoaded', ()=>{
   });
 
   document.getElementById('addFarmerBtn').addEventListener('click', ()=>{
+    if(loggedInUserType==='customer'){ alert('Not allowed'); return; }
     switchDashTab('bills');
     setTimeout(()=> document.getElementById('newCustomerBtn').click(), 50);
   });
 
   document.getElementById('deleteCustomerBtn').addEventListener('click', ()=>{
+    if(loggedInUserType==='customer'){ alert('Not allowed'); return; }
     if(!activeCustomerId){ alert('No customer selected.'); return; }
     if(!confirm('Delete this customer and all data?')) return;
     let customers = loadCustomers();
@@ -1549,6 +1703,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
   });
 
   document.getElementById('clearWorkLogBtn').addEventListener('click', ()=>{
+    if(loggedInUserType==='customer'){ alert('Not allowed'); return; }
     if(!activeCustomerId) return;
     if(!confirm('Delete all work entries?')) return;
     const customers = loadCustomers();
@@ -1557,6 +1712,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
   });
 
   document.getElementById('clearPaymentsBtn').addEventListener('click', ()=>{
+    if(loggedInUserType==='customer'){ alert('Not allowed'); return; }
     if(!activeCustomerId) return;
     if(!confirm('Delete all payment records?')) return;
     const customers = loadCustomers();
@@ -1565,6 +1721,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
   });
 
   document.getElementById('setBillNoBtn').addEventListener('click', ()=>{
+    if(loggedInUserType==='customer'){ alert('Not allowed'); return; }
     if(!activeCustomerId) return;
     const newBill = document.getElementById('adminBillNo').value.trim();
     if(!newBill) return;
@@ -1574,6 +1731,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
   });
 
   document.getElementById('sharePdfBtn').addEventListener('click', ()=>{
+    if(loggedInUserType==='customer'){ alert('Not allowed'); return; }
     if(!activeCustomerId){ alert('Select a customer first.'); return; }
     syncActiveCustomerFromInputs();
     document.getElementById('pdfLangModal').classList.add('active');
@@ -1619,6 +1777,13 @@ document.addEventListener('DOMContentLoaded', ()=>{
     };
     saveAllCustomers([demoCustomer]);
     refreshDashboard();
+  }
+
+  // Demo customer user for login
+  if(loadStaff().length === 0){
+    saveStaff([
+      { id:'U-DEMO-CUST', role:'customer', name:'Ramesh Patel', mobile:'9876543210', password:'cust123', power:true }
+    ]);
   }
 });
 

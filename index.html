@@ -171,6 +171,38 @@ td{padding:0.7rem 0.3rem;border-bottom:1px solid var(--border);vertical-align:mi
 
 .bill-card-view{background:var(--bg);border-radius:20px;padding:1.5rem;border:1px solid var(--border);margin-bottom:1rem;}
 
+/* ==== BILL / WORK TABLES: FIXED COLUMNS, NO OVERFLOW ==== */
+.bill-table-wrap{width:100%;overflow-x:auto;}
+.bill-table{width:100%;table-layout:fixed;border-collapse:collapse;font-size:0.9rem;}
+.bill-table th,.bill-table td{
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+  word-break:break-word;
+}
+.bill-table th:nth-child(1),.bill-table td:nth-child(1){width:38%;} /* Work */
+.bill-table th:nth-child(2),.bill-table td:nth-child(2){width:16%;} /* Type */
+.bill-table th:nth-child(3),.bill-table td:nth-child(3){width:14%;} /* Hours */
+.bill-table th:nth-child(4),.bill-table td:nth-child(4){width:16%;} /* Price */
+.bill-table th:nth-child(5),.bill-table td:nth-child(5){width:16%;} /* Photo / Action */
+
+/* Payment history compact */
+.pay-table{width:100%;table-layout:fixed;}
+.pay-table th:nth-child(1),.pay-table td:nth-child(1){width:30%;}
+.pay-table th:nth-child(2),.pay-table td:nth-child(2){width:25%;}
+.pay-table th:nth-child(3),.pay-table td:nth-child(3){width:45%;}
+.pay-table th,.pay-table td{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+
+/* Work log in editor */
+.worklog-list table{width:100%;table-layout:fixed;}
+.worklog-list table th:nth-child(1),.worklog-list table td:nth-child(1){width:34%;}
+.worklog-list table th:nth-child(2),.worklog-list table td:nth-child(2){width:14%;}
+.worklog-list table th:nth-child(3),.worklog-list table td:nth-child(3){width:12%;}
+.worklog-list table th:nth-child(4),.worklog-list table td:nth-child(4){width:16%;}
+.worklog-list table th:nth-child(5),.worklog-list table td:nth-child(5){width:12%;}
+.worklog-list table th:nth-child(6),.worklog-list table td:nth-child(6){width:12%;}
+.worklog-list table th,.worklog-list table td{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+
 @media (max-width:900px){
   .grid-2{grid-template-columns:1fr;}
   .grid-3{grid-template-columns:1fr;}
@@ -356,7 +388,6 @@ td{padding:0.7rem 0.3rem;border-bottom:1px solid var(--border);vertical-align:mi
             </div>
             <div class="mt-2"><label>Tractor model / Reg No.</label><input type="text" id="tractorModel" placeholder="e.g. Sonalika DI-745"></div>
 
-            <!-- Rate panel (hourly rate + bill options) -->
             <div class="rate-panel mt-2">
               <div class="flex-row">
                 <div>
@@ -368,7 +399,6 @@ td{padding:0.7rem 0.3rem;border-bottom:1px solid var(--border);vertical-align:mi
                   <button class="btn btn-small btn-warning" id="setHourlyRateBtn"><i class="fas fa-save"></i> Set Rate</button>
                 </div>
               </div>
-              <!-- Bill options: show work description, time, price per hour & total -->
               <div class="mt-1 text-small" style="display:flex;gap:1.2rem;flex-wrap:wrap;align-items:center;">
                 <label style="display:inline-flex;align-items:center;gap:0.3rem;text-transform:none;font-weight:500;margin:0;"><input type="checkbox" id="billOptionShowHours" checked style="width:auto;"> Show hours in bill</label>
                 <label style="display:inline-flex;align-items:center;gap:0.3rem;text-transform:none;font-weight:500;margin:0;"><input type="checkbox" id="billOptionShowRate" checked style="width:auto;"> Show rate per hour</label>
@@ -465,7 +495,6 @@ td{padding:0.7rem 0.3rem;border-bottom:1px solid var(--border);vertical-align:mi
       </div>
     </div>
 
-    <!-- MORE TAB (updated with Passbook, Tools, Jobs, Bookings, Reports) -->
     <div class="tab-panel hidden" id="tabMore">
       <div class="card">
         <h2><i class="fas fa-ellipsis-h"></i> More Tools</h2>
@@ -498,7 +527,7 @@ td{padding:0.7rem 0.3rem;border-bottom:1px solid var(--border);vertical-align:mi
 
           <div class="card" id="staffManagementCard">
             <h2><i class="fas fa-users-cog"></i> Staff & Customer Management</h2>
-            <p class="text-small mt-1">Add supervisors, drivers and customers. They can log in with mobile + password.</p>
+            <p class="text-small mt-1">Add supervisors, drivers and customers. Customers default password is <strong>123</strong>.</p>
 
             <div class="tractor-card mt-2">
               <h3 style="font-size:0.95rem;margin-bottom:0.6rem;"><i class="fas fa-user-plus"></i> Add / Update User</h3>
@@ -677,6 +706,7 @@ const BOOKINGS_KEY='damor_bookings_v1';
 const JOBS_KEY='damor_jobs_v1';
 const DEFAULT_USER='admin';
 const DEFAULT_PASSWORD='damor123';
+const CUSTOMER_DEFAULT_PASSWORD='123';
 
 function getAdminUser(){ return localStorage.getItem(ADMIN_USER_KEY) || DEFAULT_USER; }
 function getAdminPassword(){ return localStorage.getItem(ADMIN_PASSWORD_KEY) || DEFAULT_PASSWORD; }
@@ -956,14 +986,14 @@ function renderCustomerBillView(){
         <p><strong>Tractor:</strong> ${c.tractorModel||'—'}</p>
       </div>
       <h3 class="mt-1" style="font-size:1rem;">Work & Service</h3>
-      <div style="overflow-x:auto;">
-        <table>
+      <div class="bill-table-wrap">
+        <table class="bill-table">
           <thead><tr><th>Work</th><th>Type</th><th>Hours</th><th>Price</th></tr></thead>
           <tbody>
             ${(c.works||[]).map(w=>{
               const typeLabel = w.type==='hourly' ? 'Hourly' : 'Fixed';
               const hoursLabel = w.type==='hourly' ? (w.hours||0)+' hrs' : '—';
-              return `<tr><td>${w.desc||'—'}</td><td>${typeLabel}</td><td>${hoursLabel}</td><td>${formatCurrency(w.price||0)}</td></tr>`;
+              return `<tr><td title="${(w.desc||'').replace(/"/g,'&quot;')}">${w.desc||'—'}</td><td>${typeLabel}</td><td>${hoursLabel}</td><td>${formatCurrency(w.price||0)}</td></tr>`;
             }).join('') || '<tr><td colspan="4" style="text-align:center;color:var(--text-light);">No work entries.</td></tr>'}
           </tbody>
         </table>
@@ -976,12 +1006,14 @@ function renderCustomerBillView(){
         </div>
       </div>
       <h3 class="mt-2" style="font-size:1rem;">Payment History</h3>
-      <table>
-        <thead><tr><th>Date</th><th>Amount</th><th>Note</th></tr></thead>
-        <tbody>
-          ${(c.payments||[]).length > 0 ? [...c.payments].sort((a,b)=>new Date(b.date)-new Date(a.date)).map(p=>`<tr><td>${p.date||'—'}</td><td>${formatCurrency(p.amount||0)}</td><td>${p.note||'—'}</td></tr>`).join('') : '<tr><td colspan="3" style="text-align:center;color:var(--text-light);">No payments.</td></tr>'}
-        </tbody>
-      </table>
+      <div class="bill-table-wrap">
+        <table class="pay-table">
+          <thead><tr><th>Date</th><th>Amount</th><th>Note</th></tr></thead>
+          <tbody>
+            ${(c.payments||[]).length > 0 ? [...c.payments].sort((a,b)=>new Date(b.date)-new Date(a.date)).map(p=>`<tr><td>${p.date||'—'}</td><td>${formatCurrency(p.amount||0)}</td><td title="${(p.note||'').replace(/"/g,'&quot;')}">${p.note||'—'}</td></tr>`).join('') : '<tr><td colspan="3" style="text-align:center;color:var(--text-light);">No payments.</td></tr>'}
+          </tbody>
+        </table>
+      </div>
       <div class="flex-row mt-2">
         <button class="btn" data-download-cust="${c.id}"><i class="fas fa-file-pdf"></i> Download Bill PDF</button>
       </div>
@@ -1026,7 +1058,7 @@ function renderWorkTableForCustomer(works){
     const typeLabel = work.type==='hourly' ? '<span class="hours-badge">Hourly</span>' : '<span class="hours-badge" style="background:var(--border);">Fixed</span>';
     const hoursLabel = work.type==='hourly' ? (work.hours||0)+' hrs' : '—';
     row.innerHTML = `
-      <td>${work.desc||'—'}</td>
+      <td title="${(work.desc||'').replace(/"/g,'&quot;')}">${work.desc||'—'}</td>
       <td>${typeLabel}</td>
       <td>${hoursLabel}</td>
       <td>${formatCurrency(work.price||0)}</td>
@@ -1060,7 +1092,7 @@ function renderPaymentTableForCustomer(payments){
   }
   [...payments].sort((a,b)=>new Date(b.date)-new Date(a.date)).forEach(p=>{
     const row = document.createElement('tr');
-    row.innerHTML = `<td>${p.date||'—'}</td><td>${formatCurrency(p.amount||0)}</td><td>${p.note||'—'}</td>`;
+    row.innerHTML = `<td>${p.date||'—'}</td><td>${formatCurrency(p.amount||0)}</td><td title="${(p.note||'').replace(/"/g,'&quot;')}">${p.note||'—'}</td>`;
     tbody.appendChild(row);
   });
 }
@@ -1227,35 +1259,28 @@ function startHeroSlideshow(){
 
 // ================= PASSBOOK / TOOLS / BOOKINGS / JOBS / REPORTS =================
 
-// --- PASSBOOK ---
 function loadPassbook(){ try { return JSON.parse(localStorage.getItem(PASSBOOK_KEY)) || []; } catch(e){ return []; } }
 function savePassbook(arr){ localStorage.setItem(PASSBOOK_KEY, JSON.stringify(arr)); }
 
-function addPassbookEntry(entry){ // {type, amount, note, date, customerName, billNo, ...}
+function addPassbookEntry(entry){
   const arr = loadPassbook();
   arr.push({id:generateId(), ...entry});
   savePassbook(arr);
 }
 
-// --- TOOLS & EXPENSES ---
 function loadTools(){ try { return JSON.parse(localStorage.getItem(TOOLS_KEY)) || []; } catch(e){ return []; } }
 function saveTools(arr){ localStorage.setItem(TOOLS_KEY, JSON.stringify(arr)); }
 
-// --- BOOKINGS ---
 function loadBookings(){ try { return JSON.parse(localStorage.getItem(BOOKINGS_KEY)) || []; } catch(e){ return []; } }
 function saveBookings(arr){ localStorage.setItem(BOOKINGS_KEY, JSON.stringify(arr)); }
 
-// --- JOBS ---
 function loadJobs(){ try { return JSON.parse(localStorage.getItem(JOBS_KEY)) || []; } catch(e){ return []; } }
 function saveJobs(arr){ localStorage.setItem(JOBS_KEY, JSON.stringify(arr)); }
 
-// --- REPORTS ---
 function renderReportPanel(container){
-  const customers = loadAllCustomers();
   const passbook = loadPassbook();
   const tools = loadTools();
 
-  // Group by month/year
   const monthly = {};
   const yearly = {};
   passbook.forEach(e=>{
@@ -1280,7 +1305,6 @@ function renderReportPanel(container){
     monthly[key].expense += Number(t.cost)||0;
   });
 
-  // Yearly aggregation
   Object.keys(monthly).forEach(k=>{
     const y = k.split('-')[0];
     if(!yearly[y]) yearly[y] = {income:0, expense:0};
@@ -1329,7 +1353,7 @@ function renderReportPanel(container){
   }
 }
 
-// --- TOOL PANEL HANDLERS ---
+// ================= EVENT BINDINGS =================
 document.addEventListener('DOMContentLoaded', ()=>{
 
   applyTheme(localStorage.getItem('damor_theme')||'default');
@@ -1400,8 +1424,13 @@ document.addEventListener('DOMContentLoaded', ()=>{
     const role = document.getElementById('staffRoleInput').value;
     const name = document.getElementById('staffNameInput').value.trim();
     const mobile = document.getElementById('staffMobileInputAdd').value.trim();
-    const password = document.getElementById('staffPasswordInputAdd').value.trim();
     const editId = document.getElementById('staffEditId').value;
+
+    // Customer default password = 123. Other roles must enter password.
+    let password = document.getElementById('staffPasswordInputAdd').value.trim();
+    if(role === 'customer' && !password){
+      password = CUSTOMER_DEFAULT_PASSWORD;
+    }
 
     if(!name){ alert('Enter name'); return; }
     if(mobile.length!==10 || isNaN(mobile)){ alert('Enter valid 10-digit mobile'); return; }
@@ -1425,10 +1454,18 @@ document.addEventListener('DOMContentLoaded', ()=>{
     saveStaff(staff);
     clearStaffForm();
     renderStaffList();
-    alert('User saved!');
+    alert('User saved!' + (role==='customer' ? ' (Default password: 123)' : ''));
   });
 
   document.getElementById('clearStaffFormBtn').addEventListener('click', clearStaffForm);
+
+  // Auto-fill 123 when role changes to customer in settings
+  document.getElementById('staffRoleInput').addEventListener('change', function(){
+    const pwdInput = document.getElementById('staffPasswordInputAdd');
+    if(this.value === 'customer' && !pwdInput.value){
+      pwdInput.value = CUSTOMER_DEFAULT_PASSWORD;
+    }
+  });
 
   document.getElementById('applyLogoBtn').addEventListener('click', ()=>{
     const fileInput = document.getElementById('logoUpload');
@@ -1584,7 +1621,6 @@ document.addEventListener('DOMContentLoaded', ()=>{
     if(note.toLowerCase().includes('remind') || note.toLowerCase().includes('due')) c.reminder = note;
     saveCustomers(customers);
 
-    // PASSBOOK entry (income)
     addPassbookEntry({ type:'income', amount, note, date, customerName:c.customerName, billNo:c.billNo });
 
     renderPaymentTableForCustomer(c.payments);
@@ -1617,10 +1653,29 @@ document.addEventListener('DOMContentLoaded', ()=>{
       };
       customers.push(newCustomer);
       saveCustomers(customers);
+
+      // Auto-create customer login with default password 123
+      const mobile = newCustomer.customerMobile;
+      if(mobile && mobile.length===10){
+        const staff = loadStaff();
+        const exists = staff.find(s=>s.mobile===mobile && s.role==='customer');
+        if(!exists){
+          staff.push({
+            id:'U'+Date.now()+Math.random().toString(36).substr(2,4),
+            role:'customer',
+            name:newCustomer.customerName,
+            mobile:mobile,
+            password:CUSTOMER_DEFAULT_PASSWORD,
+            power:true
+          });
+          saveStaff(staff);
+        }
+      }
+
       activeCustomerId = newId;
       loadCustomerIntoEditor(newId);
       refreshDashboard();
-      alert('New customer created.');
+      alert('New customer created. Login password: 123');
     }
   });
 
@@ -1704,7 +1759,6 @@ document.addEventListener('DOMContentLoaded', ()=>{
   document.getElementById('pdfLangEnBtn').addEventListener('click', ()=>{ generatePdf('en'); document.getElementById('pdfLangModal').classList.remove('active'); });
   document.getElementById('pdfLangHiBtn').addEventListener('click', ()=>{ generatePdf('hi'); document.getElementById('pdfLangModal').classList.remove('active'); });
 
-  // MORE CARDS -> tool panel
   document.querySelectorAll('.more-card').forEach(card=>{
     card.addEventListener('click', ()=>{
       const toolName = card.dataset.tool;
@@ -1747,7 +1801,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
             if(amount<=0){ alert('Enter amount'); return; }
             addPassbookEntry({ type, amount, date, note, customerName:'Manual', billNo:'' });
             alert('Entry added!');
-            card.click(); // reload
+            card.click();
           });
         }
       } else if(toolName === 'Tools'){
@@ -1784,14 +1838,12 @@ document.addEventListener('DOMContentLoaded', ()=>{
             const arr = loadTools();
             arr.push({id:generateId(), name, cost, date, note});
             saveTools(arr);
-            // also passbook expense
             addPassbookEntry({ type:'expense', amount:cost, note:'Tool: '+name, date, customerName:'', billNo:'' });
             alert('Tool added!');
             card.click();
           });
         }
       } else if(toolName === 'Jobs'){
-        // List all customers with works, show bill button
         const customers = loadAllCustomers();
         const rows = customers.filter(c=>c.works && c.works.length>0).map(c=>{
           const total = (c.works||[]).reduce((s,w)=>s+(Number(w.price)||0),0);
@@ -1869,13 +1921,11 @@ document.addEventListener('DOMContentLoaded', ()=>{
     document.getElementById('toolPanel').classList.add('hidden');
   });
 
-  // Delete helpers
   window.deleteTool = function(id){
     if(loggedInUserType!=='admin'){ alert('Only admin'); return; }
     const arr = loadTools().filter(t=>t.id!==id);
     saveTools(arr);
     alert('Tool deleted');
-    // refresh panel
     const card = document.querySelector('.more-card[data-tool="Tools"]');
     if(card) card.click();
   };
@@ -1917,14 +1967,14 @@ document.addEventListener('DOMContentLoaded', ()=>{
 
   if(loadStaff().length === 0){
     saveStaff([
-      { id:'U-DEMO-CUST', role:'customer', name:'Ramesh Patel', mobile:'9876543210', password:'cust123', power:true },
+      { id:'U-DEMO-CUST', role:'customer', name:'Ramesh Patel', mobile:'9876543210', password:CUSTOMER_DEFAULT_PASSWORD, power:true },
       { id:'U-DEMO-SUP', role:'supervisor', name:'Suresh Patel', mobile:'9876543211', password:'sup123', power:true },
       { id:'U-DEMO-DRV', role:'driver', name:'Mahesh Singh', mobile:'9876543212', password:'drv123', power:true }
     ]);
   }
 });
 
-// PDF generation (unchanged)
+// PDF generation
 function generatePdf(lang){
   let c;
   if(loggedInUserType==='customer'){

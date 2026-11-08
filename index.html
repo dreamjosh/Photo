@@ -288,19 +288,25 @@
             text-transform: uppercase;
             letter-spacing: 0.05em;
         }
+        /* Hero Image Container for Tractor Photo */
         .hero-image {
-            background: #e5f0e5;
+            background: #ffffff;
             border-radius: 28px;
             min-height: 260px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 6rem;
-            color: #2a5c36;
             border: 2px dashed #b8d2b0;
             overflow: hidden;
+            padding: 1rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
         }
-        .hero-image i { opacity: 0.7; }
+        .hero-image img {
+            max-width: 100%;
+            max-height: 300px;
+            object-fit: contain;
+            border-radius: 16px;
+        }
         .feature-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -655,6 +661,14 @@
             font-size: 0.7rem;
             font-weight: 700;
         }
+        /* ---------- IMAGE SETTINGS PANEL ---------- */
+        .img-settings-panel {
+            background: #f0f5ed;
+            border-radius: 20px;
+            padding: 1.2rem;
+            border: 1px solid #cbdcc7;
+            margin-bottom: 1.5rem;
+        }
         /* ---------- FOOTER ---------- */
         .site-footer {
             text-align: center;
@@ -722,7 +736,8 @@
                     </div>
                 </div>
                 <div class="hero-image">
-                    <i class="fas fa-tractor"></i>
+                    <img id="heroTractorImg" src="" alt="Sonalika Tractor" style="display:none;">
+                    <i class="fas fa-tractor" id="heroPlaceholderIcon" style="font-size: 6rem; color: #2a5c36; opacity: 0.5;"></i>
                 </div>
             </div>
 
@@ -923,6 +938,22 @@
                     <div class="grid-2">
                         <!-- LEFT COLUMN -->
                         <div>
+                            <!-- IMAGE SETTINGS PANEL -->
+                            <div class="img-settings-panel">
+                                <h3 style="font-size:1rem; margin-bottom:0.8rem;"><i class="fas fa-image"></i> Tractor Photo (Home & Bill)</h3>
+                                <div class="grid-2">
+                                    <div>
+                                        <label>Upload Photo</label>
+                                        <input type="file" id="tractorImgUpload" accept="image/*" style="padding:0.4rem;">
+                                    </div>
+                                    <div>
+                                        <label>Or Paste Image URL</label>
+                                        <input type="text" id="tractorImgUrl" placeholder="https://example.com/photo.jpg">
+                                    </div>
+                                </div>
+                                <button class="btn btn-small btn-outline mt-1" id="applyImgBtn"><i class="fas fa-check"></i> Apply Photo</button>
+                            </div>
+
                             <div class="card">
                                 <h2><i class="fas fa-user-plus" style="color:#f5b042;"></i> Customer & Bill</h2>
                                 <div class="mt-1">
@@ -1174,6 +1205,45 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
+        // ================= GLOBAL TRACTOR IMAGE LOGIC =================
+        const TRACTOR_IMG_KEY = 'damor_tractor_img';
+
+        function loadTractorImage() {
+            const imgData = localStorage.getItem(TRACTOR_IMG_KEY);
+            const heroImg = document.getElementById('heroTractorImg');
+            const placeholder = document.getElementById('heroPlaceholderIcon');
+            
+            if (imgData) {
+                heroImg.src = imgData;
+                heroImg.style.display = 'block';
+                placeholder.style.display = 'none';
+            } else {
+                heroImg.style.display = 'none';
+                placeholder.style.display = 'block';
+            }
+        }
+
+        document.getElementById('applyImgBtn').addEventListener('click', () => {
+            const url = document.getElementById('tractorImgUrl').value.trim();
+            const fileInput = document.getElementById('tractorImgUpload');
+
+            if (fileInput.files && fileInput.files[0]) {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    localStorage.setItem(TRACTOR_IMG_KEY, e.target.result);
+                    loadTractorImage();
+                    alert('Photo uploaded and applied successfully!');
+                };
+                reader.readAsDataURL(fileInput.files[0]);
+            } else if (url) {
+                localStorage.setItem(TRACTOR_IMG_KEY, url);
+                loadTractorImage();
+                alert('Photo URL applied successfully!');
+            } else {
+                alert('Please select a file or paste a URL.');
+            }
+        });
+
         // ================= ADMIN LOGIN =================
         const ADMIN_PASSWORD_KEY = 'damor_admin_password';
         const DEFAULT_PASSWORD = 'damor123';
@@ -1352,7 +1422,6 @@
             document.getElementById('tractorModel').value = c.tractorModel || '';
             document.getElementById('adminBillNo').value = c.billNo || '';
 
-            // Set hourly rate display
             const rate = c.hourlyRate || getHourlyRate();
             document.getElementById('displayHourlyRate').innerText = formatCurrency(rate);
             document.getElementById('hourlyRateInput').value = rate;
@@ -1362,7 +1431,7 @@
             updateSummaryForCustomer(c);
         }
 
-        // ================= RENDER WORK TABLE (with type & hours) =================
+        // ================= RENDER WORK TABLE =================
         function renderWorkTableForCustomer(works) {
             const tbody = document.getElementById('workTableBody');
             tbody.innerHTML = '';
@@ -1507,7 +1576,6 @@
             setHourlyRate(rate);
             document.getElementById('displayHourlyRate').innerText = formatCurrency(rate);
 
-            // If a customer is active, save rate to their record too
             if (activeCustomerId) {
                 const customers = loadCustomers();
                 const c = customers.find(x => x.id === activeCustomerId);
@@ -1519,7 +1587,6 @@
             alert('Hourly rate set to ' + formatCurrency(rate) + ' per hour');
         });
 
-        // Work type toggle
         document.getElementById('workType').addEventListener('change', (e) => {
             const type = e.target.value;
             const priceInput = document.getElementById('workPrice');
@@ -1543,7 +1610,6 @@
             }
         });
 
-        // Auto-calculate preview for hourly
         function updateHourlyPreview() {
             const type = document.getElementById('workType').value;
             const rate = parseFloat(document.getElementById('workPrice').value) || 0;
@@ -1800,7 +1866,7 @@
             }
         });
 
-        // ================= PDF SHARE =================
+        // ================= PDF SHARE (UPDATED WITH IMAGE) =================
         document.getElementById('sharePdfBtn').addEventListener('click', () => {
             if (!activeCustomerId) {
                 alert('Please select a customer first.');
@@ -1848,6 +1914,13 @@
                 photoSection += '</div>';
             }
 
+            // Get Tractor Image for Bill
+            const tractorImg = localStorage.getItem(TRACTOR_IMG_KEY);
+            let billImgHtml = '';
+            if (tractorImg) {
+                billImgHtml = `<div style="text-align: center; margin: 10px 0;"><img src="${tractorImg}" style="max-height: 120px; max-width: 100%; object-fit: contain;" alt="Tractor"></div>`;
+            }
+
             const htmlContent = `
                 <div style="font-family: 'Inter', Arial, sans-serif; padding: 20px; max-width: 800px; background: #fff; color: #1e2f23;">
                     <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #2a5c36; padding-bottom: 12px;">
@@ -1860,6 +1933,10 @@
                             <div>Date: ${date}</div>
                         </div>
                     </div>
+                    
+                    <!-- BILL TRACTOR IMAGE -->
+                    ${billImgHtml}
+
                     <div style="display:flex; justify-content:space-between; margin:16px 0; background:#f7fcf5; padding:12px; border-radius:16px;">
                         <div><strong>Customer:</strong> ${customer}<br><strong>Mobile:</strong> ${c.customerMobile || '—'}</div>
                         <div><strong>Tractor:</strong> ${tractor}</div>
@@ -2160,6 +2237,9 @@
 
         // ================= INIT =================
         document.addEventListener('DOMContentLoaded', () => {
+            // Load Tractor Image
+            loadTractorImage();
+
             // Seed demo customers if empty
             const customers = loadCustomers();
             if (customers.length === 0) {

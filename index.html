@@ -1459,11 +1459,14 @@
             document.getElementById('loginError').style.display = 'none';
         }
 
-        // ================= OTP LOGIC =================
+        // ================= FAST2SMS OTP LOGIC =================
+        // 1. Yahan apni Fast2SMS API Key daalein
+        const FAST2SMS_API_KEY = "YOUR_API_KEY_HERE"; 
+        
         let generatedOtp = null;
         let otpMobileNumber = null;
 
-        document.getElementById('sendOtpBtn').addEventListener('click', () => {
+        document.getElementById('sendOtpBtn').addEventListener('click', async () => {
             const mobile = document.getElementById('loginMobileInput').value.trim();
             if (mobile.length !== 10 || isNaN(mobile)) {
                 alert('Please enter a valid 10-digit mobile number.');
@@ -1492,11 +1495,33 @@
             generatedOtp = Math.floor(1000 + Math.random() * 9000).toString();
             otpMobileNumber = mobile;
 
-            // For demo purposes, we show the OTP in an alert (No actual SMS API integrated)
-            alert(`Demo OTP for ${mobile} is: ${generatedOtp}\n\n(In a real app, this would be sent via SMS)`);
+            // Send SMS via Fast2SMS API
+            try {
+                // Fast2SMS "Quick SMS" route (no DLT needed for testing)
+                const message = `Your Damor Tractor Service OTP is: ${generatedOtp}. Valid for 5 mins.`;
+                const url = `https://www.fast2sms.com/dev/bulkV2?authorization=${FAST2SMS_API_KEY}&route=q&message=${encodeURIComponent(message)}&language=english&flash=0&numbers=${mobile}`;
+                
+                const response = await fetch(url);
+                const data = await response.json();
 
-            document.getElementById('otpStep1').classList.add('hidden');
-            document.getElementById('otpStep2').classList.remove('hidden');
+                if (data.return === true) {
+                    alert(`OTP sent successfully to ${mobile}!`);
+                    document.getElementById('otpStep1').classList.add('hidden');
+                    document.getElementById('otpStep2').classList.remove('hidden');
+                } else {
+                    // API failed (e.g., invalid key, no credits)
+                    alert(`SMS failed: ${data.message || 'Unknown error'}. Check your Fast2SMS API key and credits.`);
+                    // For demo/testing fallback, show OTP in alert
+                    alert(`Fallback: Your OTP is ${generatedOtp}`);
+                    document.getElementById('otpStep1').classList.add('hidden');
+                    document.getElementById('otpStep2').classList.remove('hidden');
+                }
+            } catch (error) {
+                console.error('SMS Error:', error);
+                alert(`Network error. Falling back to demo OTP: ${generatedOtp}`);
+                document.getElementById('otpStep1').classList.add('hidden');
+                document.getElementById('otpStep2').classList.remove('hidden');
+            }
         });
 
         document.getElementById('verifyOtpBtn').addEventListener('click', () => {
@@ -1794,11 +1819,7 @@
                 try { customers = JSON.parse(saved); } catch (e) { customers = []; }
             }
             
-            // Filter based on who is logged in
             if (loggedInUserType === 'supervisor' || loggedInUserType === 'driver') {
-                // Here we filter data specific to the logged-in staff
-                // Since we don't have a strict assignment yet, we can return all data for now.
-                // In a real app, you would filter: return customers.filter(c => c.createdBy === loggedInUserName);
                 return customers; 
             }
             return customers;
@@ -2162,7 +2183,7 @@
                     works: [],
                     payments: [],
                     reminder: '',
-                    createdBy: loggedInUserName // Tag who created it
+                    createdBy: loggedInUserName
                 };
                 customers.push(newCustomer);
                 saveCustomers(customers);
@@ -2355,17 +2376,13 @@
 
         // ================= INIT =================
         document.addEventListener('DOMContentLoaded', () => {
-            // Load Theme
             const savedTheme = localStorage.getItem('damor_theme') || 'default';
             applyTheme(savedTheme);
             
-            // Load Language
             applyLanguage(currentLang);
             
-            // Load Tractor Image
             loadTractorImage();
 
-            // Seed demo customers if empty
             const customers = loadCustomers();
             if (customers.length === 0) {
                 const demoCustomer = {
